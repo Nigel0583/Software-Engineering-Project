@@ -88,7 +88,6 @@ namespace CarSYS
 
             }
            
-
             if (txtModel.Text.Equals(""))
             {
                 MessageBox.Show("Car model must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -105,11 +104,8 @@ namespace CarSYS
                 return;
 
             }
-
-            
-
             //check if RegNo already exists
-            if (Cars.checkRegExists(txtReg.Text))
+            if (Cars.checkRegExists(txtReg.Text.ToUpper()))
             {
                 MessageBox.Show("Registration number already exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtReg.Focus();
@@ -177,7 +173,7 @@ namespace CarSYS
             addCar.addCars();
             
             //Display confirmation
-            MessageBox.Show("Car with Reg " + txtReg.Text , "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Car with Reg " + txtReg.Text +" has been added" , "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             
             //Reset UI
             txtMake.Clear();
@@ -199,7 +195,7 @@ namespace CarSYS
         }
         public Boolean isValidReg(String regNo)
         {
-            regNo.ToString().ToUpper();
+            regNo.ToUpper();
             // Define Regex for car reg with 3 digits-two letters-up to 5 digits
             if ((Regex.IsMatch(regNo, "^[0-9]{2,3}[-][KK|WW|C|CE|CN|CW|D|DL|G|KE|KY|L|LD|LH|LK|LM|LS|MH|MN|MO|OY|SO|RN|TN|TS|W|WD|WH|WX]{1,2}[-][0-9]{1,5}$")))
             {

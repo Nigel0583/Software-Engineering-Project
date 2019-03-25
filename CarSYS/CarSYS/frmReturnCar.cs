@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -170,9 +171,10 @@ namespace CarSYS
             reCar.collectCar();
 
             //Display Confirmation Message
-            print();
+            
             MessageBox.Show("Car " + txtReg.Text + " has been returned", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            ClearUI();
+            print();
+            
         }
 
         public void print()
@@ -187,14 +189,75 @@ namespace CarSYS
 
         private void pdtReturn_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            e.Graphics.DrawString(txtBookingID.Text, new Font("Arial",12, FontStyle.Regular), Brushes.Black, 150, 125);
-            e.Graphics.DrawString(txtReg.Text, new Font("Arial", 12, FontStyle.Regular), Brushes.Black, 200, 125);
-            e.Graphics.DrawString(txtStartDate.Text, new Font("Arial", 12, FontStyle.Regular), Brushes.Black, 150, 175);
-            e.Graphics.DrawString(txtEndDate.Text, new Font("Arial", 12, FontStyle.Regular), Brushes.Black, 200, 300);
-            e.Graphics.DrawString(txtCustomerID.Text, new Font("Arial", 12, FontStyle.Regular), Brushes.Black, 150, 200);
-            e.Graphics.DrawString(txtTotal.Text, new Font("Arial", 12, FontStyle.Regular), Brushes.Black, 200, 200);
-            e.Graphics.DrawString(grdTotalCost.Text, new Font("Arial", 12, FontStyle.Regular), Brushes.Black, 225, 225);
+
+            //From https://www.codeproject.com/Tips/453871/Simple-Receipt-Like-Printing-Using-the-Csharp-Prin
+            string dir = Path.GetDirectoryName(Application.ExecutablePath);
+            string filename = Path.Combine(dir, @"logo.png");
+            Image imageFile = Image.FromFile(filename);
+           
+            Graphics graphics = e.Graphics;
+           
             
+            Font font = new Font("Courier New", 10);
+            float fontHeight = font.GetHeight();
+            int startX = 50;
+            int startY = 55;
+            int Offset = 40;
+            e.Graphics.DrawImage(imageFile, new PointF(0.0F, 0.0F));
+            Offset = Offset + 20;
+
+            graphics.DrawString("Car rental Receipt", new Font("Courier New", 14),
+                                new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+            graphics.DrawString("Booking No:" + txtBookingID.Text,
+                     new Font("Courier New", 14),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+            graphics.DrawString("Customer No :" + txtCustomerID.Text,
+                     new Font("Courier New", 12),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+            String underLine = "------------------------------------------";
+            graphics.DrawString(underLine, new Font("Courier New", 10),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+
+            Offset = Offset + 20;
+            
+            graphics.DrawString("From " + txtStartDate.Text + " To " + txtEndDate.Text, new Font("Courier New", 10),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+            String total = "Total Amount to Pay Before fee = " + txtTotal.Text;
+            graphics.DrawString(total, new Font("Courier New", 10),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+
+            Offset = Offset + 20;
+            underLine = "------------------------------------------";
+            graphics.DrawString(underLine, new Font("Courier New", 10),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+
+            DateTime endDate = DateTime.ParseExact(txtEndDate.Text, "yyyy-MM-dd",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+            if (DateTime.Today < endDate)
+            {
+                Offset = Offset + 20;
+                String Grosstotal = "Total Amount to Pay = " + txtTotal.Text;
+
+                graphics.DrawString(Grosstotal, new Font("Courier New", 10),
+                    new SolidBrush(Color.Black), startX, startY + Offset);
+                Offset = Offset + 20;
+            }
+            else
+            {
+                Offset = Offset + 20;
+                String Grosstotal = "Total Amount to Pay = " + grdTotalCost.Text;
+
+                graphics.DrawString(Grosstotal, new Font("Courier New", 10),
+                    new SolidBrush(Color.Black), startX, startY + Offset);
+                Offset = Offset + 20;
+            }
+            
+            ClearUI();
         }
     }
 }
