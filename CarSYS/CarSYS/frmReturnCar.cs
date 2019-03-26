@@ -14,6 +14,7 @@ namespace CarSYS
     public partial class frmReturnCar : Form
     {
         frmMainMenu parent;
+
         public frmReturnCar(frmMainMenu Parent)
         {
             InitializeComponent();
@@ -25,8 +26,8 @@ namespace CarSYS
         {
             this.Close();
             parent.Visible = true;
-        
         }
+
         private void frmReturnCar_Load(object sender, EventArgs e)
         {
             try
@@ -41,22 +42,19 @@ namespace CarSYS
                 this.Close();
                 parent.Visible = true;
             }
-           
         }
 
         private void btnReturnCar_Click(object sender, EventArgs e)
         {
-
             if (cboReturnCar.Text.Equals(""))
             {
                 MessageBox.Show("Chose to return", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboReturnCar.Focus();
                 return;
-
             }
 
             DateTime endDate = DateTime.ParseExact(txtEndDate.Text.Trim(), "yyyy-MM-dd",
-                                       System.Globalization.CultureInfo.InvariantCulture);
+                System.Globalization.CultureInfo.InvariantCulture);
 
 
             if (DateTime.Today > endDate)
@@ -65,20 +63,18 @@ namespace CarSYS
                 btnLateReturn.Focus();
                 return;
             }
-            
+
             updateBookingCar();
-            
-           
         }
 
         private void cboReturnCar_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             //if resetting combo, ignore
             if (cboReturnCar.SelectedIndex == -1)
             {
                 return;
             }
+
             //find cust details
             Booking booking = new Booking();
             booking.getBooking(Convert.ToInt32(cboReturnCar.Text));
@@ -100,12 +96,11 @@ namespace CarSYS
             txtTotal.Text = booking.getTotal().ToString();
 
 
-
             //display details
             cboReturnCar.Visible = true;
         }
 
-        private void ClearUI()
+        private void clearUi()
         {
             txtCustomerID.Clear();
             txtBookingID.Clear();
@@ -116,7 +111,6 @@ namespace CarSYS
             txtTotal.Clear();
             cboReturnCar.ResetText();
             cboReturnCar.SelectedIndex = -1;
-
         }
 
         private void btnLateReturn_Click(object sender, EventArgs e)
@@ -126,17 +120,16 @@ namespace CarSYS
                 MessageBox.Show("Chose to return", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboReturnCar.Focus();
                 return;
-
             }
 
             string today = DateTime.Today.ToString("yyyy-MM-dd");
             //From https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings
             DateTime endDate = DateTime.ParseExact(txtEndDate.Text, "yyyy-MM-dd",
-                                       System.Globalization.CultureInfo.InvariantCulture);
+                System.Globalization.CultureInfo.InvariantCulture);
             DateTime startDate = DateTime.ParseExact(txtStartDate.Text, "yyyy-MM-dd",
-                                       System.Globalization.CultureInfo.InvariantCulture);
+                System.Globalization.CultureInfo.InvariantCulture);
             DateTime todayDate = DateTime.ParseExact(today, "yyyy-MM-dd",
-                                       System.Globalization.CultureInfo.InvariantCulture);
+                System.Globalization.CultureInfo.InvariantCulture);
 
             if (DateTime.Today < endDate)
             {
@@ -144,13 +137,14 @@ namespace CarSYS
                 btnReturnCar.Focus();
                 return;
             }
+
             string from = startDate.ToString("yyyy-MM-dd");
             string to = todayDate.ToString("yyyy-MM-dd");
 
             DataSet ds = new DataSet();
             grdTotalCost.DataSource = Rates.getBookingCost(ds, to, from, txtReg.Text).Tables["book"];
 
-            
+
             updateBookingCar();
         }
 
@@ -171,10 +165,10 @@ namespace CarSYS
             reCar.collectCar();
 
             //Display Confirmation Message
-            
-            MessageBox.Show("Car " + txtReg.Text + " has been returned", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            MessageBox.Show("Car " + txtReg.Text + " has been returned", "Confirmation", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
             print();
-            
         }
 
         public void print()
@@ -189,75 +183,74 @@ namespace CarSYS
 
         private void pdtReturn_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-
             //From https://www.codeproject.com/Tips/453871/Simple-Receipt-Like-Printing-Using-the-Csharp-Prin
             string dir = Path.GetDirectoryName(Application.ExecutablePath);
             string filename = Path.Combine(dir, @"logo.png");
             Image imageFile = Image.FromFile(filename);
-           
+
             Graphics graphics = e.Graphics;
-           
-            
+
+
             Font font = new Font("Courier New", 10);
             float fontHeight = font.GetHeight();
             int startX = 50;
             int startY = 55;
-            int Offset = 40;
+            int offset = 40;
             e.Graphics.DrawImage(imageFile, new PointF(0.0F, 0.0F));
-            Offset = Offset + 20;
+            offset = offset + 20;
 
             graphics.DrawString("Car rental Receipt", new Font("Courier New", 14),
-                                new SolidBrush(Color.Black), startX, startY + Offset);
-            Offset = Offset + 20;
+                new SolidBrush(Color.Black), startX, startY + offset);
+            offset = offset + 20;
             graphics.DrawString("Booking No:" + txtBookingID.Text,
-                     new Font("Courier New", 14),
-                     new SolidBrush(Color.Black), startX, startY + Offset);
-            Offset = Offset + 20;
+                new Font("Courier New", 14),
+                new SolidBrush(Color.Black), startX, startY + offset);
+            offset = offset + 20;
             graphics.DrawString("Customer No :" + txtCustomerID.Text,
-                     new Font("Courier New", 12),
-                     new SolidBrush(Color.Black), startX, startY + Offset);
-            Offset = Offset + 20;
+                new Font("Courier New", 12),
+                new SolidBrush(Color.Black), startX, startY + offset);
+            offset = offset + 20;
             String underLine = "------------------------------------------";
             graphics.DrawString(underLine, new Font("Courier New", 10),
-                     new SolidBrush(Color.Black), startX, startY + Offset);
+                new SolidBrush(Color.Black), startX, startY + offset);
 
-            Offset = Offset + 20;
-            
+            offset = offset + 20;
+
             graphics.DrawString("From " + txtStartDate.Text + " To " + txtEndDate.Text, new Font("Courier New", 10),
-                     new SolidBrush(Color.Black), startX, startY + Offset);
-            Offset = Offset + 20;
+                new SolidBrush(Color.Black), startX, startY + offset);
+            offset = offset + 20;
             String total = "Total Amount to Pay Before fee = " + txtTotal.Text;
             graphics.DrawString(total, new Font("Courier New", 10),
-                     new SolidBrush(Color.Black), startX, startY + Offset);
+                new SolidBrush(Color.Black), startX, startY + offset);
 
-            Offset = Offset + 20;
+            offset = offset + 20;
             underLine = "------------------------------------------";
             graphics.DrawString(underLine, new Font("Courier New", 10),
-                     new SolidBrush(Color.Black), startX, startY + Offset);
-            Offset = Offset + 20;
+                new SolidBrush(Color.Black), startX, startY + offset);
+            offset = offset + 20;
 
             DateTime endDate = DateTime.ParseExact(txtEndDate.Text, "yyyy-MM-dd",
-                                       System.Globalization.CultureInfo.InvariantCulture);
+                System.Globalization.CultureInfo.InvariantCulture);
             if (DateTime.Today < endDate)
             {
-                Offset = Offset + 20;
-                String Grosstotal = "Total Amount to Pay = " + txtTotal.Text;
+                offset = offset + 20;
+                String grossTotal = "Total Amount to Pay = " + txtTotal.Text;
 
-                graphics.DrawString(Grosstotal, new Font("Courier New", 10),
-                    new SolidBrush(Color.Black), startX, startY + Offset);
-                Offset = Offset + 20;
+                graphics.DrawString(grossTotal, new Font("Courier New", 10),
+                    new SolidBrush(Color.Black), startX, startY + offset);
+                offset = offset + 20;
             }
             else
             {
-                Offset = Offset + 20;
-                String Grosstotal = "Total Amount to Pay = " + grdTotalCost.Text;
+                offset = offset + 20;
+                String grossTotal = "Total Amount to Pay = " + grdTotalCost.Text;
 
-                graphics.DrawString(Grosstotal, new Font("Courier New", 10),
-                    new SolidBrush(Color.Black), startX, startY + Offset);
-                Offset = Offset + 20;
+                graphics.DrawString(grossTotal, new Font("Courier New", 10),
+                    new SolidBrush(Color.Black), startX, startY + offset);
+                offset = offset + 20;
             }
-            
-            ClearUI();
+
+            clearUi();
         }
     }
 }

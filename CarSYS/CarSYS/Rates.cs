@@ -20,7 +20,6 @@ namespace CarSYS
             catID = "";
             description = "";
             cost = 0;
-           
         }
 
         public Rates(string catID, string description, decimal cost)
@@ -50,8 +49,8 @@ namespace CarSYS
             return cost;
         }
 
-        
-    public static Boolean checkCategoryExists(String CatId)
+
+        public static Boolean checkCategoryExists(String CatId)
         {
             try
             {
@@ -79,16 +78,15 @@ namespace CarSYS
             }
             catch
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return false;
             }
-            
-            }
-          
+        }
 
-    public static DataSet getCatID(DataSet DS)
+
+        public static DataSet getCatID(DataSet DS)
         {
-
             try
             {
                 //create an OracleConnection object using the connection string defined in static class CarSysConnect
@@ -114,14 +112,14 @@ namespace CarSYS
             }
             catch
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null ;
+                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return null;
             }
-            
         }
 
 
-        public  void addRates()
+        public void addRates()
         {
             try
             {
@@ -131,7 +129,7 @@ namespace CarSYS
 
                 //Define SQL query to INSERT rate record
                 String insertRates = "INSERT INTO rates VALUES('" + this.catID.ToUpper() +
-                    "','" + this.description.ToUpper() + "'," + this.cost + ")";
+                                     "','" + this.description.ToUpper() + "'," + this.cost + ")";
 
                 //Execute the command
                 OracleCommand cmd = new OracleCommand(insertRates, conn);
@@ -139,25 +137,23 @@ namespace CarSYS
 
                 //close DB connection
                 conn.Close();
-
             }
             catch
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
-
-
         }
 
         public static DataSet getBookingCost(DataSet DS, String start, String end, String reg)
         {
-
             OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
 
 
             //Define the SQL Query to retrieve the data
-            String strSQL = "SELECT ((TO_DATE('"+start+"', 'yyyy-MM-dd')+1)- TO_DATE('"+end+"', 'yyyy-MM-dd')) * ra.COST AS Total from rates ra, cars ca WHERE RegNo = '"+reg+
-                "' AND ca.CatID = ra.CatID";
+            String strSQL = "SELECT ((TO_DATE('" + start + "', 'yyyy-MM-dd')+1)- TO_DATE('" + end +
+                            "', 'yyyy-MM-dd')) * ra.COST AS Total from rates ra, cars ca WHERE RegNo = '" + reg +
+                            "' AND ca.CatID = ra.CatID";
 
             OracleCommand cmd = new OracleCommand(strSQL, conn);
 
@@ -169,7 +165,6 @@ namespace CarSYS
             conn.Close();
 
             return DS;
-
         }
 
         public void getInvoicePerDay()
@@ -179,7 +174,8 @@ namespace CarSYS
             myConn.Open();
 
 
-            String strSQL = "select * from rates r,  bookings b, cars c  where BookingID = ( select max(BookingID) from bookings ) AND b.regno = c.regno AND r.catid = c.catid";
+            String strSQL =
+                "select * from rates r,  bookings b, cars c  where BookingID = ( select max(BookingID) from bookings ) AND b.regno = c.regno AND r.catid = c.catid";
 
             OracleCommand cmd = new OracleCommand(strSQL, myConn);
 
@@ -190,8 +186,8 @@ namespace CarSYS
             if (dr.Read())
             {
                 setCost(dr.GetDecimal(2));
-                
             }
+
             //close DB connection
             myConn.Close();
         }

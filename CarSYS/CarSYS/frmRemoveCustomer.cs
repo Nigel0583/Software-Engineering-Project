@@ -13,15 +13,16 @@ namespace CarSYS
     public partial class frmRemoveCustomer : Form
     {
         frmMainMenu parent;
+
         public frmRemoveCustomer(frmMainMenu Parent)
         {
             InitializeComponent();
             parent = Parent;
         }
+
         public frmRemoveCustomer()
         {
             InitializeComponent();
-           
         }
 
         private void frmRemoveCustomer_Load(object sender, EventArgs e)
@@ -32,14 +33,14 @@ namespace CarSYS
                 DataSet ds = new DataSet();
                 ds = Customer.getCustInfo(ds);
                 for (int i = 0; i < ds.Tables["cust"].Rows.Count; i++)
-                    cboRemoveCustomer.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(3, '0') + " " + ds.Tables[0].Rows[i][1].ToString());
+                    cboRemoveCustomer.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(3, '0') + " " +
+                                                ds.Tables[0].Rows[i][1].ToString());
             }
             catch
             {
                 this.Close();
                 parent.Visible = true;
             }
-           
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -48,7 +49,6 @@ namespace CarSYS
             parent.Visible = true;
         }
 
-        
 
         private void btnRemoveCustomer_Click(object sender, EventArgs e)
         {
@@ -57,18 +57,16 @@ namespace CarSYS
                 MessageBox.Show("Chose a customer to remove", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboRemoveCustomer.Focus();
                 return;
-
             }
 
             if (txtUpdate.Text.Equals(""))
             {
-                MessageBox.Show("Set current availability to R or A", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Set current availability to R or A", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 txtUpdate.Focus();
                 return;
-
             }
 
-            
 
             if (!txtUpdate.Text.Equals("R") && !txtUpdate.Text.Equals("A"))
             {
@@ -89,7 +87,8 @@ namespace CarSYS
             customer.removeCustomer();
 
             //Display Confirmation Message
-            MessageBox.Show("Customer " + txtCustomerID.Text + " has been removed", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Customer " + txtCustomerID.Text + " has been removed", "Confirmation",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //reset UI
             grpRemoveCustomer.Visible = false;
@@ -97,7 +96,7 @@ namespace CarSYS
             cboRemoveCustomer.SelectedIndex = -1;
         }
 
-      
+
         private void cboRemoveCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
             //if resetting combo, ignore
@@ -105,6 +104,7 @@ namespace CarSYS
             {
                 return;
             }
+
             //find cust details
             Customer rCustomer = new Customer();
             rCustomer.getCustomers(Convert.ToInt32(cboRemoveCustomer.Text.Substring(0, 3)));

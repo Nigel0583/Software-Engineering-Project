@@ -35,10 +35,11 @@ namespace CarSYS
             postcode = "";
             phoneNum = "";
             DOB = "";
-            status =' ';
+            status = ' ';
         }
 
-        public Customer(int CustomerID, string email, string licence, string fname, string sname, string address, string country, string postcode, string phoneNum, string DOB, char status)
+        public Customer(int CustomerID, string email, string licence, string fname, string sname, string address,
+            string country, string postcode, string phoneNum, string DOB, char status)
         {
             this.CustomerID = CustomerID;
             this.email = email;
@@ -51,7 +52,6 @@ namespace CarSYS
             this.phoneNum = phoneNum;
             this.DOB = DOB;
             this.status = status;
-
         }
 
         public void setCustomerID(int CustomerID)
@@ -163,6 +163,7 @@ namespace CarSYS
         {
             return status;
         }
+
         public static int nextCustomerID()
         {
             try
@@ -195,12 +196,11 @@ namespace CarSYS
             }
             catch
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-              
+                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
                 return 0;
-                
             }
-            
         }
 
         public static Boolean checkEmailExists(String Email)
@@ -230,12 +230,10 @@ namespace CarSYS
             }
             catch
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return false;
-
             }
-
-
         }
 
         public void getCustomers(int cust)
@@ -265,12 +263,10 @@ namespace CarSYS
                 setPhoneNum(dr.GetString(8));
                 setPostcode(dr.GetString(7));
                 setDOB(dr.GetString(9));
-                
-               // setStatus(dr.GetChar(10));
-                
 
-
+                // setStatus(dr.GetChar(10));
             }
+
             //close DB connection
             myConn.Close();
         }
@@ -279,21 +275,23 @@ namespace CarSYS
         {
             OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
             conn.Open();
-            
 
-            String insert= "INSERT INTO customers VALUES(" +this.CustomerID.ToString() + ",'"+this.email.ToLower()+"','"+this.licence.ToUpper()+"','"+this.fName.ToUpper()+"','"+this.sName.ToUpper()+"','"+this.address.ToUpper()+"','"+this.country.ToUpper()+"','"+
-                this.postcode.ToUpper()+"','"+this.phoneNum+"','"+this.DOB+ "','" + this.status+"')";
+
+            String insert = "INSERT INTO customers VALUES(" + this.CustomerID.ToString() + ",'" + this.email.ToLower() +
+                            "','" + this.licence.ToUpper() + "','" + this.fName.ToUpper() + "','" +
+                            this.sName.ToUpper() + "','" + this.address.ToUpper() + "','" + this.country.ToUpper() +
+                            "','" +
+                            this.postcode.ToUpper() + "','" + this.phoneNum + "','" + this.DOB + "','" + this.status +
+                            "')";
 
             OracleCommand cmd = new OracleCommand(insert, conn);
             cmd.ExecuteNonQuery();
 
             conn.Close();
-
         }
 
         public static DataSet getCustInfo(DataSet DS)
         {
-
             try
             {
                 //create an OracleConnection object using the connection string defined in static class CarSysConnect
@@ -319,10 +317,10 @@ namespace CarSYS
             }
             catch
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return null;
             }
-            
         }
 
         public void removeCustomer()
@@ -332,7 +330,8 @@ namespace CarSYS
             myConn.Open();
 
             //Define SQL query to INSERT car record
-            String strSQL = "UPDATE customers SET status = '" + this.status + "' WHERE customerID ='" + this.CustomerID + "'";
+            String strSQL = "UPDATE customers SET status = '" + this.status + "' WHERE customerID ='" +
+                            this.CustomerID + "'";
 
             //Execute the command
             OracleCommand cmd = new OracleCommand(strSQL, myConn);
@@ -349,8 +348,12 @@ namespace CarSYS
             myConn.Open();
 
             //Define SQL query to INSERT stock record
-            String strSQL = "UPDATE customers SET email = '" + this.email.ToLower() + "', LicenceNum = '"+this.licence.ToUpper()+"', Fname = '"+this.fName.ToUpper() +"', Sname = '"+this.sName.ToUpper()+"', Address = '"+this.address.ToUpper()+
-                "', Country='"+this.country.ToUpper()+"', Postcode ='"+this.postcode.ToUpper()+ "', DOB = '" + this.DOB + "',Status='" + this.status+ "' WHERE CustomerID = " + this.CustomerID;
+            String strSQL = "UPDATE customers SET email = '" + this.email.ToLower() + "', LicenceNum = '" +
+                            this.licence.ToUpper() + "', Fname = '" + this.fName.ToUpper() + "', Sname = '" +
+                            this.sName.ToUpper() + "', Address = '" + this.address.ToUpper() +
+                            "', Country='" + this.country.ToUpper() + "', Postcode ='" + this.postcode.ToUpper() +
+                            "', DOB = '" + this.DOB + "',Status='" + this.status + "' WHERE CustomerID = " +
+                            this.CustomerID;
 
             //Execute the command
             OracleCommand cmd = new OracleCommand(strSQL, myConn);
@@ -367,7 +370,8 @@ namespace CarSYS
             myConn.Open();
 
 
-            String strSQL = "select * from customers c,  bookings b  where BookingID = ( select max(BookingID) from bookings ) AND b.customerid = c.customerid";
+            String strSQL =
+                "select * from customers c,  bookings b  where BookingID = ( select max(BookingID) from bookings ) AND b.customerid = c.customerid";
 
             OracleCommand cmd = new OracleCommand(strSQL, myConn);
 
@@ -385,10 +389,9 @@ namespace CarSYS
                 setCountry(dr.GetString(6));
                 setPostcode(dr.GetString(7));
             }
+
             //close DB connection
             myConn.Close();
         }
-
-
     }
 }

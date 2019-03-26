@@ -13,9 +13,9 @@ namespace CarSYS
     {
         private int bookNo;
         public int customerId;
-        
+
         private decimal total;
-        
+
         private string regNo;
         private string startDate;
         private string endDate;
@@ -24,39 +24,43 @@ namespace CarSYS
         public Booking()
         {
             bookNo = 0;
-           
+
             total = 0;
-            
+
             regNo = "";
             startDate = "";
             endDate = "";
             status = "";
         }
 
-        public Booking(int bookNo, int customerId ,string regNo,string startDate, string endDate, string status,int total) {
+        public Booking(int bookNo, int customerId, string regNo, string startDate, string endDate, string status,
+            int total)
+        {
             this.bookNo = bookNo;
             this.customerId = customerId;
-            
+
             this.regNo = regNo;
             this.startDate = startDate;
             this.endDate = endDate;
             this.status = status;
             this.total = total;
-
         }
 
         public void setCustomerid(int customerId)
         {
             this.customerId = customerId;
         }
+
         public void setBookNo(int bookNo)
         {
             this.bookNo = bookNo;
         }
+
         public void setTotal(decimal total)
         {
             this.total = total;
         }
+
         public void setRegNo(string regNo)
         {
             this.regNo = regNo;
@@ -66,10 +70,12 @@ namespace CarSYS
         {
             this.startDate = startDate;
         }
+
         public void setEndDate(string endDate)
         {
             this.endDate = endDate;
         }
+
         public void setStatus(string status)
         {
             this.status = status;
@@ -79,10 +85,12 @@ namespace CarSYS
         {
             return bookNo;
         }
+
         public int getCustomerID()
         {
             return customerId;
         }
+
         public decimal getTotal()
         {
             return total;
@@ -102,12 +110,11 @@ namespace CarSYS
         {
             return endDate;
         }
+
         public string getStatus()
         {
             return status;
         }
-
-
 
 
         public static int nextBookingNo()
@@ -142,10 +149,10 @@ namespace CarSYS
             }
             catch
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return 0;
             }
-           
         }
 
         public void addBooking()
@@ -153,7 +160,10 @@ namespace CarSYS
             OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
             conn.Open();
 
-            String insertBooking = "INSERT INTO bookings VALUES("+ this.bookNo.ToString()+","+this.customerId.ToString()+ ",'"+this.regNo.ToUpper()+"','"+this.startDate.ToUpper()+ "','"+this.endDate.ToUpper()+ "','"+this.status+"',"+this.total.ToString()+")";
+            String insertBooking = "INSERT INTO bookings VALUES(" + this.bookNo.ToString() + "," +
+                                   this.customerId.ToString() + ",'" + this.regNo.ToUpper() + "','" +
+                                   this.startDate.ToUpper() + "','" + this.endDate.ToUpper() + "','" + this.status +
+                                   "'," + this.total.ToString() + ")";
 
             OracleCommand cmd = new OracleCommand(insertBooking, conn);
             cmd.ExecuteNonQuery();
@@ -168,7 +178,7 @@ namespace CarSYS
             myConn.Open();
 
             //Define SQL query to INSERT car record
-            String strSQL = "DELETE FROM Bookings WHERE BookingID = "+this.bookNo ;
+            String strSQL = "DELETE FROM Bookings WHERE BookingID = " + this.bookNo;
 
             //Execute the command
             OracleCommand cmd = new OracleCommand(strSQL, myConn);
@@ -202,8 +212,8 @@ namespace CarSYS
                 setEndDate(dr.GetString(4));
                 setStatus(dr.GetString(5));
                 setTotal(dr.GetDecimal(6));
-               
             }
+
             //close DB connection
             myConn.Close();
         }
@@ -216,7 +226,8 @@ namespace CarSYS
                 OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
 
                 //Define the SQL Query to retrieve the data
-                String strSQL = "SELECT BookingID, CustomerID  FROM Bookings WHERE bookingstatus = 'B' ORDER BY BookingID";
+                String strSQL =
+                    "SELECT BookingID, CustomerID  FROM Bookings WHERE bookingstatus = 'B' ORDER BY BookingID";
 
                 //Create an OracleCommand object and instantiate it 
                 OracleCommand cmd = new OracleCommand(strSQL, conn);
@@ -235,7 +246,8 @@ namespace CarSYS
             }
             catch
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -244,13 +256,12 @@ namespace CarSYS
         {
             try
             {
-
-
                 //create an OracleConnection object using the connection string defined in static class CarSysConnect
                 OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
 
                 //Define the SQL Query to retrieve the data
-                String strSQL = "SELECT BookingID, CustomerID  FROM Bookings WHERE bookingstatus = 'O' ORDER BY BookingID";
+                String strSQL =
+                    "SELECT BookingID, CustomerID  FROM Bookings WHERE bookingstatus = 'O' ORDER BY BookingID";
 
                 //Create an OracleCommand object and instantiate it 
                 OracleCommand cmd = new OracleCommand(strSQL, conn);
@@ -269,7 +280,8 @@ namespace CarSYS
             }
             catch
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -281,7 +293,8 @@ namespace CarSYS
             myConn.Open();
 
             //Define SQL query to INSERT car record
-            String strSQL = "UPDATE bookings SET Bookingstatus = '" + this.status.ToUpper() + "' WHERE bookingid =" + this.bookNo ;
+            String strSQL = "UPDATE bookings SET Bookingstatus = '" + this.status.ToUpper() + "' WHERE bookingid =" +
+                            this.bookNo;
 
             //Execute the command
             OracleCommand cmd = new OracleCommand(strSQL, myConn);
@@ -290,6 +303,7 @@ namespace CarSYS
             //close DB connection
             myConn.Close();
         }
+
         public void getInvoiceBooking()
         {
             //Conenct to the DB
@@ -297,7 +311,8 @@ namespace CarSYS
             myConn.Open();
 
 
-            String strSQL = "select * from bookings b, customers c where BookingID = ( select max(BookingID) from bookings ) AND b.customerid = c.customerid";
+            String strSQL =
+                "select * from bookings b, customers c where BookingID = ( select max(BookingID) from bookings ) AND b.customerid = c.customerid";
 
             OracleCommand cmd = new OracleCommand(strSQL, myConn);
 
@@ -315,9 +330,9 @@ namespace CarSYS
                 setStatus(dr.GetString(5));
                 setTotal(dr.GetDecimal(6));
             }
+
             //close DB connection
             myConn.Close();
         }
-
     }
 }

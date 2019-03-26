@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBack = new System.Windows.Forms.Button();
             this.chtData = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.grpCartype = new System.Windows.Forms.GroupBox();
-            this.lblFrom = new System.Windows.Forms.Label();
-            this.btnCarType = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cboCarCategory = new System.Windows.Forms.ComboBox();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblFrom = new System.Windows.Forms.Label();
+            this.cboCarCategory = new System.Windows.Forms.ComboBox();
+            this.btnCarType = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chtData)).BeginInit();
             this.grpCartype.SuspendLayout();
             this.SuspendLayout();
@@ -55,16 +55,16 @@
             // 
             // chtData
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chtData.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chtData.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chtData.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtData.Legends.Add(legend1);
             this.chtData.Location = new System.Drawing.Point(12, 106);
             this.chtData.Name = "chtData";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chtData.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chtData.Series.Add(series1);
             this.chtData.Size = new System.Drawing.Size(792, 332);
             this.chtData.TabIndex = 19;
             this.chtData.Text = "chart1";
@@ -83,24 +83,13 @@
             this.grpCartype.TabStop = false;
             this.grpCartype.Text = "Car Analysis";
             // 
-            // lblFrom
+            // dtpDate
             // 
-            this.lblFrom.AutoSize = true;
-            this.lblFrom.Location = new System.Drawing.Point(6, 26);
-            this.lblFrom.Name = "lblFrom";
-            this.lblFrom.Size = new System.Drawing.Size(29, 13);
-            this.lblFrom.TabIndex = 16;
-            this.lblFrom.Text = "Year";
-            // 
-            // btnCarType
-            // 
-            this.btnCarType.Location = new System.Drawing.Point(295, 46);
-            this.btnCarType.Name = "btnCarType";
-            this.btnCarType.Size = new System.Drawing.Size(211, 36);
-            this.btnCarType.TabIndex = 7;
-            this.btnCarType.Text = "Analyse Car Type";
-            this.btnCarType.UseVisualStyleBackColor = true;
-            this.btnCarType.Click += new System.EventHandler(this.btnCarType_Click);
+            this.dtpDate.Location = new System.Drawing.Point(41, 20);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(209, 20);
+            this.dtpDate.TabIndex = 22;
+           
             // 
             // label6
             // 
@@ -110,6 +99,15 @@
             this.label6.Size = new System.Drawing.Size(50, 13);
             this.label6.TabIndex = 21;
             this.label6.Text = "Car Type";
+            // 
+            // lblFrom
+            // 
+            this.lblFrom.AutoSize = true;
+            this.lblFrom.Location = new System.Drawing.Point(6, 26);
+            this.lblFrom.Name = "lblFrom";
+            this.lblFrom.Size = new System.Drawing.Size(29, 13);
+            this.lblFrom.TabIndex = 16;
+            this.lblFrom.Text = "Year";
             // 
             // cboCarCategory
             // 
@@ -122,14 +120,17 @@
             this.cboCarCategory.TabIndex = 20;
             this.cboCarCategory.Tag = "";
             this.cboCarCategory.Text = "CarType";
-            this.cboCarCategory.SelectedIndexChanged += new System.EventHandler(this.cboCarCategory_SelectedIndexChanged);
+           
             // 
-            // dtpDate
+            // btnCarType
             // 
-            this.dtpDate.Location = new System.Drawing.Point(41, 20);
-            this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(209, 20);
-            this.dtpDate.TabIndex = 22;
+            this.btnCarType.Location = new System.Drawing.Point(295, 46);
+            this.btnCarType.Name = "btnCarType";
+            this.btnCarType.Size = new System.Drawing.Size(211, 36);
+            this.btnCarType.TabIndex = 7;
+            this.btnCarType.Text = "Analyse Car Type";
+            this.btnCarType.UseVisualStyleBackColor = true;
+            this.btnCarType.Click += new System.EventHandler(this.btnCarType_Click);
             // 
             // frmCarAnalysis
             // 

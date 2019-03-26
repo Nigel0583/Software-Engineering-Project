@@ -15,61 +15,63 @@ namespace CarSYS
 
         public frmInvoice(frmMakeBooking Parent)
         {
-            
             InitializeComponent();
             parent = Parent;
             btnPrint.Text = "Preview";
-           
+
             this.ppdInvoice.MinimumSize =
-        new Size(900, 1200);
+                new Size(900, 1200);
             ppdInvoice.StartPosition = FormStartPosition.CenterParent;
             pdInvoice.PrintPage += new PrintPageEventHandler(pdtInvoice_PrintPage);
         }
+
         //From https://stackoverflow.com/questions/10605840/print-panel-in-windows-form-c-sharp
-        Bitmap MemoryImage;
-        public void GetPrintArea(Panel pnl)
+        Bitmap memoryImage;
+
+        public void getPrintArea(Panel pnl)
         {
-            MemoryImage = new Bitmap(pnl.Width, pnl.Height);
-            pnl.DrawToBitmap(MemoryImage, new Rectangle(0, 0, pnl.Width, pnl.Height));
+            memoryImage = new Bitmap(pnl.Width, pnl.Height);
+            pnl.DrawToBitmap(memoryImage, new Rectangle(0, 0, pnl.Width, pnl.Height));
         }
+
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (MemoryImage != null)
+            if (memoryImage != null)
             {
-                e.Graphics.DrawImage(MemoryImage, 0, 0);
+                e.Graphics.DrawImage(memoryImage, 0, 0);
                 base.OnPaint(e);
             }
         }
 
         void btnPrint_Click(object sender, EventArgs e)
         {
-            Print(this.panelInvoice);
+            print(this.panelInvoice);
             this.Close();
             parent.Visible = true;
         }
+
         void pdtInvoice_PrintPage(object sender, PrintPageEventArgs e)
         {
             Rectangle pagearea = e.PageBounds;
-            e.Graphics.DrawImage(MemoryImage, (pagearea.Width / 2) - (this.panelInvoice.Width / 2), this.panelInvoice.Location.Y); 
+            e.Graphics.DrawImage(memoryImage, (pagearea.Width / 2) - (this.panelInvoice.Width / 2),
+                this.panelInvoice.Location.Y);
         }
-        public void Print(Panel pnl)
+
+        public void print(Panel pnl)
         {
-           // panelInvoice = pnl;
-            GetPrintArea(pnl);
+            // panelInvoice = pnl;
+            getPrintArea(pnl);
             ppdInvoice.Document = pdInvoice;
             //From https://www.c-sharpcorner.com/UploadFile/mahesh/printdialog-in-C-Sharp/
-            PrintDialog PrintDialog = new PrintDialog();
-            PrintDialog.Document = pdInvoice;
-            PrintDialog.AllowSelection = true;
-            PrintDialog.AllowSomePages = true;
-            if (PrintDialog.ShowDialog() == DialogResult.OK) pdInvoice.Print();
-
-
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.Document = pdInvoice;
+            printDialog.AllowSelection = true;
+            printDialog.AllowSomePages = true;
+            if (printDialog.ShowDialog() == DialogResult.OK) pdInvoice.Print();
         }
 
         private void frmInvoice_Load(object sender, EventArgs e)
         {
-
             Booking invoice = new Booking();
             invoice.getInvoiceBooking();
 
@@ -94,6 +96,5 @@ namespace CarSYS
             rates.getInvoicePerDay();
             lblDayCost.Text = rates.getCost().ToString().Trim();
         }
-
     }
 }

@@ -14,13 +14,14 @@ namespace CarSYS
     public partial class frmRevenueAnalysis : Form
     {
         frmMainMenu parent;
+
         public frmRevenueAnalysis(frmMainMenu Parent)
         {
             InitializeComponent();
             parent = Parent;
             dtpFrom.Format = DateTimePickerFormat.Custom;
             dtpFrom.CustomFormat = "yyyy";
-            
+            dtpFrom.ShowUpDown = true;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -29,86 +30,69 @@ namespace CarSYS
             parent.Visible = true;
         }
 
-        private void btnRevenue_Click(object sender, EventArgs e)
-        {
-            chtData.Titles.Clear();
-            fillChart();
-           
-        }
+
         public String getMonth(int month)
         {
             switch (month)
             {
                 case 1:
-                    {
-                        return "JAN";
-
-                    }
+                {
+                    return "JAN";
+                }
                 case 2:
-                    {
-                        return "FEB";
-
-                    }
+                {
+                    return "FEB";
+                }
                 case 3:
-                    {
-                        return "MAR";
-
-                    }
+                {
+                    return "MAR";
+                }
                 case 4:
-                    {
-                        return "APR";
-
-                    }
+                {
+                    return "APR";
+                }
                 case 5:
-                    {
-                        return "MAY";
-
-                    }
+                {
+                    return "MAY";
+                }
                 case 6:
-                    {
-                        return "JUN";
-
-                    }
+                {
+                    return "JUN";
+                }
                 case 7:
-                    {
-                        return "JUL";
-
-                    }
+                {
+                    return "JUL";
+                }
                 case 8:
-                    {
-                        return "AUG";
-
-                    }
+                {
+                    return "AUG";
+                }
                 case 9:
-                    {
-                        return "SEP";
-
-                    }
+                {
+                    return "SEP";
+                }
                 case 10:
-                    {
-                        return "OCT";
-
-                    }
+                {
+                    return "OCT";
+                }
                 case 11:
-                    {
-                        return "NOV";
-
-                    }
+                {
+                    return "NOV";
+                }
                 case 12:
-                    {
-                        return "DEC";
-
-                    }
+                {
+                    return "DEC";
+                }
                 default: return "OTH";
-
             }
         }
-    
+
         private void fillChart()
         {
-            string from = dtpFrom.Value.ToString("yyyy");
-            String strSQL = "SELECT SUM(Total), to_Char(TO_DATE(EndDate,'YYYY-MM-DD'),'MM') as Month FROM bookings WHERE EndDate  LIKE '" + from +
-                "%' GROUP BY to_Char(TO_DATE(EndDate, 'YYYY-MM-DD'), 'MM')ORDER BY to_char(TO_DATE(EndDate, 'YYYY-MM-DD'), 'MM')";
+            String strSQL = "SELECT SUM(Total), to_Char(TO_DATE(EndDate,'YYYY-MM-DD'),'MM') as Month FROM bookings " +
+                            "WHERE EXTRACT(YEAR FROM TO_DATE(EndDate, 'YYYY-MM-DD')) = '" + dtpFrom.Text + "' " +
+                            "GROUP BY to_Char(TO_DATE(EndDate, 'YYYY-MM-DD'), 'MM') " +
+                            "ORDER BY to_char(TO_DATE(EndDate, 'YYYY-MM-DD'), 'MM')";
             DataTable dt = new DataTable();
 
             OracleConnection myConn = new OracleConnection(CarSysConnect.oradb);
@@ -122,16 +106,16 @@ namespace CarSYS
             }
             catch
             {
-                MessageBox.Show("Sorry, Unable to complete the search", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sorry, Unable to complete the search", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
-            
+
 
             string[] N = new string[dt.Rows.Count];
             decimal[] M = new decimal[dt.Rows.Count];
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-
                 N[i] = getMonth(Convert.ToInt32(dt.Rows[i][1]));
                 M[i] = Convert.ToDecimal(dt.Rows[i][0]);
             }
@@ -163,7 +147,13 @@ namespace CarSYS
 
         private void frmRevenueAnalysis_Load(object sender, EventArgs e)
         {
-            
+            fillChart();
+        }
+
+        private void dtpFrom_ValueChanged(object sender, EventArgs e)
+        {
+            chtData.Titles.Clear();
+            fillChart();
         }
     }
 }

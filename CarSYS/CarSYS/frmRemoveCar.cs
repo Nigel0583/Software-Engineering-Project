@@ -14,6 +14,7 @@ namespace CarSYS
     public partial class frmRemove : Form
     {
         frmMainMenu parent;
+
         public frmRemove(frmMainMenu Parent)
         {
             InitializeComponent();
@@ -35,8 +36,8 @@ namespace CarSYS
                 this.Close();
                 parent.Visible = true;
             }
-            
         }
+
         private void btnBack_Click_1(object sender, EventArgs e)
         {
             this.Close();
@@ -45,26 +46,25 @@ namespace CarSYS
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-
             if (cboRemoveCar.Text.Equals(""))
             {
                 MessageBox.Show("Chose a car to remove", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboRemoveCar.Focus();
                 return;
-
             }
 
             if (txtCurrentAvailability.Text.Equals(""))
             {
-                MessageBox.Show("Set current availability to R or A", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Set current availability to R or A", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 txtCurrentAvailability.Focus();
                 return;
-
             }
 
             if (txtCurrentAvailability.Text.Trim().Equals("O"))
             {
-                MessageBox.Show("You cannot remove car "+cboRemoveCar.Text+" since it is currently been rented", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("You cannot remove car " + cboRemoveCar.Text + " since it is currently been rented",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboRemoveCar.Focus();
                 return;
             }
@@ -81,20 +81,20 @@ namespace CarSYS
 
             reCar.setAvailability(txtUpdate.Text);
             reCar.setRegNo(cboRemoveCar.Text);
-            
+
             //remove  record into car table
             reCar.removeCar();
 
             //Display Confirmation Message
-            MessageBox.Show("Car " +cboRemoveCar.Text+ " has been removed", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Car " + cboRemoveCar.Text + " has been removed", "Confirmation", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
 
             //reset UI
             grpRemoveCar.Visible = false;
 
             cboRemoveCar.SelectedIndex = -1;
-
         }
-       
+
         private void cboRemoveCar_SelectedIndexChanged(object sender, EventArgs e)
         {
             //if resetting combo, ignore
@@ -102,6 +102,7 @@ namespace CarSYS
             {
                 return;
             }
+
             //find car details
             Cars rCars = new Cars();
             rCars.getCars(cboRemoveCar.Text);
@@ -123,7 +124,5 @@ namespace CarSYS
             //display details
             grpRemoveCar.Visible = true;
         }
-
-       
     }
 }

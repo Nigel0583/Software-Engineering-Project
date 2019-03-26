@@ -19,7 +19,6 @@ namespace CarSYS
 
         private void bookingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         private void addCarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -34,7 +33,6 @@ namespace CarSYS
             this.Hide();
             frmAddCarType frmAddCarType = new frmAddCarType(this);
             frmAddCarType.Show();
-       
         }
 
         private void checkCarAvailabilityToolStripMenuItem_Click(object sender, EventArgs e)
@@ -42,7 +40,6 @@ namespace CarSYS
             this.Hide();
             frmCarAvailability frmCarAvailability = new frmCarAvailability(this);
             frmCarAvailability.Show();
-
         }
 
         private void removeCarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -52,14 +49,12 @@ namespace CarSYS
             frmRemove.Show();
         }
 
-        
 
         private void makeBookingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
             frmMakeBooking frmMakeBooking = new frmMakeBooking(this);
             frmMakeBooking.Show();
-
         }
 
         private void cancelBookingToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,7 +99,6 @@ namespace CarSYS
 
         private void frmMainMenu_Load(object sender, EventArgs e)
         {
-
         }
 
         private void addCustomerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -112,7 +106,6 @@ namespace CarSYS
             this.Hide();
             frmAddCustomer frmAddCustomer = new frmAddCustomer(this);
             frmAddCustomer.Show();
-
         }
 
         private void updateCustomerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -125,9 +118,8 @@ namespace CarSYS
         private void removeCustomerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmRemoveCustomer frmRemoveCustomer  = new frmRemoveCustomer(this);
+            frmRemoveCustomer frmRemoveCustomer = new frmRemoveCustomer(this);
             frmRemoveCustomer.Show();
-
         }
     }
 }

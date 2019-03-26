@@ -14,11 +14,13 @@ namespace CarSYS
     public partial class frmAddCarType : Form
     {
         frmMainMenu parent;
+
         public frmAddCarType(frmMainMenu Parent)
         {
             InitializeComponent();
             parent = Parent;
         }
+
         private void frmAddCarType_Load(object sender, EventArgs e)
         {
             numericUpRate.Increment = 5.0m;
@@ -28,12 +30,11 @@ namespace CarSYS
         private void btnAdd_CLick(object sender, EventArgs e)
         {
             //Validate data
-            if (txtCarType.Text.Equals("") )
+            if (txtCarType.Text.Equals(""))
             {
                 MessageBox.Show("Car type field must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtCarType.Focus();
                 return;
-
             }
 
             //check if category already exists
@@ -50,7 +51,6 @@ namespace CarSYS
                 MessageBox.Show("Car type is invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtCarType.Focus();
                 return;
-
             }
 
             if (!isValidDesc(txtDesc.Text))
@@ -58,24 +58,22 @@ namespace CarSYS
                 MessageBox.Show("Description field is invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtDesc.Focus();
                 return;
-
             }
 
             if (txtDesc.Text.Equals(""))
             {
-                MessageBox.Show("Description field must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Description field must be entered", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 txtDesc.Focus();
                 return;
-
             }
-            if (numericUpRate.Text.Equals("") )
+
+            if (numericUpRate.Text.Equals(""))
             {
                 MessageBox.Show("Rate field must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 numericUpRate.Focus();
                 return;
-
             }
-
 
 
             try
@@ -104,7 +102,6 @@ namespace CarSYS
                 this.Close();
                 parent.Visible = true;
             }
-            
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -112,11 +109,12 @@ namespace CarSYS
             this.Close();
             parent.Visible = true;
         }
+
         public Boolean isValidType(String type)
         {
-            type.ToUpper();
-          
-            if ((Regex.IsMatch(type, "^[A-Za-z]+$")))
+           string ty = type.ToUpper();
+
+            if ((Regex.IsMatch(ty, "^[A-Za-z]+$")))
             {
                 return true;
             }
@@ -126,9 +124,9 @@ namespace CarSYS
 
         public Boolean isValidDesc(String desc)
         {
-            desc.ToUpper();
+            string des = desc.ToUpper();
 
-            if ((Regex.IsMatch(desc, "^[0-9A-Za-z. ]+$")))
+            if ((Regex.IsMatch(des, "^[0-9A-Za-z. ]+$")))
             {
                 return true;
             }
@@ -136,10 +134,26 @@ namespace CarSYS
                 return false;
         }
 
+        //From https://stackoverflow.com/questions/1669318/override-standard-close-x-button-in-a-windows-form
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
 
-        
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+
+            // Confirm user wants to close
+            switch (MessageBox.Show(this, "Are you sure you want to close?", "Closing", MessageBoxButtons.YesNo))
+            {
+                case DialogResult.No:
+                    e.Cancel = true;
+                  
+                    parent.Visible = true;
+                    break;
+                default:
+                    
+                    parent.Visible = true;
+                    break;
+            }
+        }
     }
 }
-
-
-

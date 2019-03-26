@@ -14,11 +14,13 @@ namespace CarSYS
     public partial class frmUpdateCustomer : Form
     {
         frmMainMenu parent;
+
         public frmUpdateCustomer(frmMainMenu Parent)
         {
             InitializeComponent();
             parent = Parent;
         }
+
         public frmUpdateCustomer()
         {
             InitializeComponent();
@@ -32,20 +34,22 @@ namespace CarSYS
                 DataSet ds = new DataSet();
                 ds = Customer.getCustInfo(ds);
                 for (int i = 0; i < ds.Tables["cust"].Rows.Count; i++)
-                    cboUpdateCustomer.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(3, '0') + " " + ds.Tables[0].Rows[i][1].ToString());
+                    cboUpdateCustomer.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(3, '0') + " " +
+                                                ds.Tables[0].Rows[i][1].ToString());
             }
             catch
             {
                 this.Close();
                 parent.Visible = true;
             }
-            
         }
+
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
             parent.Visible = true;
         }
+
         private void cboUpdateCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
             string DOB = dtpCustomer.Value.ToString("yyyy-MM-dd");
@@ -54,6 +58,7 @@ namespace CarSYS
             {
                 return;
             }
+
             //find cust details
             Customer uCustomer = new Customer();
             uCustomer.getCustomers(Convert.ToInt32(cboUpdateCustomer.Text.Substring(0, 3)));
@@ -66,24 +71,25 @@ namespace CarSYS
             }
 
             //display cust details
-            txtFirstName.Text = uCustomer.getFname();
-            txtSurname.Text = uCustomer.getSname();
-            txtLicence.Text = uCustomer.getLicence();
-            txtPhone.Text = uCustomer.getLicence();
-            txtEmail.Text = uCustomer.getEmail();
-            txtCustomerID.Text = uCustomer.getCustomerID().ToString("00000");
-            txtAddress.Text = uCustomer.getAddress();
-            txtCountry.Text = uCustomer.getCountry();
-            txtZipCode.Text = uCustomer.getPostcode();
-            dtpCustomer.Text = uCustomer.getDOB();
+            txtFirstName.Text = uCustomer.getFname().Trim();
+            txtSurname.Text = uCustomer.getSname().Trim();
+            txtLicence.Text = uCustomer.getLicence().Trim();
+            txtPhone.Text = uCustomer.getLicence().Trim();
+            txtEmail.Text = uCustomer.getEmail().Trim();
+            txtCustomerID.Text = uCustomer.getCustomerID().ToString("00000").Trim();
+            txtAddress.Text = uCustomer.getAddress().Trim();
+            txtCountry.Text = uCustomer.getCountry().Trim();
+            txtZipCode.Text = uCustomer.getPostcode().Trim();
+            dtpCustomer.Text = uCustomer.getDOB().Trim();
             //dtpCustomer.Value = Convert.ToDateTime(uCustomer.getDOB().ToString());
             //textBox1.Text = uCustomer.getDOB();
-            txtStatus.Text = uCustomer.getStatus().ToString();
+            txtStatus.Text = uCustomer.getStatus().ToString().Trim();
 
 
             //display details
             grpUpdateCustomer.Visible = true;
         }
+
         private void btnUpdCustomer_Click(object sender, EventArgs e)
         {
             if (cboUpdateCustomer.Text.Equals(""))
@@ -91,7 +97,6 @@ namespace CarSYS
                 MessageBox.Show("Chose a customer to update", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboUpdateCustomer.Focus();
                 return;
-
             }
 
             //validate data
@@ -100,28 +105,27 @@ namespace CarSYS
                 MessageBox.Show("Status must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtStatus.Focus();
                 return;
-
             }
+
             if (txtFirstName.Text.Equals(""))
             {
                 MessageBox.Show("First name must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtFirstName.Focus();
                 return;
-
             }
+
             if (!isValidLetter(txtFirstName.Text))
             {
                 MessageBox.Show("First name is invalid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtFirstName.Focus();
                 return;
-
             }
+
             if (txtSurname.Text.Equals(""))
             {
                 MessageBox.Show("Surname must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtSurname.Focus();
                 return;
-
             }
 
             if (!isValidLetter(txtSurname.Text))
@@ -129,7 +133,6 @@ namespace CarSYS
                 MessageBox.Show("Surname name is invalid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtSurname.Focus();
                 return;
-
             }
 
             if (txtLicence.Text.Equals(""))
@@ -137,14 +140,13 @@ namespace CarSYS
                 MessageBox.Show("Licence number must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtLicence.Focus();
                 return;
-
             }
+
             if (!isvalidLicence(txtLicence.Text))
             {
                 MessageBox.Show("Licence is invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtLicence.Focus();
                 return;
-
             }
 
             if (txtPhone.Text.Equals(""))
@@ -152,14 +154,13 @@ namespace CarSYS
                 MessageBox.Show("Phone number must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPhone.Focus();
                 return;
-
             }
+
             if (!isvalidPhone(txtPhone.Text))
             {
                 MessageBox.Show("Invalid phone number ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPhone.Focus();
                 return;
-
             }
 
             if (txtAddress.Text.Equals(""))
@@ -167,14 +168,13 @@ namespace CarSYS
                 MessageBox.Show("Address must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtAddress.Focus();
                 return;
-
             }
+
             if (!isValidLetter(txtAddress.Text))
             {
                 MessageBox.Show("Address is invalid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtAddress.Focus();
                 return;
-
             }
 
             if (txtCountry.Text.Equals(""))
@@ -182,7 +182,6 @@ namespace CarSYS
                 MessageBox.Show("Country must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtCountry.Focus();
                 return;
-
             }
 
             if (!isValidLetterOnly(txtCountry.Text))
@@ -190,7 +189,6 @@ namespace CarSYS
                 MessageBox.Show("Country is invalid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtCountry.Focus();
                 return;
-
             }
 
             if (txtZipCode.Text.Equals(""))
@@ -198,14 +196,13 @@ namespace CarSYS
                 MessageBox.Show("Zip code must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtZipCode.Focus();
                 return;
-
             }
+
             if (!isValidLetter(txtZipCode.Text))
             {
                 MessageBox.Show("Zip code is invalid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtZipCode.Focus();
                 return;
-
             }
 
             if (txtEmail.Text.Equals(""))
@@ -213,30 +210,31 @@ namespace CarSYS
                 MessageBox.Show("Email must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtEmail.Focus();
                 return;
-
             }
+
             if ((DateTime.Now.Subtract(dtpCustomer.Value).Days) / (365) < 25)
             {
-                MessageBox.Show("Less than 25 Years are not allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Less than 25 Years are not allowed", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 dtpCustomer.Focus();
                 return;
             }
 
-            if (Customer.checkEmailExists(txtEmail.Text))
-            {
-                MessageBox.Show("Email  already exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtEmail.Focus();
-                return;
-            }
+            /*  if (Customer.checkEmailExists(txtEmail.Text))
+              {
+                  MessageBox.Show("Email  already exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                  txtEmail.Focus();
+                  return;
+              }*/
 
-            if (!frmAddCustomer.IsValidEmail(txtEmail.Text))
+            if (!frmAddCustomer.isValidEmail(txtEmail.Text))
             {
                 MessageBox.Show("Eamil is invalid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtEmail.Focus();
                 return;
             }
 
-            string DOB = dtpCustomer.Value.ToString("yyyy-MM-dd");
+            string dob = dtpCustomer.Value.ToString("yyyy-MM-dd");
             //instantiate  Object
             Customer customer = new Customer();
 
@@ -248,7 +246,7 @@ namespace CarSYS
             customer.setAddress(txtAddress.Text);
             customer.setCountry(txtCountry.Text);
             customer.setPostcode(txtZipCode.Text);
-            customer.setDOB(DOB);
+            customer.setDOB(dob);
             customer.setStatus(Convert.ToChar(txtStatus.Text));
             customer.setCustomerID(Convert.ToInt32(txtCustomerID.Text));
 
@@ -257,20 +255,19 @@ namespace CarSYS
             customer.updateCustomer();
 
             //Display Confirmation Message
-            MessageBox.Show("Customer " + txtCustomerID.Text + " has been updated", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Customer " + txtCustomerID.Text + " has been updated", "Confirmation",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             //reset UI
             grpUpdateCustomer.Visible = false;
 
             cboUpdateCustomer.SelectedIndex = -1;
-            clearUI();
-
+            clearUi();
         }
 
-      
+
         public Boolean isvalidLicence(String licence)
         {
-
             if ((Regex.IsMatch(licence, @"^[a-zA-Z0-9]+$")))
             {
                 return true;
@@ -292,20 +289,21 @@ namespace CarSYS
 
         public Boolean isValidLetter(String input)
         {
-            input.ToUpper();
+            string inp = input.ToUpper();
 
-            if ((Regex.IsMatch(input, "^[0-9A-Za-z.,'-_ ]+$")))
+            if ((Regex.IsMatch(inp, "^[0-9A-Za-z.,'-_ ]+$")))
             {
                 return true;
             }
             else
                 return false;
         }
+
         public Boolean isValidLetterOnly(String type)
         {
-            type.ToUpper();
+            string ty = type.ToUpper();
 
-            if ((Regex.IsMatch(type, "^[A-Za-z]+$")))
+            if ((Regex.IsMatch(ty, "^[A-Za-z]+$")))
             {
                 return true;
             }
@@ -314,7 +312,7 @@ namespace CarSYS
         }
 
 
-        public void clearUI()
+        public void clearUi()
         {
             //Rest UI
             txtAddress.Clear();
@@ -330,8 +328,5 @@ namespace CarSYS
             txtCustomerID.Text = Customer.nextCustomerID().ToString("00000");
             txtFirstName.Focus();
         }
-
-
     }
 }
-

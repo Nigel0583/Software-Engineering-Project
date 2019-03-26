@@ -13,6 +13,7 @@ namespace CarSYS
     public partial class frmCarAvailability : Form
     {
         frmMainMenu parent;
+
         public frmCarAvailability(frmMainMenu Parent)
         {
             InitializeComponent();
@@ -21,17 +22,15 @@ namespace CarSYS
             // Set the MinDate
             dtpFrom.MinDate = DateTime.Today;
             dtpTo.MinDate = DateTime.Today;
-           
         }
-        
+
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
             parent.Visible = true;
-
         }
-       
+
         private void btnCheck_Click(object sender, EventArgs e)
         {
             string from = dtpFrom.Value.ToString("yyyy-MM-dd");
@@ -48,13 +47,10 @@ namespace CarSYS
                 this.Close();
                 parent.Visible = true;
             }
-            
-
         }
 
         private void frmCarAvailability_Load(object sender, EventArgs e)
         {
-
         }
 
         private void dtpFrom_ValueChanged(object sender, EventArgs e)

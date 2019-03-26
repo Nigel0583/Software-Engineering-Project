@@ -14,22 +14,15 @@ namespace CarSYS
 {
     public partial class frmAddCustomer : Form
     {
-        
         frmMainMenu parent;
+
         public frmAddCustomer(frmMainMenu Parent)
         {
             InitializeComponent();
             parent = Parent;
         }
-        public frmAddCustomer()
-        {
-            InitializeComponent();
-        }
-
         private void frmAddCustomer_Load(object sender, EventArgs e)
         {
-
-            
             txtCustomerID.Text = Customer.nextCustomerID().ToString("00000");
         }
 
@@ -49,21 +42,20 @@ namespace CarSYS
                 MessageBox.Show("First name must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtFirstName.Focus();
                 return;
-
             }
+
             if (!isValidLetter(txtFirstName.Text))
             {
                 MessageBox.Show("First name is invalid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtFirstName.Focus();
                 return;
-
             }
+
             if (txtSurname.Text.Equals(""))
             {
                 MessageBox.Show("Surname must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtSurname.Focus();
                 return;
-
             }
 
             if (!isValidLetter(txtSurname.Text))
@@ -71,7 +63,6 @@ namespace CarSYS
                 MessageBox.Show("Surname name is invalid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtSurname.Focus();
                 return;
-
             }
 
             if (txtLicence.Text.Equals(""))
@@ -79,14 +70,13 @@ namespace CarSYS
                 MessageBox.Show("Licence number must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtLicence.Focus();
                 return;
-
             }
+
             if (!isvalidLicence(txtLicence.Text))
             {
                 MessageBox.Show("Licence is invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtLicence.Focus();
                 return;
-
             }
 
             if (txtPhone.Text.Equals(""))
@@ -94,14 +84,13 @@ namespace CarSYS
                 MessageBox.Show("Phone number must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPhone.Focus();
                 return;
-
             }
+
             if (!isvalidPhone(txtPhone.Text))
             {
                 MessageBox.Show("Invalid phone number ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPhone.Focus();
                 return;
-
             }
 
             if (txtAddress.Text.Equals(""))
@@ -109,14 +98,13 @@ namespace CarSYS
                 MessageBox.Show("Address must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtAddress.Focus();
                 return;
-
             }
+
             if (!isValidLetter(txtAddress.Text))
             {
                 MessageBox.Show("Address is invalid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtAddress.Focus();
                 return;
-
             }
 
             if (txtCountry.Text.Equals(""))
@@ -124,7 +112,6 @@ namespace CarSYS
                 MessageBox.Show("Country must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtCountry.Focus();
                 return;
-
             }
 
             if (!isValidLetterOnly(txtCountry.Text))
@@ -132,7 +119,6 @@ namespace CarSYS
                 MessageBox.Show("Country is invalid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtCountry.Focus();
                 return;
-
             }
 
             if (txtZipCode.Text.Equals(""))
@@ -140,14 +126,13 @@ namespace CarSYS
                 MessageBox.Show("Zip code must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtZipCode.Focus();
                 return;
-
             }
+
             if (!isValidLetter(txtZipCode.Text))
             {
                 MessageBox.Show("Zip code is invalid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtZipCode.Focus();
                 return;
-
             }
 
             if (txtEmail.Text.Equals(""))
@@ -155,11 +140,12 @@ namespace CarSYS
                 MessageBox.Show("Email must be entered", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtEmail.Focus();
                 return;
-
             }
+
             if ((DateTime.Now.Subtract(dtpCustomer.Value).Days) / (365) < 25)
             {
-                MessageBox.Show("Less than 25 Years are not allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Less than 25 Years are not allowed", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 dtpCustomer.Focus();
                 return;
             }
@@ -171,7 +157,7 @@ namespace CarSYS
                 return;
             }
 
-            if (!IsValidEmail(txtEmail.Text))
+            if (!isValidEmail(txtEmail.Text))
             {
                 MessageBox.Show("Eamil is invalid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtEmail.Focus();
@@ -180,24 +166,26 @@ namespace CarSYS
 
             try
             {
-                Customer customer = new Customer(Convert.ToInt32(txtCustomerID.Text), txtEmail.Text, txtLicence.Text, txtFirstName.Text, txtSurname.Text, txtAddress.Text, txtCountry.Text, txtZipCode.Text, txtPhone.Text, DOB, 'A');
+                Customer customer = new Customer(Convert.ToInt32(txtCustomerID.Text), txtEmail.Text, txtLicence.Text,
+                    txtFirstName.Text, txtSurname.Text, txtAddress.Text, txtCountry.Text, txtZipCode.Text,
+                    txtPhone.Text, DOB, 'A');
 
                 customer.addCustomer();
 
-                MessageBox.Show("Customer " + txtCustomerID.Text + " Registered", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Customer " + txtCustomerID.Text + " Registered", "Confirmation", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
 
-                clearUI();
+                clearUi();
             }
             catch
             {
                 this.Close();
                 parent.Visible = true;
             }
-           
         }
 
         //From https://docs.microsoft.com/en-us/dotnet/standard/base-types/how-to-verify-that-strings-are-in-valid-email-format
-        public static bool IsValidEmail(string email)
+        public static bool isValidEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
                 return false;
@@ -206,7 +194,7 @@ namespace CarSYS
             {
                 // Normalize the domain
                 email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
-                                      RegexOptions.None, TimeSpan.FromMilliseconds(200));
+                    RegexOptions.None, TimeSpan.FromMilliseconds(200));
 
                 // Examines the domain part of the email and normalizes it.
                 string DomainMapper(Match match)
@@ -240,12 +228,10 @@ namespace CarSYS
             {
                 return false;
             }
-
-            
         }
+
         public Boolean isvalidLicence(String licence)
         {
-            
             if ((Regex.IsMatch(licence, @"^[a-zA-Z0-9]+$")))
             {
                 return true;
@@ -267,29 +253,30 @@ namespace CarSYS
 
         public Boolean isValidLetter(String input)
         {
-            input.ToUpper();
+           string inp = input.ToUpper();
 
-            if ((Regex.IsMatch(input, "^[0-9A-Za-z.,'-_ ]+$")))
+            if ((Regex.IsMatch(inp, "^[0-9A-Za-z.,'-_ ]+$")))
             {
                 return true;
             }
             else
                 return false;
         }
+
         public Boolean isValidLetterOnly(String type)
         {
-            type.ToUpper();
+          string ty = type.ToUpper();
 
-            if ((Regex.IsMatch(type, "^[A-Za-z]+$")))
+            if ((Regex.IsMatch(ty, "^[A-Za-z]+$")))
             {
                 return true;
             }
             else
                 return false;
         }
-       
 
-        public void clearUI()
+
+        public void clearUi()
         {
             //Rest UI
             txtAddress.Clear();
@@ -305,6 +292,5 @@ namespace CarSYS
             txtCustomerID.Text = Customer.nextCustomerID().ToString("00000");
             txtFirstName.Focus();
         }
-
     }
 }

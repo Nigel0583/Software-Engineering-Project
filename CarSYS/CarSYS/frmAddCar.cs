@@ -63,7 +63,7 @@ namespace CarSYS
         
         private void btnAddCar_Click(object sender, EventArgs e)
         {
-            txtReg.Text.ToUpper();
+            string regNo = txtReg.Text.ToUpper();
             //Validate data
             if (txtMake.Text.Equals(""))
             {
@@ -105,7 +105,7 @@ namespace CarSYS
 
             }
             //check if RegNo already exists
-            if (Cars.checkRegExists(txtReg.Text.ToUpper()))
+            if (Cars.checkRegExists(regNo))
             {
                 MessageBox.Show("Registration number already exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtReg.Focus();
@@ -195,9 +195,9 @@ namespace CarSYS
         }
         public Boolean isValidReg(String regNo)
         {
-            regNo.ToUpper();
+           string regno = regNo.ToUpper();
             // Define Regex for car reg with 3 digits-two letters-up to 5 digits
-            if ((Regex.IsMatch(regNo, "^[0-9]{2,3}[-][KK|WW|C|CE|CN|CW|D|DL|G|KE|KY|L|LD|LH|LK|LM|LS|MH|MN|MO|OY|SO|RN|TN|TS|W|WD|WH|WX]{1,2}[-][0-9]{1,5}$")))
+            if ((Regex.IsMatch(regno, "^[0-9]{2,3}[-][KK|WW|C|CE|CN|CW|D|DL|G|KE|KY|L|LD|LH|LK|LM|LS|MH|MN|MO|OY|SO|RN|TN|TS|W|WD|WH|WX]{1,2}[-][0-9]{1,5}$")))
             {
                 return true;
             }
@@ -217,8 +217,10 @@ namespace CarSYS
             else
                 return false;
         }
+       
 
     }
+
 }
 
 

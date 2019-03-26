@@ -28,22 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnBack = new System.Windows.Forms.Button();
-            this.grpRevenue = new System.Windows.Forms.GroupBox();
             this.lblFrom = new System.Windows.Forms.Label();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
-            this.btnRevenue = new System.Windows.Forms.Button();
             this.chtData = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.grpRevenue.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtData)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(12, 12);
+            this.btnBack.Location = new System.Drawing.Point(729, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 20);
             this.btnBack.TabIndex = 15;
@@ -51,57 +48,38 @@
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // grpRevenue
-            // 
-            this.grpRevenue.Controls.Add(this.lblFrom);
-            this.grpRevenue.Controls.Add(this.dtpFrom);
-            this.grpRevenue.Controls.Add(this.btnRevenue);
-            this.grpRevenue.Location = new System.Drawing.Point(124, 12);
-            this.grpRevenue.Name = "grpRevenue";
-            this.grpRevenue.Size = new System.Drawing.Size(322, 90);
-            this.grpRevenue.TabIndex = 16;
-            this.grpRevenue.TabStop = false;
-            this.grpRevenue.Text = "Revenue Analysis";
-            // 
             // lblFrom
             // 
             this.lblFrom.AutoSize = true;
-            this.lblFrom.Location = new System.Drawing.Point(39, 26);
+            this.lblFrom.Location = new System.Drawing.Point(12, 19);
             this.lblFrom.Name = "lblFrom";
-            this.lblFrom.Size = new System.Drawing.Size(29, 13);
+            this.lblFrom.Size = new System.Drawing.Size(62, 13);
             this.lblFrom.TabIndex = 16;
-            this.lblFrom.Text = "Year";
+            this.lblFrom.Text = "Select Year";
             // 
             // dtpFrom
             // 
-            this.dtpFrom.Location = new System.Drawing.Point(75, 20);
+            this.dtpFrom.Location = new System.Drawing.Point(80, 13);
             this.dtpFrom.Name = "dtpFrom";
             this.dtpFrom.Size = new System.Drawing.Size(194, 20);
             this.dtpFrom.TabIndex = 13;
-            // 
-            // btnRevenue
-            // 
-            this.btnRevenue.Location = new System.Drawing.Point(96, 48);
-            this.btnRevenue.Name = "btnRevenue";
-            this.btnRevenue.Size = new System.Drawing.Size(173, 36);
-            this.btnRevenue.TabIndex = 7;
-            this.btnRevenue.Text = "Analyse Revenue";
-            this.btnRevenue.UseVisualStyleBackColor = true;
-            this.btnRevenue.Click += new System.EventHandler(this.btnRevenue_Click);
+            this.dtpFrom.ValueChanged += new System.EventHandler(this.dtpFrom_ValueChanged);
             // 
             // chtData
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chtData.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chtData.Legends.Add(legend2);
-            this.chtData.Location = new System.Drawing.Point(12, 108);
+            this.chtData.BackColor = System.Drawing.Color.Transparent;
+            this.chtData.BorderlineColor = System.Drawing.Color.Transparent;
+            chartArea1.Name = "ChartArea1";
+            this.chtData.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtData.Legends.Add(legend1);
+            this.chtData.Location = new System.Drawing.Point(12, 39);
             this.chtData.Name = "chtData";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chtData.Series.Add(series2);
-            this.chtData.Size = new System.Drawing.Size(792, 330);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chtData.Series.Add(series1);
+            this.chtData.Size = new System.Drawing.Size(792, 399);
             this.chtData.TabIndex = 17;
             this.chtData.Text = "chart1";
             // 
@@ -110,27 +88,25 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(816, 450);
+            this.Controls.Add(this.lblFrom);
             this.Controls.Add(this.chtData);
-            this.Controls.Add(this.grpRevenue);
+            this.Controls.Add(this.dtpFrom);
             this.Controls.Add(this.btnBack);
             this.Name = "frmRevenueAnalysis";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmRevenueAnalysis";
             this.Load += new System.EventHandler(this.frmRevenueAnalysis_Load);
-            this.grpRevenue.ResumeLayout(false);
-            this.grpRevenue.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtData)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.GroupBox grpRevenue;
         private System.Windows.Forms.Label lblFrom;
         private System.Windows.Forms.DateTimePicker dtpFrom;
-        private System.Windows.Forms.Button btnRevenue;
         private System.Windows.Forms.DataVisualization.Charting.Chart chtData;
     }
 }

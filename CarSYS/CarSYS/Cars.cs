@@ -24,7 +24,7 @@ namespace CarSYS
         private int doors;
         private decimal engSize;
         private int numBags;
-        
+
 
         public Cars()
         {
@@ -40,7 +40,8 @@ namespace CarSYS
             doors = 0;
         }
 
-        public Cars(string make, string model, string CatID, string regNo,  string transmission, string fuel, decimal mileage, string availability, int numSeats,int doors, string extras, decimal engSize, int numBags)
+        public Cars(string make, string model, string CatID, string regNo, string transmission, string fuel,
+            decimal mileage, string availability, int numSeats, int doors, string extras, decimal engSize, int numBags)
         {
             this.make = make;
             this.model = model;
@@ -66,6 +67,7 @@ namespace CarSYS
         {
             return make;
         }
+
         public void setModel(String model)
         {
             this.model = model;
@@ -75,18 +77,22 @@ namespace CarSYS
         {
             return model;
         }
+
         public void setCatID(String CatID)
         {
             this.CatID = CatID;
         }
+
         public string getCatID()
         {
             return CatID;
         }
+
         public void setRegNo(String regNo)
         {
             this.regNo = regNo;
         }
+
         public string getReg()
         {
             return regNo;
@@ -96,6 +102,7 @@ namespace CarSYS
         {
             this.fuel = fuel;
         }
+
         public string getFuel()
         {
             return fuel;
@@ -105,14 +112,17 @@ namespace CarSYS
         {
             this.mileage = mileage;
         }
+
         public decimal getMileage()
         {
             return mileage;
         }
+
         public void setTransmission(String transmission)
         {
             this.transmission = transmission;
         }
+
         public string getTransmission()
         {
             return transmission;
@@ -122,6 +132,7 @@ namespace CarSYS
         {
             this.availability = availability;
         }
+
         public string getAvailability()
         {
             return availability;
@@ -132,6 +143,7 @@ namespace CarSYS
         {
             this.doors = doors;
         }
+
         public int getDoors()
         {
             return doors;
@@ -141,6 +153,7 @@ namespace CarSYS
         {
             this.engSize = engSize;
         }
+
         public decimal getEngSize()
         {
             return engSize;
@@ -150,22 +163,27 @@ namespace CarSYS
         {
             this.numSeats = numSeats;
         }
+
         public decimal getNumSeat()
         {
             return numSeats;
         }
+
         public void setNumBags(int numBags)
         {
             this.numBags = numBags;
         }
+
         public int getNumBags()
         {
             return numBags;
         }
+
         public void setExtras(String extras)
         {
             this.extras = extras;
         }
+
         public string getExtras()
         {
             return extras;
@@ -178,27 +196,27 @@ namespace CarSYS
             OracleConnection myConn = new OracleConnection(CarSysConnect.oradb);
             myConn.Open();
 
-            
-            String strSQL = "SELECT * FROM Cars WHERE RegNo ='" + reg +"'";
-                
+
+            String strSQL = "SELECT * FROM Cars WHERE RegNo ='" + reg + "'";
+
             OracleCommand cmd = new OracleCommand(strSQL, myConn);
 
             //execute the SQL query
             OracleDataReader dr = cmd.ExecuteReader();
 
-            
+
             if (dr.Read())
-            { 
+            {
                 setMake(dr.GetString(0));
                 setModel(dr.GetString(1));
                 setRegNo(dr.GetString(3));
                 setAvailability(dr.GetString(7));
-                
-                
             }
+
             //close DB connection
             myConn.Close();
         }
+
         public static Boolean checkRegExists(String RegNo)
         {
             Boolean exists = false;
@@ -221,7 +239,6 @@ namespace CarSYS
             }
 
             return exists;
-
         }
 
 
@@ -233,7 +250,8 @@ namespace CarSYS
 
 
                 //Define the SQL Query to retrieve the data
-                String strSQL = "SELECT ra.Cost, ra.Description,Make,Model,cars.CATID,NumSeats,Transmission,Fuel, RegNo,Extras FROM rates ra, cars WHERE ra.CatID = cars.CatID AND Availability = " +
+                String strSQL =
+                    "SELECT ra.Cost, ra.Description,Make,Model,cars.CATID,NumSeats,Transmission,Fuel, RegNo,Extras FROM rates ra, cars WHERE ra.CatID = cars.CatID AND Availability = " +
                     "'A' AND RegNo NOT IN(SELECT RegNo FROM bookings WHERE bookings.BookingStatus= 'R' AND StartDate >= '" +
                     start + "' AND EndDate <= '" + end + "' OR '" + start + "' BETWEEN StartDate AND EndDate)";
 
@@ -250,12 +268,10 @@ namespace CarSYS
             }
             catch
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return null;
             }
-            
-            
-
         }
 
         public static DataSet getRegNo(DataSet DS)
@@ -285,10 +301,10 @@ namespace CarSYS
             }
             catch
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return null;
             }
-            
         }
 
 
@@ -296,16 +312,18 @@ namespace CarSYS
         {
             OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
             conn.Open();
-          
-            String insertCars = "INSERT INTO cars VALUES('" +this.make.ToUpper() + "','"+this.model.ToUpper() + "','"+this.CatID.ToUpper() + "','"+
-                this.regNo.ToUpper() + "','"+this.transmission.ToUpper()+"','"+this.fuel.ToUpper()+"',"+this.mileage+",'"+this.availability+"',"+this.numSeats+","+this.doors+",'"+
-                this.extras+"',"+this.engSize+","+this.numBags+")";
+
+            String insertCars = "INSERT INTO cars VALUES('" + this.make.ToUpper() + "','" + this.model.ToUpper() +
+                                "','" + this.CatID.ToUpper() + "','" +
+                                this.regNo.ToUpper() + "','" + this.transmission.ToUpper() + "','" +
+                                this.fuel.ToUpper() + "'," + this.mileage + ",'" + this.availability + "'," +
+                                this.numSeats + "," + this.doors + ",'" +
+                                this.extras + "'," + this.engSize + "," + this.numBags + ")";
 
             OracleCommand cmd = new OracleCommand(insertCars, conn);
             cmd.ExecuteNonQuery();
 
             conn.Close();
-
         }
 
         public void removeCar()
@@ -315,7 +333,8 @@ namespace CarSYS
             myConn.Open();
 
             //Define SQL query to INSERT car record
-            String strSQL = "UPDATE cars SET Availability = '" + this.availability.ToUpper() + "' WHERE RegNo ='"+ this.regNo+"'";
+            String strSQL = "UPDATE cars SET Availability = '" + this.availability.ToUpper() + "' WHERE RegNo ='" +
+                            this.regNo + "'";
 
             //Execute the command
             OracleCommand cmd = new OracleCommand(strSQL, myConn);
@@ -327,14 +346,13 @@ namespace CarSYS
 
         public static DataSet availableForBooking(DataSet DS, String start, String end, String catid)
         {
-
             OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
 
 
             //Define the SQL Query to retrieve the data
-            String strSQL = "SELECT ra.Cost,ra.CatID,Make,Model,RegNo FROM rates ra, cars WHERE ra.catid ='" + catid + 
-                "' AND ra.CatID = cars.CatID AND Availability ='A' AND RegNo NOT IN(SELECT RegNo FROM bookings WHERE bookings.BookingStatus= 'R' AND StartDate >= '" + 
-                start + "' AND EndDate <= '" + end + "' OR '" + start + "' BETWEEN StartDate AND EndDate)";
+            String strSQL = "SELECT ra.Cost,ra.CatID,Make,Model,RegNo FROM rates ra, cars WHERE ra.catid ='" + catid +
+                            "' AND ra.CatID = cars.CatID AND Availability ='A' AND RegNo NOT IN(SELECT RegNo FROM bookings WHERE bookings.BookingStatus= 'R' AND StartDate >= '" +
+                            start + "' AND EndDate <= '" + end + "' OR '" + start + "' BETWEEN StartDate AND EndDate)";
 
             OracleCommand cmd = new OracleCommand(strSQL, conn);
 
@@ -346,7 +364,6 @@ namespace CarSYS
             conn.Close();
 
             return DS;
-
         }
 
         public void collectCar()
@@ -356,7 +373,8 @@ namespace CarSYS
             myConn.Open();
 
             //Define SQL query to INSERT car record
-            String strSQL = "UPDATE cars SET Availability = '" + this.availability.ToUpper() + "' WHERE RegNo ='" + this.regNo + "'";
+            String strSQL = "UPDATE cars SET Availability = '" + this.availability.ToUpper() + "' WHERE RegNo ='" +
+                            this.regNo + "'";
 
             //Execute the command
             OracleCommand cmd = new OracleCommand(strSQL, myConn);
@@ -365,7 +383,5 @@ namespace CarSYS
             //close DB connection
             myConn.Close();
         }
-
-
     }
 }

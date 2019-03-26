@@ -13,6 +13,7 @@ namespace CarSYS
     public partial class frmCollectCar : Form
     {
         frmMainMenu parent;
+
         public frmCollectCar(frmMainMenu Parent)
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace CarSYS
             this.Close();
             parent.Visible = true;
         }
+
         private void frmCollectCar_Load(object sender, EventArgs e)
         {
             try
@@ -43,13 +45,11 @@ namespace CarSYS
 
         private void btnCollectCar_Click(object sender, EventArgs e)
         {
-
             if (cboCollectCar.Text.Equals(""))
             {
                 MessageBox.Show("Chose booking to collect car", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboCollectCar.Focus();
                 return;
-
             }
 
             Booking bookingStatus = new Booking();
@@ -67,9 +67,9 @@ namespace CarSYS
             reCar.collectCar();
 
             //Display Confirmation Message
-            MessageBox.Show("Car " + cboCollectCar.Text + " has been collected", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            ClearUI();
-  
+            MessageBox.Show("Car " + cboCollectCar.Text + " has been collected", "Confirmation", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+            clearUi();
         }
 
         private void cboCollectCar_SelectedIndexChanged(object sender, EventArgs e)
@@ -79,6 +79,7 @@ namespace CarSYS
             {
                 return;
             }
+
             //find cust details
             Booking booking = new Booking();
             booking.getBooking(Convert.ToInt32(cboCollectCar.Text));
@@ -100,12 +101,11 @@ namespace CarSYS
             txtTotal.Text = booking.getTotal().ToString();
 
 
-
             //display details
             cboCollectCar.Visible = true;
         }
 
-        private void ClearUI()
+        private void clearUi()
         {
             txtCustomerID.Clear();
             txtBookingID.Clear();
@@ -116,9 +116,6 @@ namespace CarSYS
             txtTotal.Clear();
             cboCollectCar.ResetText();
             cboCollectCar.SelectedIndex = -1;
-
         }
-
-
     }
 }

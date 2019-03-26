@@ -13,12 +13,14 @@ namespace CarSYS
     public partial class frmCancelBooking : Form
     {
         frmMainMenu parent;
+
         public frmCancelBooking(frmMainMenu Parent)
         {
             InitializeComponent();
             parent = Parent;
             this.cboCancelBooking.DropDownStyle = ComboBoxStyle.DropDownList;
         }
+
         private void frmCancelBooking_Load(object sender, EventArgs e)
         {
             try
@@ -39,28 +41,24 @@ namespace CarSYS
         {
             this.Close();
             parent.Visible = true;
-          
         }
 
         private void btnCancelBooking_Click(object sender, EventArgs e)
         {
-
             if (cboCancelBooking.Text.Equals(""))
             {
                 MessageBox.Show("Chose booking to cancel", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboCancelBooking.Focus();
                 return;
-
             }
 
             DialogResult cancel = new DialogResult();
             cancel = MessageBox.Show("Do you want to delete this booking?", "Cancel",
-                     MessageBoxButtons.YesNo,
-                     MessageBoxIcon.Warning,
-                     MessageBoxDefaultButton.Button2);
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2);
             if (cancel == DialogResult.Yes)
             {
-                
                 //instantiate Stock Object
                 Booking cancelBooking = new Booking();
 
@@ -69,14 +67,12 @@ namespace CarSYS
 
                 cancelBooking.deleteBooking();
 
-                
-                MessageBox.Show("Booking " + txtBookingID.Text + " has been canelled", "Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
 
+                MessageBox.Show("Booking " + txtBookingID.Text + " has been canelled", "Confirmation",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            ClearUI();
 
-
+            clearUi();
         }
 
         private void cboRemoveCar_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,6 +82,7 @@ namespace CarSYS
             {
                 return;
             }
+
             //find cust details
             Booking booking = new Booking();
             booking.getBooking(Convert.ToInt32(cboCancelBooking.Text));
@@ -105,13 +102,13 @@ namespace CarSYS
             txtEndDate.Text = booking.getEndDate();
             txtStatus.Text = booking.getStatus();
             txtTotal.Text = booking.getTotal().ToString();
-          
 
 
             //display details
             grpCancelBooking.Visible = true;
         }
-        private void ClearUI()
+
+        private void clearUi()
         {
             txtCustomerID.Clear();
             txtBookingID.Clear();
@@ -122,7 +119,6 @@ namespace CarSYS
             txtTotal.Clear();
             cboCancelBooking.ResetText();
             cboCancelBooking.SelectedIndex = -1;
-
         }
     }
 }
