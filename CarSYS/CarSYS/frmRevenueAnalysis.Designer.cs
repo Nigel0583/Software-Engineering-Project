@@ -43,7 +43,7 @@
             this.btnBack.Location = new System.Drawing.Point(729, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 20);
-            this.btnBack.TabIndex = 15;
+            this.btnBack.TabIndex = 2;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -62,7 +62,7 @@
             this.dtpFrom.Location = new System.Drawing.Point(80, 13);
             this.dtpFrom.Name = "dtpFrom";
             this.dtpFrom.Size = new System.Drawing.Size(194, 20);
-            this.dtpFrom.TabIndex = 13;
+            this.dtpFrom.TabIndex = 1;
             this.dtpFrom.ValueChanged += new System.EventHandler(this.dtpFrom_ValueChanged);
             // 
             // chtData

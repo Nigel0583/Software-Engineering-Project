@@ -56,10 +56,10 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(12, 12);
+            this.btnBack.Location = new System.Drawing.Point(447, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 20);
-            this.btnBack.TabIndex = 14;
+            this.btnBack.TabIndex = 12;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -108,7 +108,7 @@
             this.txtBookingStatus.Name = "txtBookingStatus";
             this.txtBookingStatus.ReadOnly = true;
             this.txtBookingStatus.Size = new System.Drawing.Size(103, 20);
-            this.txtBookingStatus.TabIndex = 52;
+            this.txtBookingStatus.TabIndex = 6;
             this.txtBookingStatus.Text = "O";
             // 
             // lblBookedCar
@@ -127,7 +127,7 @@
             this.txtStatusCar.Name = "txtStatusCar";
             this.txtStatusCar.ReadOnly = true;
             this.txtStatusCar.Size = new System.Drawing.Size(103, 20);
-            this.txtStatusCar.TabIndex = 50;
+            this.txtStatusCar.TabIndex = 10;
             this.txtStatusCar.Text = "O";
             // 
             // txtTotal
@@ -137,7 +137,7 @@
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
             this.txtTotal.Size = new System.Drawing.Size(103, 20);
-            this.txtTotal.TabIndex = 49;
+            this.txtTotal.TabIndex = 8;
             // 
             // lblTotal
             // 
@@ -164,7 +164,7 @@
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.ReadOnly = true;
             this.txtStatus.Size = new System.Drawing.Size(103, 20);
-            this.txtStatus.TabIndex = 46;
+            this.txtStatus.TabIndex = 5;
             // 
             // txtEndDate
             // 
@@ -173,7 +173,7 @@
             this.txtEndDate.Name = "txtEndDate";
             this.txtEndDate.ReadOnly = true;
             this.txtEndDate.Size = new System.Drawing.Size(103, 20);
-            this.txtEndDate.TabIndex = 45;
+            this.txtEndDate.TabIndex = 9;
             // 
             // lblUpdateAvailability
             // 
@@ -200,7 +200,7 @@
             this.txtStartDate.Name = "txtStartDate";
             this.txtStartDate.ReadOnly = true;
             this.txtStartDate.Size = new System.Drawing.Size(103, 20);
-            this.txtStartDate.TabIndex = 42;
+            this.txtStartDate.TabIndex = 4;
             // 
             // lblRegNO
             // 
@@ -218,7 +218,7 @@
             this.txtReg.Name = "txtReg";
             this.txtReg.ReadOnly = true;
             this.txtReg.Size = new System.Drawing.Size(103, 20);
-            this.txtReg.TabIndex = 40;
+            this.txtReg.TabIndex = 3;
             // 
             // lblCustomerID
             // 
@@ -236,7 +236,7 @@
             this.txtCustomerID.Name = "txtCustomerID";
             this.txtCustomerID.ReadOnly = true;
             this.txtCustomerID.Size = new System.Drawing.Size(103, 20);
-            this.txtCustomerID.TabIndex = 38;
+            this.txtCustomerID.TabIndex = 7;
             // 
             // txtBookingID
             // 
@@ -245,7 +245,7 @@
             this.txtBookingID.Name = "txtBookingID";
             this.txtBookingID.ReadOnly = true;
             this.txtBookingID.Size = new System.Drawing.Size(103, 20);
-            this.txtBookingID.TabIndex = 37;
+            this.txtBookingID.TabIndex = 2;
             // 
             // lblBookingID
             // 
@@ -261,7 +261,7 @@
             this.btnCollectCar.Location = new System.Drawing.Point(233, 138);
             this.btnCollectCar.Name = "btnCollectCar";
             this.btnCollectCar.Size = new System.Drawing.Size(197, 52);
-            this.btnCollectCar.TabIndex = 20;
+            this.btnCollectCar.TabIndex = 11;
             this.btnCollectCar.Text = "Collect Car";
             this.btnCollectCar.UseVisualStyleBackColor = true;
             this.btnCollectCar.Click += new System.EventHandler(this.btnCollectCar_Click);
@@ -272,7 +272,7 @@
             this.cboCollectCar.Location = new System.Drawing.Point(112, 42);
             this.cboCollectCar.Name = "cboCollectCar";
             this.cboCollectCar.Size = new System.Drawing.Size(121, 21);
-            this.cboCollectCar.TabIndex = 24;
+            this.cboCollectCar.TabIndex = 1;
             this.cboCollectCar.SelectedIndexChanged += new System.EventHandler(this.cboCollectCar_SelectedIndexChanged);
             // 
             // label1

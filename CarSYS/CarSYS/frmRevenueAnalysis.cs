@@ -155,5 +155,15 @@ namespace CarSYS
             chtData.Titles.Clear();
             fillChart();
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            parent.Visible = true;
+
+
+        }
     }
 }

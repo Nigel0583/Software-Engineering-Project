@@ -55,7 +55,7 @@
             this.btnBack.Location = new System.Drawing.Point(12, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 23);
-            this.btnBack.TabIndex = 0;
+            this.btnBack.TabIndex = 4;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -90,7 +90,7 @@
             this.txtUpdate.MaxLength = 12;
             this.txtUpdate.Name = "txtUpdate";
             this.txtUpdate.Size = new System.Drawing.Size(103, 20);
-            this.txtUpdate.TabIndex = 54;
+            this.txtUpdate.TabIndex = 2;
             this.txtUpdate.Text = "R";
             // 
             // lblUpdateStatus
@@ -198,7 +198,7 @@
             this.btnRemoveCustomer.Location = new System.Drawing.Point(81, 169);
             this.btnRemoveCustomer.Name = "btnRemoveCustomer";
             this.btnRemoveCustomer.Size = new System.Drawing.Size(255, 34);
-            this.btnRemoveCustomer.TabIndex = 10;
+            this.btnRemoveCustomer.TabIndex = 3;
             this.btnRemoveCustomer.Text = "Remove Customer";
             this.btnRemoveCustomer.UseVisualStyleBackColor = true;
             this.btnRemoveCustomer.Click += new System.EventHandler(this.btnRemoveCustomer_Click);
@@ -227,7 +227,7 @@
             this.cboRemoveCustomer.Location = new System.Drawing.Point(93, 49);
             this.cboRemoveCustomer.Name = "cboRemoveCustomer";
             this.cboRemoveCustomer.Size = new System.Drawing.Size(255, 21);
-            this.cboRemoveCustomer.TabIndex = 12;
+            this.cboRemoveCustomer.TabIndex = 1;
             this.cboRemoveCustomer.Text = "RemoveCustomer";
             this.cboRemoveCustomer.SelectedIndexChanged += new System.EventHandler(this.cboRemoveCustomer_SelectedIndexChanged);
             // 

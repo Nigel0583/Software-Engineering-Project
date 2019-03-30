@@ -29,18 +29,7 @@ namespace CarSYS
 
         private void frmCollectCar_Load(object sender, EventArgs e)
         {
-            try
-            {
-                DataSet ds = new DataSet();
-                ds = Booking.getBookingInfo(ds);
-                for (int i = 0; i < ds.Tables["booking"].Rows.Count; i++)
-                    cboCollectCar.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(0, '0').Trim());
-            }
-            catch
-            {
-                this.Close();
-                parent.Visible = true;
-            }
+            loadData();
         }
 
         private void btnCollectCar_Click(object sender, EventArgs e)
@@ -70,10 +59,13 @@ namespace CarSYS
             MessageBox.Show("Car " + cboCollectCar.Text + " has been collected", "Confirmation", MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
             clearUi();
+            cboCollectCar.Items.Clear();
+            loadData();
         }
 
         private void cboCollectCar_SelectedIndexChanged(object sender, EventArgs e)
         {
+            grpCollectCar.Visible = true;
             //if resetting combo, ignore
             if (cboCollectCar.SelectedIndex == -1)
             {
@@ -116,6 +108,31 @@ namespace CarSYS
             txtTotal.Clear();
             cboCollectCar.ResetText();
             cboCollectCar.SelectedIndex = -1;
+        }
+        public void loadData()
+        {
+            grpCollectCar.Visible = false;
+            try
+            {
+                DataSet ds = new DataSet();
+                ds = Booking.getBookingInfo(ds);
+                for (int i = 0; i < ds.Tables["booking"].Rows.Count; i++)
+                    cboCollectCar.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(0, '0').Trim());
+            }
+            catch
+            {
+                this.Close();
+                parent.Visible = true;
+            }
+        }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            parent.Visible = true;
+
+
         }
     }
 }

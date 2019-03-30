@@ -49,13 +49,19 @@ namespace CarSYS
             }
         }
 
-        private void frmCarAvailability_Load(object sender, EventArgs e)
-        {
-        }
-
         private void dtpFrom_ValueChanged(object sender, EventArgs e)
         {
             dtpTo.MinDate = dtpFrom.Value;
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            parent.Visible = true;
+
+
         }
     }
 }

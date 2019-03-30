@@ -96,5 +96,15 @@ namespace CarSYS
             rates.getInvoicePerDay();
             lblDayCost.Text = rates.getCost().ToString().Trim();
         }
+
+        //From https://stackoverflow.com/questions/1669318/override-standard-close-x-button-in-a-windows-form
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+                    parent.Visible = true;
+            
+        }
     }
 }

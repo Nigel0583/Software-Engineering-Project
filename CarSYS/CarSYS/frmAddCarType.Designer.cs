@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddCarType));
             this.grpType = new System.Windows.Forms.GroupBox();
+            this.numericUpRate = new System.Windows.Forms.NumericUpDown();
             this.btnAdd = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtDesc = new System.Windows.Forms.TextBox();
@@ -36,7 +38,6 @@
             this.txtCarType = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
-            this.numericUpRate = new System.Windows.Forms.NumericUpDown();
             this.grpType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpRate)).BeginInit();
             this.SuspendLayout();
@@ -50,19 +51,43 @@
             this.grpType.Controls.Add(this.label5);
             this.grpType.Controls.Add(this.txtCarType);
             this.grpType.Controls.Add(this.label6);
-            this.grpType.Location = new System.Drawing.Point(12, 66);
+            this.grpType.Location = new System.Drawing.Point(19, 38);
             this.grpType.Name = "grpType";
             this.grpType.Size = new System.Drawing.Size(267, 293);
-            this.grpType.TabIndex = 8;
+            this.grpType.TabIndex = 0;
             this.grpType.TabStop = false;
             this.grpType.Text = "Enter car type details";
+            // 
+            // numericUpRate
+            // 
+            this.numericUpRate.DecimalPlaces = 1;
+            this.numericUpRate.Location = new System.Drawing.Point(85, 154);
+            this.numericUpRate.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.numericUpRate.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpRate.MinimumSize = new System.Drawing.Size(1, 0);
+            this.numericUpRate.Name = "numericUpRate";
+            this.numericUpRate.Size = new System.Drawing.Size(92, 20);
+            this.numericUpRate.TabIndex = 3;
+            this.numericUpRate.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(19, 208);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(235, 52);
-            this.btnAdd.TabIndex = 6;
+            this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "AddCarType";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_CLick);
@@ -83,7 +108,7 @@
             this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(140, 59);
-            this.txtDesc.TabIndex = 9;
+            this.txtDesc.TabIndex = 2;
             // 
             // label5
             // 
@@ -100,7 +125,7 @@
             this.txtCarType.MaxLength = 3;
             this.txtCarType.Name = "txtCarType";
             this.txtCarType.Size = new System.Drawing.Size(50, 20);
-            this.txtCarType.TabIndex = 7;
+            this.txtCarType.TabIndex = 1;
             // 
             // label6
             // 
@@ -113,48 +138,25 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(12, 12);
+            this.btnBack.Location = new System.Drawing.Point(211, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 20);
-            this.btnBack.TabIndex = 11;
+            this.btnBack.TabIndex = 5;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // numericUpRate
-            // 
-            this.numericUpRate.DecimalPlaces = 1;
-            this.numericUpRate.Location = new System.Drawing.Point(85, 154);
-            this.numericUpRate.Maximum = new decimal(new int[] {
-            999,
-            0,
-            0,
-            0});
-            this.numericUpRate.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpRate.MinimumSize = new System.Drawing.Size(1, 0);
-            this.numericUpRate.Name = "numericUpRate";
-            this.numericUpRate.Size = new System.Drawing.Size(92, 20);
-            this.numericUpRate.TabIndex = 37;
-            this.numericUpRate.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
             // 
             // frmAddCarType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(298, 392);
+            this.ClientSize = new System.Drawing.Size(298, 334);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.grpType);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmAddCarType";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddCarType";
+            this.Text = "Add Car Type";
             this.Load += new System.EventHandler(this.frmAddCarType_Load);
             this.grpType.ResumeLayout(false);
             this.grpType.PerformLayout();

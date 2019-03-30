@@ -23,6 +23,7 @@ namespace CarSYS
         }
         private void frmAddCustomer_Load(object sender, EventArgs e)
         {
+          
             txtCustomerID.Text = Customer.nextCustomerID().ToString("00000");
         }
 
@@ -291,6 +292,66 @@ namespace CarSYS
 
             txtCustomerID.Text = Customer.nextCustomerID().ToString("00000");
             txtFirstName.Focus();
+        }
+
+        public static List<RegionInfo> GetCountriesByIso3166()
+        {
+            List<RegionInfo> countries = new List<RegionInfo>();
+            foreach (CultureInfo culture in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
+            {
+                RegionInfo country = new RegionInfo(culture.LCID);
+                if (countries.Where(p => p.Name == country.Name).Count() == 0)
+                    countries.Add(country);
+            }
+            return countries.OrderBy(p => p.EnglishName).ToList();
+        }
+
+        
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            parent.Visible = true;
+
+
+        }
+
+        private void EmailTextEnter(object sender, EventArgs e)
+        {
+            
+            if (txtEmail.Text.Equals("example@email.com"))
+            {
+                txtEmail.Text = "";
+                txtEmail.ForeColor = Color.Black;
+            }
+        }
+
+        private void EmailTextLeave(object sender, EventArgs e)
+        {
+            if (txtEmail.Text.Equals(""))
+            {
+                txtEmail.Text = "example@email.com";
+                txtEmail.ForeColor = Color.Silver;
+            }
+        }
+
+        private void phoneTextEnter(object sender, EventArgs e)
+        {
+            if (txtPhone.Text.Equals("+353861234567"))
+            {
+                txtPhone.Text = "";
+                txtPhone.ForeColor = Color.Black;
+            }
+        }
+
+        private void phoneTextLeave(object sender, EventArgs e)
+        {
+            if (txtPhone.Text.Equals(""))
+            {
+                txtPhone.Text = "+353861234567";
+                txtPhone.ForeColor = Color.Silver;
+            }
         }
     }
 }

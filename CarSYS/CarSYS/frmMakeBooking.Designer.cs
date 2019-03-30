@@ -72,10 +72,10 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(12, 12);
+            this.btnBack.Location = new System.Drawing.Point(775, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 20);
-            this.btnBack.TabIndex = 12;
+            this.btnBack.TabIndex = 22;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -87,10 +87,10 @@
             this.grpMakeBooking.Controls.Add(this.dtpFrom);
             this.grpMakeBooking.Controls.Add(this.dtpTo);
             this.grpMakeBooking.Controls.Add(this.btnSelectCar);
-            this.grpMakeBooking.Location = new System.Drawing.Point(12, 111);
+            this.grpMakeBooking.Location = new System.Drawing.Point(12, 303);
             this.grpMakeBooking.Name = "grpMakeBooking";
             this.grpMakeBooking.Size = new System.Drawing.Size(287, 111);
-            this.grpMakeBooking.TabIndex = 13;
+            this.grpMakeBooking.TabIndex = 11;
             this.grpMakeBooking.TabStop = false;
             this.grpMakeBooking.Text = "Select Dates + Car Type";
             // 
@@ -118,7 +118,7 @@
             this.dtpFrom.Location = new System.Drawing.Point(62, 19);
             this.dtpFrom.Name = "dtpFrom";
             this.dtpFrom.Size = new System.Drawing.Size(176, 20);
-            this.dtpFrom.TabIndex = 13;
+            this.dtpFrom.TabIndex = 12;
             this.dtpFrom.Value = new System.DateTime(2019, 2, 24, 0, 0, 0, 0);
             this.dtpFrom.ValueChanged += new System.EventHandler(this.dtpFrom_ValueChanged);
             // 
@@ -128,7 +128,7 @@
             this.dtpTo.Location = new System.Drawing.Point(62, 46);
             this.dtpTo.Name = "dtpTo";
             this.dtpTo.Size = new System.Drawing.Size(176, 20);
-            this.dtpTo.TabIndex = 12;
+            this.dtpTo.TabIndex = 13;
             this.dtpTo.Value = new System.DateTime(2019, 2, 24, 0, 0, 0, 0);
             this.dtpTo.ValueChanged += new System.EventHandler(this.dtpTo_ValueChanged);
             // 
@@ -137,7 +137,7 @@
             this.btnSelectCar.Location = new System.Drawing.Point(29, 81);
             this.btnSelectCar.Name = "btnSelectCar";
             this.btnSelectCar.Size = new System.Drawing.Size(209, 24);
-            this.btnSelectCar.TabIndex = 7;
+            this.btnSelectCar.TabIndex = 14;
             this.btnSelectCar.Text = "Select Car";
             this.btnSelectCar.UseVisualStyleBackColor = true;
             this.btnSelectCar.Click += new System.EventHandler(this.btnSelectCar_Click);
@@ -145,22 +145,21 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 84);
+            this.label6.Location = new System.Drawing.Point(37, 256);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 13);
             this.label6.TabIndex = 14;
             this.label6.Text = "Car Type";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // cboCarCategory
             // 
             this.cboCarCategory.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cboCarCategory.FormattingEnabled = true;
-            this.cboCarCategory.Location = new System.Drawing.Point(74, 84);
+            this.cboCarCategory.Location = new System.Drawing.Point(90, 256);
             this.cboCarCategory.MaxDropDownItems = 10;
             this.cboCarCategory.Name = "cboCarCategory";
             this.cboCarCategory.Size = new System.Drawing.Size(176, 21);
-            this.cboCarCategory.TabIndex = 11;
+            this.cboCarCategory.TabIndex = 10;
             this.cboCarCategory.Tag = "";
             this.cboCarCategory.Text = "CarType";
             this.cboCarCategory.SelectedIndexChanged += new System.EventHandler(this.cboCarCategory_SelectedIndexChanged);
@@ -178,10 +177,10 @@
             this.grpChoseCustomer.Controls.Add(this.txtSurname);
             this.grpChoseCustomer.Controls.Add(this.txtFirstName);
             this.grpChoseCustomer.Controls.Add(this.lblName);
-            this.grpChoseCustomer.Location = new System.Drawing.Point(12, 267);
+            this.grpChoseCustomer.Location = new System.Drawing.Point(12, 84);
             this.grpChoseCustomer.Name = "grpChoseCustomer";
             this.grpChoseCustomer.Size = new System.Drawing.Size(287, 149);
-            this.grpChoseCustomer.TabIndex = 14;
+            this.grpChoseCustomer.TabIndex = 9;
             this.grpChoseCustomer.TabStop = false;
             this.grpChoseCustomer.Text = "Customer";
             // 
@@ -201,7 +200,7 @@
             this.txtCustomerID.Name = "txtCustomerID";
             this.txtCustomerID.ReadOnly = true;
             this.txtCustomerID.Size = new System.Drawing.Size(66, 20);
-            this.txtCustomerID.TabIndex = 53;
+            this.txtCustomerID.TabIndex = 3;
             this.txtCustomerID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtLicence
@@ -211,7 +210,7 @@
             this.txtLicence.Name = "txtLicence";
             this.txtLicence.ReadOnly = true;
             this.txtLicence.Size = new System.Drawing.Size(92, 20);
-            this.txtLicence.TabIndex = 56;
+            this.txtLicence.TabIndex = 6;
             // 
             // lblEmail
             // 
@@ -229,7 +228,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.ReadOnly = true;
             this.txtEmail.Size = new System.Drawing.Size(189, 20);
-            this.txtEmail.TabIndex = 58;
+            this.txtEmail.TabIndex = 8;
             // 
             // lblPhone
             // 
@@ -247,7 +246,7 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.ReadOnly = true;
             this.txtPhone.Size = new System.Drawing.Size(92, 20);
-            this.txtPhone.TabIndex = 57;
+            this.txtPhone.TabIndex = 7;
             // 
             // lblLicence
             // 
@@ -265,7 +264,7 @@
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.ReadOnly = true;
             this.txtSurname.Size = new System.Drawing.Size(92, 20);
-            this.txtSurname.TabIndex = 55;
+            this.txtSurname.TabIndex = 5;
             // 
             // txtFirstName
             // 
@@ -274,7 +273,7 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.ReadOnly = true;
             this.txtFirstName.Size = new System.Drawing.Size(92, 20);
-            this.txtFirstName.TabIndex = 54;
+            this.txtFirstName.TabIndex = 4;
             // 
             // lblName
             // 
@@ -289,10 +288,10 @@
             // 
             this.cboCustomer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cboCustomer.FormattingEnabled = true;
-            this.cboCustomer.Location = new System.Drawing.Point(74, 240);
+            this.cboCustomer.Location = new System.Drawing.Point(90, 57);
             this.cboCustomer.Name = "cboCustomer";
             this.cboCustomer.Size = new System.Drawing.Size(176, 21);
-            this.cboCustomer.TabIndex = 11;
+            this.cboCustomer.TabIndex = 2;
             this.cboCustomer.Text = "Customer";
             this.cboCustomer.SelectedIndexChanged += new System.EventHandler(this.cboCustomer_SelectedIndexChanged);
             // 
@@ -302,7 +301,7 @@
             this.grdSelectCar.Location = new System.Drawing.Point(6, 19);
             this.grdSelectCar.Name = "grdSelectCar";
             this.grdSelectCar.Size = new System.Drawing.Size(539, 243);
-            this.grdSelectCar.TabIndex = 15;
+            this.grdSelectCar.TabIndex = 16;
             this.grdSelectCar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdSelectCar_CellContentClick);
             // 
             // grpChoseCar
@@ -313,23 +312,21 @@
             this.grpChoseCar.Controls.Add(this.lblCost);
             this.grpChoseCar.Controls.Add(this.txtRegChosen);
             this.grpChoseCar.Controls.Add(this.lblRegChosen);
-            this.grpChoseCar.Controls.Add(this.btnCancelBooking);
-            this.grpChoseCar.Controls.Add(this.btnMakeBooking);
             this.grpChoseCar.Controls.Add(this.grdSelectCar);
             this.grpChoseCar.Location = new System.Drawing.Point(305, 38);
             this.grpChoseCar.Name = "grpChoseCar";
-            this.grpChoseCar.Size = new System.Drawing.Size(553, 392);
-            this.grpChoseCar.TabIndex = 16;
+            this.grpChoseCar.Size = new System.Drawing.Size(553, 335);
+            this.grpChoseCar.TabIndex = 15;
             this.grpChoseCar.TabStop = false;
             this.grpChoseCar.Text = "Chose Car";
             // 
             // grdTotalCost
             // 
             this.grdTotalCost.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdTotalCost.Location = new System.Drawing.Point(397, 273);
+            this.grdTotalCost.Location = new System.Drawing.Point(397, 265);
             this.grdTotalCost.Name = "grdTotalCost";
-            this.grdTotalCost.Size = new System.Drawing.Size(148, 56);
-            this.grdTotalCost.TabIndex = 25;
+            this.grdTotalCost.Size = new System.Drawing.Size(148, 64);
+            this.grdTotalCost.TabIndex = 19;
             // 
             // txtCost
             // 
@@ -337,7 +334,7 @@
             this.txtCost.Name = "txtCost";
             this.txtCost.ReadOnly = true;
             this.txtCost.Size = new System.Drawing.Size(46, 20);
-            this.txtCost.TabIndex = 24;
+            this.txtCost.TabIndex = 18;
             // 
             // lblCostDay
             // 
@@ -363,7 +360,7 @@
             this.txtRegChosen.Name = "txtRegChosen";
             this.txtRegChosen.ReadOnly = true;
             this.txtRegChosen.Size = new System.Drawing.Size(118, 20);
-            this.txtRegChosen.TabIndex = 20;
+            this.txtRegChosen.TabIndex = 17;
             // 
             // lblRegChosen
             // 
@@ -376,20 +373,20 @@
             // 
             // btnCancelBooking
             // 
-            this.btnCancelBooking.Location = new System.Drawing.Point(6, 335);
+            this.btnCancelBooking.Location = new System.Drawing.Point(311, 388);
             this.btnCancelBooking.Name = "btnCancelBooking";
             this.btnCancelBooking.Size = new System.Drawing.Size(260, 43);
-            this.btnCancelBooking.TabIndex = 18;
+            this.btnCancelBooking.TabIndex = 20;
             this.btnCancelBooking.Text = "Cancel Booking";
             this.btnCancelBooking.UseVisualStyleBackColor = true;
             this.btnCancelBooking.Click += new System.EventHandler(this.btnCancelBooking_Click);
             // 
             // btnMakeBooking
             // 
-            this.btnMakeBooking.Location = new System.Drawing.Point(285, 335);
+            this.btnMakeBooking.Location = new System.Drawing.Point(598, 388);
             this.btnMakeBooking.Name = "btnMakeBooking";
             this.btnMakeBooking.Size = new System.Drawing.Size(260, 43);
-            this.btnMakeBooking.TabIndex = 16;
+            this.btnMakeBooking.TabIndex = 21;
             this.btnMakeBooking.Text = "Make Booking";
             this.btnMakeBooking.UseVisualStyleBackColor = true;
             this.btnMakeBooking.Click += new System.EventHandler(this.btnMakeBooking_Click);
@@ -397,7 +394,7 @@
             // lblBookingNo
             // 
             this.lblBookingNo.AutoSize = true;
-            this.lblBookingNo.Location = new System.Drawing.Point(73, 57);
+            this.lblBookingNo.Location = new System.Drawing.Point(89, 19);
             this.lblBookingNo.Name = "lblBookingNo";
             this.lblBookingNo.Size = new System.Drawing.Size(63, 13);
             this.lblBookingNo.TabIndex = 17;
@@ -405,17 +402,17 @@
             // 
             // txtBookingNo
             // 
-            this.txtBookingNo.Location = new System.Drawing.Point(158, 57);
+            this.txtBookingNo.Location = new System.Drawing.Point(174, 19);
             this.txtBookingNo.MaxLength = 12;
             this.txtBookingNo.Name = "txtBookingNo";
             this.txtBookingNo.ReadOnly = true;
             this.txtBookingNo.Size = new System.Drawing.Size(92, 20);
-            this.txtBookingNo.TabIndex = 18;
+            this.txtBookingNo.TabIndex = 1;
             // 
             // lblCustomer
             // 
             this.lblCustomer.AutoSize = true;
-            this.lblCustomer.Location = new System.Drawing.Point(18, 243);
+            this.lblCustomer.Location = new System.Drawing.Point(34, 60);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(51, 13);
             this.lblCustomer.TabIndex = 19;
@@ -432,8 +429,10 @@
             this.Controls.Add(this.grpChoseCar);
             this.Controls.Add(this.grpChoseCustomer);
             this.Controls.Add(this.label6);
+            this.Controls.Add(this.btnCancelBooking);
             this.Controls.Add(this.grpMakeBooking);
             this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.btnMakeBooking);
             this.Controls.Add(this.cboCustomer);
             this.Controls.Add(this.cboCarCategory);
             this.Name = "frmMakeBooking";

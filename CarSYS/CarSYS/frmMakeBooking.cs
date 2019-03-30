@@ -32,10 +32,16 @@ namespace CarSYS
         {
             this.Close();
             parent.Visible = true;
+
         }
 
         private void frmMakeBooking_Load(object sender, EventArgs e)
         {
+            grpChoseCar.Visible = false;
+            btnMakeBooking.Visible = false;
+            
+            grpChoseCustomer.Visible = false;
+            grpMakeBooking.Visible = false;
             txtBookingNo.Text = Booking.nextBookingNo().ToString("00000");
 
             // create instance of data set
@@ -67,16 +73,24 @@ namespace CarSYS
 
         private void btnSelectCar_Click(object sender, EventArgs e)
         {
+            grpChoseCar.Visible = true;
+
             string from = dtpFrom.Value.ToString("yyyy-MM-dd");
             string to = dtpTo.Value.ToString("yyyy-MM-dd");
             // create instance of data set
             DataSet ds = new DataSet();
 
             grdSelectCar.DataSource = Cars.availableForBooking(ds, from, to, cboCarCategory.Text).Tables["bookCar"];
+
+            
+           
+
+           
         }
 
         private void cboCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
             //if resetting combo, ignore
             if (cboCustomer.SelectedIndex == -1)
             {
@@ -103,12 +117,12 @@ namespace CarSYS
             txtCustomerID.Text = rCustomer.getCustomerID().ToString("00000");
 
 
-            //display details
-            grpChoseCar.Visible = true;
+            grpChoseCustomer.Visible = true;
         }
 
         private void grdSelectCar_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            btnMakeBooking.Visible = true;
             string from = dtpFrom.Value.ToString("yyyy-MM-dd");
             string to = dtpTo.Value.ToString("yyyy-MM-dd");
             //From https://www.youtube.com/watch?v=SqQAbzDs3jo
@@ -144,6 +158,26 @@ namespace CarSYS
 
         private void btnMakeBooking_Click(object sender, EventArgs e)
         {
+            if (cboCustomer.Text.Equals(""))
+            {
+                MessageBox.Show("Chose a customer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboCustomer.Focus();
+                return;
+            }
+
+            if (cboCarCategory.Text.Equals(""))
+            {
+                MessageBox.Show("Chose a customer", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboCarCategory.Focus();
+                return;
+            }
+
+            if (txtRegChosen.Text.Equals(""))
+            {
+                MessageBox.Show("Chose a car", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                grpChoseCar.Focus();
+                return;
+            }
             string from = dtpFrom.Value.ToString("yyyy-MM-dd");
             string to = dtpTo.Value.ToString("yyyy-MM-dd");
             string total = grdTotalCost.Rows[0].Cells["total"].Value.ToString();
@@ -159,7 +193,7 @@ namespace CarSYS
             booking.addBooking();
 
             //Display confirmation
-            MessageBox.Show("Car Reg " + txtRegChosen.Text + ", Customer" + txtCustomerID.Text, "Success",
+            MessageBox.Show("Car with registration " + txtRegChosen.Text + "has been booked by customer" + txtCustomerID.Text, "Success",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             ClearUI();
@@ -205,13 +239,18 @@ namespace CarSYS
         {
             dtpTo.MinDate = dtpFrom.Value;
         }
+        //From https://stackoverflow.com/questions/1669318/override-standard-close-x-button-in-a-windows-form
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            parent.Visible = true;
+        }
 
         private void cboCarCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
+            grpMakeBooking.Visible = true;
         }
     }
 }

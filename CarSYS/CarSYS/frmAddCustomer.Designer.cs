@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddCustomer));
             this.btnBack = new System.Windows.Forms.Button();
             this.grpAddCustomer = new System.Windows.Forms.GroupBox();
             this.lblCustID = new System.Windows.Forms.Label();
@@ -56,7 +57,7 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(12, 12);
+            this.btnBack.Location = new System.Drawing.Point(307, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 23);
             this.btnBack.TabIndex = 0;
@@ -129,7 +130,6 @@
             this.dtpCustomer.Size = new System.Drawing.Size(255, 20);
             this.dtpCustomer.TabIndex = 10;
             this.dtpCustomer.Value = new System.DateTime(2019, 2, 24, 0, 0, 0, 0);
-          
             // 
             // txtLicence
             // 
@@ -150,16 +150,20 @@
             // 
             // txtEmail
             // 
+            this.txtEmail.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.txtEmail.Location = new System.Drawing.Point(81, 108);
-            this.txtEmail.MaxLength = 256;
+            this.txtEmail.MaxLength = 40;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(255, 20);
             this.txtEmail.TabIndex = 6;
+            this.txtEmail.Text = "example@email.com";
+            this.txtEmail.Enter += new System.EventHandler(this.EmailTextEnter);
+            this.txtEmail.Leave += new System.EventHandler(this.EmailTextLeave);
             // 
             // txtZipCode
             // 
             this.txtZipCode.Location = new System.Drawing.Point(244, 172);
-            this.txtZipCode.MaxLength = 12;
+            this.txtZipCode.MaxLength = 18;
             this.txtZipCode.Name = "txtZipCode";
             this.txtZipCode.Size = new System.Drawing.Size(92, 20);
             this.txtZipCode.TabIndex = 9;
@@ -184,8 +188,10 @@
             // 
             // txtCountry
             // 
+            this.txtCountry.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtCountry.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.txtCountry.Location = new System.Drawing.Point(81, 172);
-            this.txtCountry.MaxLength = 12;
+            this.txtCountry.MaxLength = 56;
             this.txtCountry.Name = "txtCountry";
             this.txtCountry.Size = new System.Drawing.Size(92, 20);
             this.txtCountry.TabIndex = 8;
@@ -202,7 +208,7 @@
             // txtAddress
             // 
             this.txtAddress.Location = new System.Drawing.Point(81, 146);
-            this.txtAddress.MaxLength = 12;
+            this.txtAddress.MaxLength = 100;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(255, 20);
             this.txtAddress.TabIndex = 7;
@@ -218,11 +224,15 @@
             // 
             // txtPhone
             // 
+            this.txtPhone.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.txtPhone.Location = new System.Drawing.Point(244, 82);
-            this.txtPhone.MaxLength = 12;
+            this.txtPhone.MaxLength = 18;
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(92, 20);
             this.txtPhone.TabIndex = 5;
+            this.txtPhone.Text = "+353861234567";
+            this.txtPhone.Enter += new System.EventHandler(this.phoneTextEnter);
+            this.txtPhone.Leave += new System.EventHandler(this.phoneTextLeave);
             // 
             // lblLicence
             // 
@@ -245,7 +255,7 @@
             // txtSurname
             // 
             this.txtSurname.Location = new System.Drawing.Point(244, 43);
-            this.txtSurname.MaxLength = 12;
+            this.txtSurname.MaxLength = 20;
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(92, 20);
             this.txtSurname.TabIndex = 3;
@@ -263,7 +273,7 @@
             // txtFirstName
             // 
             this.txtFirstName.Location = new System.Drawing.Point(91, 43);
-            this.txtFirstName.MaxLength = 12;
+            this.txtFirstName.MaxLength = 20;
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(92, 20);
             this.txtFirstName.TabIndex = 2;
@@ -284,6 +294,7 @@
             this.ClientSize = new System.Drawing.Size(394, 348);
             this.Controls.Add(this.grpAddCustomer);
             this.Controls.Add(this.btnBack);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmAddCustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddCustomer";

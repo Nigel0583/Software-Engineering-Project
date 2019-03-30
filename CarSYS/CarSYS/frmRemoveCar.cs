@@ -24,18 +24,7 @@ namespace CarSYS
 
         private void frmRemove_Load(object sender, EventArgs e)
         {
-            try
-            {
-                DataSet ds = new DataSet();
-                ds = Cars.getRegNo(ds);
-                for (int i = 0; i < ds.Tables["reg"].Rows.Count; i++)
-                    cboRemoveCar.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(0, '0').Trim());
-            }
-            catch
-            {
-                this.Close();
-                parent.Visible = true;
-            }
+            loadData();
         }
 
         private void btnBack_Click_1(object sender, EventArgs e)
@@ -88,11 +77,11 @@ namespace CarSYS
             //Display Confirmation Message
             MessageBox.Show("Car " + cboRemoveCar.Text + " has been removed", "Confirmation", MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
-
-            //reset UI
-            grpRemoveCar.Visible = false;
-
+           
             cboRemoveCar.SelectedIndex = -1;
+            cboRemoveCar.Items.Clear();
+            loadData();
+
         }
 
         private void cboRemoveCar_SelectedIndexChanged(object sender, EventArgs e)
@@ -123,6 +112,32 @@ namespace CarSYS
 
             //display details
             grpRemoveCar.Visible = true;
+        }
+
+        public void loadData()
+        {
+            grpRemoveCar.Visible = false;
+            try
+            {
+                DataSet ds = new DataSet();
+                ds = Cars.getRegNo(ds);
+                for (int i = 0; i < ds.Tables["reg"].Rows.Count; i++)
+                    cboRemoveCar.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(0, '0').Trim());
+            }
+            catch
+            {
+                this.Close();
+                parent.Visible = true;
+            }
+        }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            parent.Visible = true;
+
+
         }
     }
 }

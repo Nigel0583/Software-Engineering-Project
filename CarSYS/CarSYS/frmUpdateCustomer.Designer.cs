@@ -62,7 +62,7 @@
             this.btnBack.Location = new System.Drawing.Point(12, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 23);
-            this.btnBack.TabIndex = 0;
+            this.btnBack.TabIndex = 13;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -104,7 +104,7 @@
             this.dtpCustomer.Location = new System.Drawing.Point(81, 216);
             this.dtpCustomer.Name = "dtpCustomer";
             this.dtpCustomer.Size = new System.Drawing.Size(257, 20);
-            this.dtpCustomer.TabIndex = 56;
+            this.dtpCustomer.TabIndex = 11;
             // 
             // lblStatus
             // 
@@ -118,10 +118,11 @@
             // txtStatus
             // 
             this.txtStatus.Location = new System.Drawing.Point(131, 17);
-            this.txtStatus.MaxLength = 12;
+            this.txtStatus.MaxLength = 1;
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.Size = new System.Drawing.Size(40, 20);
-            this.txtStatus.TabIndex = 53;
+            this.txtStatus.TabIndex = 2;
+            this.txtStatus.Text = "A";
             // 
             // lblCustID
             // 
@@ -157,7 +158,7 @@
             this.txtLicence.MaxLength = 12;
             this.txtLicence.Name = "txtLicence";
             this.txtLicence.Size = new System.Drawing.Size(92, 20);
-            this.txtLicence.TabIndex = 3;
+            this.txtLicence.TabIndex = 5;
             // 
             // lblEmail
             // 
@@ -174,7 +175,7 @@
             this.txtEmail.MaxLength = 12;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(255, 20);
-            this.txtEmail.TabIndex = 5;
+            this.txtEmail.TabIndex = 7;
             // 
             // txtZipCode
             // 
@@ -182,7 +183,7 @@
             this.txtZipCode.MaxLength = 12;
             this.txtZipCode.Name = "txtZipCode";
             this.txtZipCode.Size = new System.Drawing.Size(92, 20);
-            this.txtZipCode.TabIndex = 8;
+            this.txtZipCode.TabIndex = 10;
             // 
             // lblZipCode
             // 
@@ -208,7 +209,7 @@
             this.txtCountry.MaxLength = 12;
             this.txtCountry.Name = "txtCountry";
             this.txtCountry.Size = new System.Drawing.Size(92, 20);
-            this.txtCountry.TabIndex = 7;
+            this.txtCountry.TabIndex = 9;
             // 
             // lblAddress
             // 
@@ -225,7 +226,7 @@
             this.txtAddress.MaxLength = 12;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(255, 20);
-            this.txtAddress.TabIndex = 6;
+            this.txtAddress.TabIndex = 8;
             // 
             // lblPhone
             // 
@@ -242,7 +243,7 @@
             this.txtPhone.MaxLength = 12;
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(92, 20);
-            this.txtPhone.TabIndex = 4;
+            this.txtPhone.TabIndex = 6;
             // 
             // lblLicence
             // 
@@ -268,14 +269,14 @@
             this.txtSurname.MaxLength = 12;
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(92, 20);
-            this.txtSurname.TabIndex = 2;
+            this.txtSurname.TabIndex = 4;
             // 
             // btnUpdCustomer
             // 
             this.btnUpdCustomer.Location = new System.Drawing.Point(81, 241);
             this.btnUpdCustomer.Name = "btnUpdCustomer";
             this.btnUpdCustomer.Size = new System.Drawing.Size(255, 34);
-            this.btnUpdCustomer.TabIndex = 10;
+            this.btnUpdCustomer.TabIndex = 12;
             this.btnUpdCustomer.Text = "Update Customer";
             this.btnUpdCustomer.UseVisualStyleBackColor = true;
             this.btnUpdCustomer.Click += new System.EventHandler(this.btnUpdCustomer_Click);
@@ -286,7 +287,7 @@
             this.txtFirstName.MaxLength = 12;
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(92, 20);
-            this.txtFirstName.TabIndex = 1;
+            this.txtFirstName.TabIndex = 3;
             // 
             // lblFirstName
             // 
@@ -303,7 +304,7 @@
             this.cboUpdateCustomer.Location = new System.Drawing.Point(93, 56);
             this.cboUpdateCustomer.Name = "cboUpdateCustomer";
             this.cboUpdateCustomer.Size = new System.Drawing.Size(255, 21);
-            this.cboUpdateCustomer.TabIndex = 13;
+            this.cboUpdateCustomer.TabIndex = 1;
             this.cboUpdateCustomer.Text = "Update Customer";
             this.cboUpdateCustomer.SelectedIndexChanged += new System.EventHandler(this.cboUpdateCustomer_SelectedIndexChanged);
             // 

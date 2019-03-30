@@ -134,26 +134,14 @@ namespace CarSYS
                 return false;
         }
 
-        //From https://stackoverflow.com/questions/1669318/override-standard-close-x-button-in-a-windows-form
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
 
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            parent.Visible = true;
 
-            // Confirm user wants to close
-            switch (MessageBox.Show(this, "Are you sure you want to close?", "Closing", MessageBoxButtons.YesNo))
-            {
-                case DialogResult.No:
-                    e.Cancel = true;
-                  
-                    parent.Visible = true;
-                    break;
-                default:
-                    
-                    parent.Visible = true;
-                    break;
-            }
+
         }
     }
 }

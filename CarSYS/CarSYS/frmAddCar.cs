@@ -127,7 +127,7 @@ namespace CarSYS
             }
             if (cboTransmission.Text.Equals(""))
             {
-                MessageBox.Show("Chose transmision", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Chose transmission", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboCarCategory.Focus();
                 return;
 
@@ -217,8 +217,34 @@ namespace CarSYS
             else
                 return false;
         }
-       
+        
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
 
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+                    parent.Visible = true;
+                  
+            
+        }
+
+        private void RegTextLeave(object sender, EventArgs e)
+        {
+            if (txtReg.Text.Equals(""))
+            {
+                txtReg.Text = "NN(N)-X(X)-NNNN";
+                txtReg.ForeColor = Color.Silver;
+            }
+        }
+
+        private void RegTextEnter(object sender, EventArgs e)
+        {
+            if (txtReg.Text.Equals("NN(N)-X(X)-NNNN"))
+            {
+                txtReg.Text = "";
+                txtReg.ForeColor = Color.Black;
+            }
+        }
     }
 
 }

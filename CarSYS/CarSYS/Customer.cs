@@ -243,7 +243,7 @@ namespace CarSYS
             myConn.Open();
 
 
-            String strSQL = "SELECT * FROM customers WHERE CustomerID =" + cust + " AND status  = 'A'";
+            String strSQL = "SELECT * FROM customers WHERE CustomerID =" + cust ;
 
             OracleCommand cmd = new OracleCommand(strSQL, myConn);
 
@@ -264,7 +264,7 @@ namespace CarSYS
                 setPostcode(dr.GetString(7));
                 setDOB(dr.GetString(9));
 
-                // setStatus(dr.GetChar(10));
+                //setStatus(dr.GetChar(10));
             }
 
             //close DB connection
@@ -299,6 +299,39 @@ namespace CarSYS
 
                 //Define the SQL Query to retrieve the data
                 String strSQL = "SELECT CustomerID, email FROM Customers WHERE status  = 'A' ORDER BY CustomerID";
+
+                //Create an OracleCommand object and instantiate it
+                OracleCommand cmd = new OracleCommand(strSQL, conn);
+
+                //Create an oracleAdapter to hold the result of the executed OracleCommand
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+
+                //Fill the DataSet DS with the query result
+                da.Fill(DS, "cust");
+
+                //close the DB Connection
+                conn.Close();
+
+                //Return the Dataset with the required data to the windows form which executed this method
+                return DS;
+            }
+            catch
+            {
+                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        public static DataSet getCustInfoToUp(DataSet DS)
+        {
+            try
+            {
+                //create an OracleConnection object using the connection string defined in static class CarSysConnect
+                OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
+
+                //Define the SQL Query to retrieve the data
+                String strSQL = "SELECT CustomerID, email FROM Customers WHERE status  = 'A' OR status  = 'R' ORDER BY CustomerID";
 
                 //Create an OracleCommand object and instantiate it
                 OracleCommand cmd = new OracleCommand(strSQL, conn);

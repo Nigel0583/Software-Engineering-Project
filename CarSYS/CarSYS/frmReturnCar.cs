@@ -30,18 +30,7 @@ namespace CarSYS
 
         private void frmReturnCar_Load(object sender, EventArgs e)
         {
-            try
-            {
-                DataSet ds = new DataSet();
-                ds = Booking.getCurrentBookingInfo(ds);
-                for (int i = 0; i < ds.Tables["booking"].Rows.Count; i++)
-                    cboReturnCar.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(0, '0').Trim());
-            }
-            catch
-            {
-                this.Close();
-                parent.Visible = true;
-            }
+            loadData();
         }
 
         private void btnReturnCar_Click(object sender, EventArgs e)
@@ -65,6 +54,8 @@ namespace CarSYS
             }
 
             updateBookingCar();
+            cboReturnCar.Items.Clear();
+            loadData();
         }
 
         private void cboReturnCar_SelectedIndexChanged(object sender, EventArgs e)
@@ -251,6 +242,31 @@ namespace CarSYS
             }
 
             clearUi();
+        }
+        public void loadData()
+        {
+            grpReturnCar.Visible = false;
+            try
+            {
+                DataSet ds = new DataSet();
+                ds = Booking.getCurrentBookingInfo(ds);
+                for (int i = 0; i < ds.Tables["booking"].Rows.Count; i++)
+                    cboReturnCar.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(0, '0').Trim());
+            }
+            catch
+            {
+                this.Close();
+                parent.Visible = true;
+            }
+        }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            parent.Visible = true;
+
+
         }
     }
 }

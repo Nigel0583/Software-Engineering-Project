@@ -28,20 +28,8 @@ namespace CarSYS
 
         private void frmUpdateCustomer_Load(object sender, EventArgs e)
         {
-            this.cboUpdateCustomer.DropDownStyle = ComboBoxStyle.DropDownList;
-            try
-            {
-                DataSet ds = new DataSet();
-                ds = Customer.getCustInfo(ds);
-                for (int i = 0; i < ds.Tables["cust"].Rows.Count; i++)
-                    cboUpdateCustomer.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(3, '0') + " " +
-                                                ds.Tables[0].Rows[i][1].ToString());
-            }
-            catch
-            {
-                this.Close();
-                parent.Visible = true;
-            }
+            grpUpdateCustomer.Visible = false;
+            loadData();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -92,6 +80,7 @@ namespace CarSYS
 
         private void btnUpdCustomer_Click(object sender, EventArgs e)
         {
+         
             if (cboUpdateCustomer.Text.Equals(""))
             {
                 MessageBox.Show("Chose a customer to update", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -106,6 +95,7 @@ namespace CarSYS
                 txtStatus.Focus();
                 return;
             }
+            string stat = txtStatus.Text.ToUpper();
 
             if (txtFirstName.Text.Equals(""))
             {
@@ -247,7 +237,7 @@ namespace CarSYS
             customer.setCountry(txtCountry.Text);
             customer.setPostcode(txtZipCode.Text);
             customer.setDOB(dob);
-            customer.setStatus(Convert.ToChar(txtStatus.Text));
+            customer.setStatus(Convert.ToChar(stat));
             customer.setCustomerID(Convert.ToInt32(txtCustomerID.Text));
 
 
@@ -263,6 +253,8 @@ namespace CarSYS
 
             cboUpdateCustomer.SelectedIndex = -1;
             clearUi();
+            loadData();
+           
         }
 
 
@@ -327,6 +319,34 @@ namespace CarSYS
 
             txtCustomerID.Text = Customer.nextCustomerID().ToString("00000");
             txtFirstName.Focus();
+        }
+
+        public void loadData()
+        {
+            cboUpdateCustomer.Items.Clear();
+            this.cboUpdateCustomer.DropDownStyle = ComboBoxStyle.DropDownList;
+            try
+            {
+                DataSet ds = new DataSet();
+                ds = Customer.getCustInfoToUp(ds);
+                for (int i = 0; i < ds.Tables["cust"].Rows.Count; i++)
+                    cboUpdateCustomer.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(3, '0') + " " +
+                                                ds.Tables[0].Rows[i][1].ToString());
+            }
+            catch
+            {
+                this.Close();
+                parent.Visible = true;
+            }
+        }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            parent.Visible = true;
+
+
         }
     }
 }

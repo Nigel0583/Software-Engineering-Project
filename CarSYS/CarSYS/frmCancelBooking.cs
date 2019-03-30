@@ -23,18 +23,8 @@ namespace CarSYS
 
         private void frmCancelBooking_Load(object sender, EventArgs e)
         {
-            try
-            {
-                DataSet ds = new DataSet();
-                ds = Booking.getBookingInfo(ds);
-                for (int i = 0; i < ds.Tables["booking"].Rows.Count; i++)
-                    cboCancelBooking.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(0, '0').Trim());
-            }
-            catch
-            {
-                this.Close();
-                parent.Visible = true;
-            }
+            grpCancelBooking.Visible = false;
+            loadData();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -73,10 +63,13 @@ namespace CarSYS
             }
 
             clearUi();
+            cboCancelBooking.Items.Clear();
+            loadData();
         }
 
         private void cboRemoveCar_SelectedIndexChanged(object sender, EventArgs e)
         {
+            grpCancelBooking.Visible = true;
             //if resetting combo, ignore
             if (cboCancelBooking.SelectedIndex == -1)
             {
@@ -119,6 +112,33 @@ namespace CarSYS
             txtTotal.Clear();
             cboCancelBooking.ResetText();
             cboCancelBooking.SelectedIndex = -1;
+        }
+
+        public void loadData()
+        {
+            cboCancelBooking.Items.Clear();
+            try
+            {
+                DataSet ds = new DataSet();
+                ds = Booking.getBookingInfo(ds);
+                for (int i = 0; i < ds.Tables["booking"].Rows.Count; i++)
+                    cboCancelBooking.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(0, '0').Trim());
+            }
+            catch
+            {
+                this.Close();
+                parent.Visible = true;
+            }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            parent.Visible = true;
+
+
         }
     }
 }

@@ -52,10 +52,10 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(12, 12);
+            this.btnBack.Location = new System.Drawing.Point(195, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 20);
-            this.btnBack.TabIndex = 12;
+            this.btnBack.TabIndex = 10;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -65,7 +65,7 @@
             this.btnCancelBooking.Location = new System.Drawing.Point(21, 218);
             this.btnCancelBooking.Name = "btnCancelBooking";
             this.btnCancelBooking.Size = new System.Drawing.Size(197, 34);
-            this.btnCancelBooking.TabIndex = 20;
+            this.btnCancelBooking.TabIndex = 9;
             this.btnCancelBooking.Text = "Cancel Booking";
             this.btnCancelBooking.UseVisualStyleBackColor = true;
             this.btnCancelBooking.Click += new System.EventHandler(this.btnCancelBooking_Click);
@@ -90,7 +90,7 @@
             this.grpCancelBooking.Location = new System.Drawing.Point(12, 84);
             this.grpCancelBooking.Name = "grpCancelBooking";
             this.grpCancelBooking.Size = new System.Drawing.Size(248, 277);
-            this.grpCancelBooking.TabIndex = 23;
+            this.grpCancelBooking.TabIndex = 11;
             this.grpCancelBooking.TabStop = false;
             this.grpCancelBooking.Text = "Cancel Booking";
             // 
@@ -101,7 +101,7 @@
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
             this.txtTotal.Size = new System.Drawing.Size(103, 20);
-            this.txtTotal.TabIndex = 35;
+            this.txtTotal.TabIndex = 8;
             // 
             // lblTotal
             // 
@@ -128,7 +128,7 @@
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.ReadOnly = true;
             this.txtStatus.Size = new System.Drawing.Size(103, 20);
-            this.txtStatus.TabIndex = 32;
+            this.txtStatus.TabIndex = 7;
             // 
             // txtEndDate
             // 
@@ -137,7 +137,7 @@
             this.txtEndDate.Name = "txtEndDate";
             this.txtEndDate.ReadOnly = true;
             this.txtEndDate.Size = new System.Drawing.Size(103, 20);
-            this.txtEndDate.TabIndex = 31;
+            this.txtEndDate.TabIndex = 6;
             // 
             // lblUpdateAvailability
             // 
@@ -164,7 +164,7 @@
             this.txtStartDate.Name = "txtStartDate";
             this.txtStartDate.ReadOnly = true;
             this.txtStartDate.Size = new System.Drawing.Size(103, 20);
-            this.txtStartDate.TabIndex = 28;
+            this.txtStartDate.TabIndex = 5;
             // 
             // lblRegNO
             // 
@@ -182,7 +182,7 @@
             this.txtReg.Name = "txtReg";
             this.txtReg.ReadOnly = true;
             this.txtReg.Size = new System.Drawing.Size(103, 20);
-            this.txtReg.TabIndex = 26;
+            this.txtReg.TabIndex = 4;
             // 
             // lblCustomerID
             // 
@@ -200,7 +200,7 @@
             this.txtCustomerID.Name = "txtCustomerID";
             this.txtCustomerID.ReadOnly = true;
             this.txtCustomerID.Size = new System.Drawing.Size(103, 20);
-            this.txtCustomerID.TabIndex = 24;
+            this.txtCustomerID.TabIndex = 3;
             // 
             // txtBookingID
             // 
@@ -209,7 +209,7 @@
             this.txtBookingID.Name = "txtBookingID";
             this.txtBookingID.ReadOnly = true;
             this.txtBookingID.Size = new System.Drawing.Size(103, 20);
-            this.txtBookingID.TabIndex = 23;
+            this.txtBookingID.TabIndex = 2;
             // 
             // lblBookingID
             // 
@@ -227,7 +227,7 @@
             this.cboCancelBooking.Location = new System.Drawing.Point(78, 57);
             this.cboCancelBooking.Name = "cboCancelBooking";
             this.cboCancelBooking.Size = new System.Drawing.Size(182, 21);
-            this.cboCancelBooking.TabIndex = 24;
+            this.cboCancelBooking.TabIndex = 1;
             this.cboCancelBooking.SelectedIndexChanged += new System.EventHandler(this.cboRemoveCar_SelectedIndexChanged);
             // 
             // lblBooking

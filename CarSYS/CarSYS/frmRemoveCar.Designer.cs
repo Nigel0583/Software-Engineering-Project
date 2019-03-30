@@ -81,7 +81,7 @@
             this.txtUpdate.MaxLength = 12;
             this.txtUpdate.Name = "txtUpdate";
             this.txtUpdate.Size = new System.Drawing.Size(103, 20);
-            this.txtUpdate.TabIndex = 31;
+            this.txtUpdate.TabIndex = 2;
             this.txtUpdate.Text = "R";
             // 
             // lblUpdateAvailability
@@ -170,7 +170,7 @@
             this.btnRemove.Location = new System.Drawing.Point(21, 170);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(197, 52);
-            this.btnRemove.TabIndex = 20;
+            this.btnRemove.TabIndex = 3;
             this.btnRemove.Text = "Remove Car";
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
@@ -181,7 +181,7 @@
             this.cboRemoveCar.Location = new System.Drawing.Point(78, 59);
             this.cboRemoveCar.Name = "cboRemoveCar";
             this.cboRemoveCar.Size = new System.Drawing.Size(182, 21);
-            this.cboRemoveCar.TabIndex = 21;
+            this.cboRemoveCar.TabIndex = 1;
             this.cboRemoveCar.SelectedIndexChanged += new System.EventHandler(this.cboRemoveCar_SelectedIndexChanged);
             // 
             // btnBack
@@ -189,7 +189,7 @@
             this.btnBack.Location = new System.Drawing.Point(12, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 20);
-            this.btnBack.TabIndex = 21;
+            this.btnBack.TabIndex = 4;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click_1);

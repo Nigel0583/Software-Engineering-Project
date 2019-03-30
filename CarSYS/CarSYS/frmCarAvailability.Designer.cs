@@ -42,10 +42,10 @@
             // 
             // btnCheck
             // 
-            this.btnCheck.Location = new System.Drawing.Point(558, 17);
+            this.btnCheck.Location = new System.Drawing.Point(550, 19);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(191, 33);
-            this.btnCheck.TabIndex = 7;
+            this.btnCheck.TabIndex = 3;
             this.btnCheck.Text = "Check Availability ";
             this.btnCheck.UseVisualStyleBackColor = true;
             this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
@@ -57,7 +57,7 @@
             this.grpCarAvail.Controls.Add(this.dtpFrom);
             this.grpCarAvail.Controls.Add(this.dtpTo);
             this.grpCarAvail.Controls.Add(this.btnCheck);
-            this.grpCarAvail.Location = new System.Drawing.Point(82, 12);
+            this.grpCarAvail.Location = new System.Drawing.Point(12, 12);
             this.grpCarAvail.Name = "grpCarAvail";
             this.grpCarAvail.Size = new System.Drawing.Size(781, 67);
             this.grpCarAvail.TabIndex = 8;
@@ -88,7 +88,7 @@
             this.dtpFrom.MinDate = new System.DateTime(2019, 2, 19, 0, 0, 0, 0);
             this.dtpFrom.Name = "dtpFrom";
             this.dtpFrom.Size = new System.Drawing.Size(200, 20);
-            this.dtpFrom.TabIndex = 13;
+            this.dtpFrom.TabIndex = 1;
             this.dtpFrom.Value = new System.DateTime(2019, 2, 19, 0, 0, 0, 0);
             this.dtpFrom.ValueChanged += new System.EventHandler(this.dtpFrom_ValueChanged);
             // 
@@ -98,15 +98,15 @@
             this.dtpTo.MinDate = new System.DateTime(2019, 2, 12, 0, 0, 0, 0);
             this.dtpTo.Name = "dtpTo";
             this.dtpTo.Size = new System.Drawing.Size(200, 20);
-            this.dtpTo.TabIndex = 12;
+            this.dtpTo.TabIndex = 2;
             this.dtpTo.Value = new System.DateTime(2019, 2, 12, 0, 0, 0, 0);
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(1, 3);
+            this.btnBack.Location = new System.Drawing.Point(912, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 20);
-            this.btnBack.TabIndex = 11;
+            this.btnBack.TabIndex = 5;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -117,7 +117,7 @@
             this.grdData.Location = new System.Drawing.Point(12, 85);
             this.grdData.Name = "grdData";
             this.grdData.Size = new System.Drawing.Size(975, 406);
-            this.grdData.TabIndex = 12;
+            this.grdData.TabIndex = 4;
             // 
             // frmCarAvailability
             // 
@@ -130,7 +130,6 @@
             this.Name = "frmCarAvailability";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CarAvailability";
-            this.Load += new System.EventHandler(this.frmCarAvailability_Load);
             this.grpCarAvail.ResumeLayout(false);
             this.grpCarAvail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();

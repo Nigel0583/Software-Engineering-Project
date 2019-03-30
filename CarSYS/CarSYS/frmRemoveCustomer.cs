@@ -28,19 +28,9 @@ namespace CarSYS
         private void frmRemoveCustomer_Load(object sender, EventArgs e)
         {
             this.cboRemoveCustomer.DropDownStyle = ComboBoxStyle.DropDownList;
-            try
-            {
-                DataSet ds = new DataSet();
-                ds = Customer.getCustInfo(ds);
-                for (int i = 0; i < ds.Tables["cust"].Rows.Count; i++)
-                    cboRemoveCustomer.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(3, '0') + " " +
-                                                ds.Tables[0].Rows[i][1].ToString());
-            }
-            catch
-            {
-                this.Close();
-                parent.Visible = true;
-            }
+            loadData();
+
+
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -94,6 +84,8 @@ namespace CarSYS
             grpRemoveCustomer.Visible = false;
 
             cboRemoveCustomer.SelectedIndex = -1;
+            cboRemoveCustomer.Items.Clear();
+            loadData();
         }
 
 
@@ -127,6 +119,33 @@ namespace CarSYS
 
             //display details
             grpRemoveCustomer.Visible = true;
+        }
+
+        public void loadData()
+        {
+            try
+            {
+                DataSet ds = new DataSet();
+                ds = Customer.getCustInfo(ds);
+                for (int i = 0; i < ds.Tables["cust"].Rows.Count; i++)
+                    cboRemoveCustomer.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(3, '0') + " " +
+                                                ds.Tables[0].Rows[i][1].ToString());
+            }
+            catch
+            {
+                this.Close();
+                parent.Visible = true;
+            }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            parent.Visible = true;
+
+
         }
     }
 }

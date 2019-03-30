@@ -30,6 +30,12 @@
         {
             this.btnBack = new System.Windows.Forms.Button();
             this.grpReturnCar = new System.Windows.Forms.GroupBox();
+            this.lblLate = new System.Windows.Forms.Label();
+            this.grdTotalCost = new System.Windows.Forms.DataGridView();
+            this.lblBookingStatus = new System.Windows.Forms.Label();
+            this.txtBookingStatus = new System.Windows.Forms.TextBox();
+            this.lblBookedCar = new System.Windows.Forms.Label();
+            this.txtStatusCar = new System.Windows.Forms.TextBox();
             this.btnLateReturn = new System.Windows.Forms.Button();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.lblTotal = new System.Windows.Forms.Label();
@@ -48,12 +54,6 @@
             this.btnReturnCar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cboReturnCar = new System.Windows.Forms.ComboBox();
-            this.lblBookingStatus = new System.Windows.Forms.Label();
-            this.txtBookingStatus = new System.Windows.Forms.TextBox();
-            this.lblBookedCar = new System.Windows.Forms.Label();
-            this.txtStatusCar = new System.Windows.Forms.TextBox();
-            this.grdTotalCost = new System.Windows.Forms.DataGridView();
-            this.lblLate = new System.Windows.Forms.Label();
             this.pdReturn = new System.Windows.Forms.PrintDialog();
             this.pdtReturn = new System.Drawing.Printing.PrintDocument();
             this.grpReturnCar.SuspendLayout();
@@ -65,7 +65,7 @@
             this.btnBack.Location = new System.Drawing.Point(12, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 20);
-            this.btnBack.TabIndex = 13;
+            this.btnBack.TabIndex = 4;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -101,12 +101,67 @@
             this.grpReturnCar.TabStop = false;
             this.grpReturnCar.Text = "Return Car";
             // 
+            // lblLate
+            // 
+            this.lblLate.AutoSize = true;
+            this.lblLate.Location = new System.Drawing.Point(197, 153);
+            this.lblLate.Name = "lblLate";
+            this.lblLate.Size = new System.Drawing.Size(90, 13);
+            this.lblLate.TabIndex = 80;
+            this.lblLate.Text = "Total and late fee";
+            // 
+            // grdTotalCost
+            // 
+            this.grdTotalCost.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdTotalCost.Location = new System.Drawing.Point(293, 130);
+            this.grdTotalCost.Name = "grdTotalCost";
+            this.grdTotalCost.Size = new System.Drawing.Size(125, 81);
+            this.grdTotalCost.TabIndex = 79;
+            // 
+            // lblBookingStatus
+            // 
+            this.lblBookingStatus.AutoSize = true;
+            this.lblBookingStatus.Location = new System.Drawing.Point(8, 137);
+            this.lblBookingStatus.Name = "lblBookingStatus";
+            this.lblBookingStatus.Size = new System.Drawing.Size(79, 13);
+            this.lblBookingStatus.TabIndex = 78;
+            this.lblBookingStatus.Text = "Booking Status";
+            // 
+            // txtBookingStatus
+            // 
+            this.txtBookingStatus.Location = new System.Drawing.Point(105, 130);
+            this.txtBookingStatus.MaxLength = 12;
+            this.txtBookingStatus.Name = "txtBookingStatus";
+            this.txtBookingStatus.ReadOnly = true;
+            this.txtBookingStatus.Size = new System.Drawing.Size(103, 20);
+            this.txtBookingStatus.TabIndex = 77;
+            this.txtBookingStatus.Text = "R";
+            // 
+            // lblBookedCar
+            // 
+            this.lblBookedCar.AutoSize = true;
+            this.lblBookedCar.Location = new System.Drawing.Point(218, 110);
+            this.lblBookedCar.Name = "lblBookedCar";
+            this.lblBookedCar.Size = new System.Drawing.Size(56, 13);
+            this.lblBookedCar.TabIndex = 76;
+            this.lblBookedCar.Text = "Car Status";
+            // 
+            // txtStatusCar
+            // 
+            this.txtStatusCar.Location = new System.Drawing.Point(315, 107);
+            this.txtStatusCar.MaxLength = 12;
+            this.txtStatusCar.Name = "txtStatusCar";
+            this.txtStatusCar.ReadOnly = true;
+            this.txtStatusCar.Size = new System.Drawing.Size(103, 20);
+            this.txtStatusCar.TabIndex = 75;
+            this.txtStatusCar.Text = "A";
+            // 
             // btnLateReturn
             // 
             this.btnLateReturn.Location = new System.Drawing.Point(11, 217);
             this.btnLateReturn.Name = "btnLateReturn";
             this.btnLateReturn.Size = new System.Drawing.Size(197, 40);
-            this.btnLateReturn.TabIndex = 74;
+            this.btnLateReturn.TabIndex = 3;
             this.btnLateReturn.Text = "Late Return";
             this.btnLateReturn.UseVisualStyleBackColor = true;
             this.btnLateReturn.Click += new System.EventHandler(this.btnLateReturn_Click);
@@ -242,7 +297,7 @@
             this.btnReturnCar.Location = new System.Drawing.Point(221, 217);
             this.btnReturnCar.Name = "btnReturnCar";
             this.btnReturnCar.Size = new System.Drawing.Size(197, 40);
-            this.btnReturnCar.TabIndex = 20;
+            this.btnReturnCar.TabIndex = 2;
             this.btnReturnCar.Text = "ReturnCar";
             this.btnReturnCar.UseVisualStyleBackColor = true;
             this.btnReturnCar.Click += new System.EventHandler(this.btnReturnCar_Click);
@@ -262,63 +317,8 @@
             this.cboReturnCar.Location = new System.Drawing.Point(117, 42);
             this.cboReturnCar.Name = "cboReturnCar";
             this.cboReturnCar.Size = new System.Drawing.Size(121, 21);
-            this.cboReturnCar.TabIndex = 54;
+            this.cboReturnCar.TabIndex = 1;
             this.cboReturnCar.SelectedIndexChanged += new System.EventHandler(this.cboReturnCar_SelectedIndexChanged);
-            // 
-            // lblBookingStatus
-            // 
-            this.lblBookingStatus.AutoSize = true;
-            this.lblBookingStatus.Location = new System.Drawing.Point(8, 137);
-            this.lblBookingStatus.Name = "lblBookingStatus";
-            this.lblBookingStatus.Size = new System.Drawing.Size(79, 13);
-            this.lblBookingStatus.TabIndex = 78;
-            this.lblBookingStatus.Text = "Booking Status";
-            // 
-            // txtBookingStatus
-            // 
-            this.txtBookingStatus.Location = new System.Drawing.Point(105, 130);
-            this.txtBookingStatus.MaxLength = 12;
-            this.txtBookingStatus.Name = "txtBookingStatus";
-            this.txtBookingStatus.ReadOnly = true;
-            this.txtBookingStatus.Size = new System.Drawing.Size(103, 20);
-            this.txtBookingStatus.TabIndex = 77;
-            this.txtBookingStatus.Text = "R";
-            // 
-            // lblBookedCar
-            // 
-            this.lblBookedCar.AutoSize = true;
-            this.lblBookedCar.Location = new System.Drawing.Point(218, 110);
-            this.lblBookedCar.Name = "lblBookedCar";
-            this.lblBookedCar.Size = new System.Drawing.Size(56, 13);
-            this.lblBookedCar.TabIndex = 76;
-            this.lblBookedCar.Text = "Car Status";
-            // 
-            // txtStatusCar
-            // 
-            this.txtStatusCar.Location = new System.Drawing.Point(315, 107);
-            this.txtStatusCar.MaxLength = 12;
-            this.txtStatusCar.Name = "txtStatusCar";
-            this.txtStatusCar.ReadOnly = true;
-            this.txtStatusCar.Size = new System.Drawing.Size(103, 20);
-            this.txtStatusCar.TabIndex = 75;
-            this.txtStatusCar.Text = "A";
-            // 
-            // grdTotalCost
-            // 
-            this.grdTotalCost.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdTotalCost.Location = new System.Drawing.Point(293, 130);
-            this.grdTotalCost.Name = "grdTotalCost";
-            this.grdTotalCost.Size = new System.Drawing.Size(125, 81);
-            this.grdTotalCost.TabIndex = 79;
-            // 
-            // lblLate
-            // 
-            this.lblLate.AutoSize = true;
-            this.lblLate.Location = new System.Drawing.Point(197, 153);
-            this.lblLate.Name = "lblLate";
-            this.lblLate.Size = new System.Drawing.Size(90, 13);
-            this.lblLate.TabIndex = 80;
-            this.lblLate.Text = "Total and late fee";
             // 
             // pdReturn
             // 
