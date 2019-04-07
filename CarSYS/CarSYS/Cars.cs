@@ -1,36 +1,31 @@
-﻿using System;
-using System.Data;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Oracle.ManagedDataAccess.Client;
+﻿using System.Data;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client;
 
 namespace CarSYS
 {
-    class Cars
+    internal class Cars
     {
-        private string make;
-        private string model;
-        private string CatID;
-        private string regNo;
-        private string transmission;
-        private string fuel;
-        private decimal mileage;
         private string availability;
-        private int numSeats;
-        private string extras;
+        private string catId;
         private int doors;
         private decimal engSize;
+        private string extras;
+        private string fuel;
+        private string make;
+        private decimal mileage;
+        private string model;
         private int numBags;
+        private int numSeats;
+        private string regNo;
+        private string transmission;
 
 
         public Cars()
         {
             make = "";
             model = "";
-            CatID = "";
+            catId = "";
             regNo = "";
             transmission = "";
             fuel = "";
@@ -40,12 +35,12 @@ namespace CarSYS
             doors = 0;
         }
 
-        public Cars(string make, string model, string CatID, string regNo, string transmission, string fuel,
+        public Cars(string make, string model, string catId, string regNo, string transmission, string fuel,
             decimal mileage, string availability, int numSeats, int doors, string extras, decimal engSize, int numBags)
         {
             this.make = make;
             this.model = model;
-            this.CatID = CatID;
+            this.catId = catId;
             this.regNo = regNo;
             this.transmission = transmission;
             this.fuel = fuel;
@@ -58,7 +53,7 @@ namespace CarSYS
             this.numBags = numBags;
         }
 
-        public void setMake(String make)
+        public void setMake(string make)
         {
             this.make = make;
         }
@@ -68,7 +63,7 @@ namespace CarSYS
             return make;
         }
 
-        public void setModel(String model)
+        public void setModel(string model)
         {
             this.model = model;
         }
@@ -78,17 +73,17 @@ namespace CarSYS
             return model;
         }
 
-        public void setCatID(String CatID)
+        public void setCatID(string CatID)
         {
-            this.CatID = CatID;
+            catId = CatID;
         }
 
         public string getCatID()
         {
-            return CatID;
+            return catId;
         }
 
-        public void setRegNo(String regNo)
+        public void setRegNo(string regNo)
         {
             this.regNo = regNo;
         }
@@ -98,7 +93,7 @@ namespace CarSYS
             return regNo;
         }
 
-        public void setFuel(String fuel)
+        public void setFuel(string fuel)
         {
             this.fuel = fuel;
         }
@@ -118,7 +113,7 @@ namespace CarSYS
             return mileage;
         }
 
-        public void setTransmission(String transmission)
+        public void setTransmission(string transmission)
         {
             this.transmission = transmission;
         }
@@ -128,7 +123,7 @@ namespace CarSYS
             return transmission;
         }
 
-        public void setAvailability(String availability)
+        public void setAvailability(string availability)
         {
             this.availability = availability;
         }
@@ -179,7 +174,7 @@ namespace CarSYS
             return numBags;
         }
 
-        public void setExtras(String extras)
+        public void setExtras(string extras)
         {
             this.extras = extras;
         }
@@ -190,19 +185,19 @@ namespace CarSYS
         }
 
 
-        public void getCars(String reg)
+        public void getCars(string reg)
         {
             //Conenct to the DB
-            OracleConnection myConn = new OracleConnection(CarSysConnect.oradb);
+            var myConn = new OracleConnection(CarSysConnect.oradb);
             myConn.Open();
 
 
-            String strSQL = "SELECT * FROM Cars WHERE RegNo ='" + reg + "'";
+            var strSQL = "SELECT * FROM Cars WHERE RegNo ='" + reg + "'";
 
-            OracleCommand cmd = new OracleCommand(strSQL, myConn);
+            var cmd = new OracleCommand(strSQL, myConn);
 
             //execute the SQL query
-            OracleDataReader dr = cmd.ExecuteReader();
+            var dr = cmd.ExecuteReader();
 
 
             if (dr.Read())
@@ -217,48 +212,45 @@ namespace CarSYS
             myConn.Close();
         }
 
-        public static Boolean checkRegExists(String RegNo)
+        public static bool checkRegExists(string RegNo)
         {
-            Boolean exists = false;
+            var exists = false;
 
-            OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
+            var conn = new OracleConnection(CarSysConnect.oradb);
             conn.Open();
 
             //Define the SQL Query to retrieve the data
-            String strSQL = "SELECT * FROM Cars WHERE RegNo ='" + RegNo + "'";
+            var strSQL = "SELECT * FROM Cars WHERE RegNo ='" + RegNo + "'";
 
             //Create an OracleCommand object and instantiate it
-            OracleCommand cmd = new OracleCommand(strSQL, conn);
+            var cmd = new OracleCommand(strSQL, conn);
 
             //Create an oracleAdapter to hold the result of the executed OracleCommand
-            OracleDataReader dr = cmd.ExecuteReader();
+            var dr = cmd.ExecuteReader();
 
-            if (dr.Read())
-            {
-                exists = true;
-            }
+            if (dr.Read()) exists = true;
 
             return exists;
         }
 
 
-        public static DataSet checkCarAvailability(DataSet DS, String start, String end)
+        public static DataSet checkCarAvailability(DataSet DS, string start, string end)
         {
             try
             {
-                OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
+                var conn = new OracleConnection(CarSysConnect.oradb);
 
 
                 //Define the SQL Query to retrieve the data
-                String strSQL =
-                    "SELECT ra.Cost, ra.Description,Make,Model,cars.CATID,NumSeats,Transmission,Fuel, RegNo,Extras FROM rates ra, cars WHERE ra.CatID = cars.CatID AND Availability = " +
-                    "'A' OR RegNo NOT IN(SELECT RegNo FROM bookings WHERE bookings.BookingStatus= 'R' AND StartDate >= '" +
-                    start + "' AND EndDate <= '" + end + "' OR '" + start + "' BETWEEN StartDate AND EndDate)";
+                var strSQL =
+                    "SELECT ra.Cost, ra.Description,Make,Model,cars.CATID,NumSeats,Transmission,Fuel, RegNo,Extras FROM rates ra, cars " +
+                    "WHERE ra.CatID = cars.CatID AND Availability ='A' AND RegNo NOT IN(SELECT RegNo FROM bookings WHERE bookings.BookingStatus= 'R' AND StartDate >= '" +
+                         start + "' AND EndDate <= '" + end + "' OR '" + start + "' BETWEEN StartDate AND EndDate)";
 
-                OracleCommand cmd = new OracleCommand(strSQL, conn);
+                var cmd = new OracleCommand(strSQL, conn);
 
                 //cmd.CommandType = CommandType.Text;
-                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                var da = new OracleDataAdapter(cmd);
 
                 da.Fill(DS, "chkCar");
 
@@ -266,9 +258,12 @@ namespace CarSYS
 
                 return DS;
             }
-            catch
+            catch (OracleException e)
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                MessageBox.Show(
+                    "Code: " + e.ErrorCode + "\n Message: " + e.Message +
+                    "\n\n An exception occurred.\n Please contact your system administrator.", "Error",
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return null;
             }
@@ -279,16 +274,16 @@ namespace CarSYS
             try
             {
                 //create an OracleConnection object using the connection string defined in static class CarSysConnect
-                OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
+                var conn = new OracleConnection(CarSysConnect.oradb);
 
                 //Define the SQL Query to retrieve the data
-                String strSQL = "SELECT RegNo FROM Cars ORDER BY RegNo";
+                var strSQL = "SELECT RegNo FROM Cars ORDER BY RegNo";
 
                 //Create an OracleCommand object and instantiate it
-                OracleCommand cmd = new OracleCommand(strSQL, conn);
+                var cmd = new OracleCommand(strSQL, conn);
 
                 //Create an oracleAdapter to hold the result of the executed OracleCommand
-                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                var da = new OracleDataAdapter(cmd);
 
                 //Fill the DataSet DS with the query result
                 da.Fill(DS, "reg");
@@ -299,9 +294,12 @@ namespace CarSYS
                 //Return the Dataset with the required data to the windows form which executed this method
                 return DS;
             }
-            catch
+            catch (OracleException e)
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                MessageBox.Show(
+                    "Code: " + e.ErrorCode + "\n Message: " + e.Message +
+                    "\n\n An exception occurred.\n Please contact your system administrator.", "Error",
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return null;
             }
@@ -310,17 +308,17 @@ namespace CarSYS
 
         public void addCars()
         {
-            OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
+            var conn = new OracleConnection(CarSysConnect.oradb);
             conn.Open();
 
-            String insertCars = "INSERT INTO cars VALUES('" + this.make.ToUpper() + "','" + this.model.ToUpper() +
-                                "','" + this.CatID.ToUpper() + "','" +
-                                this.regNo.ToUpper() + "','" + this.transmission.ToUpper() + "','" +
-                                this.fuel.ToUpper() + "'," + this.mileage + ",'" + this.availability + "'," +
-                                this.numSeats + "," + this.doors + ",'" +
-                                this.extras + "'," + this.engSize + "," + this.numBags + ")";
+            var insertCars = "INSERT INTO cars VALUES('" + make.ToUpper() + "','" + model.ToUpper() +
+                             "','" + catId.ToUpper() + "','" +
+                             regNo.ToUpper() + "','" + transmission.ToUpper() + "','" +
+                             fuel.ToUpper() + "'," + mileage + ",'" + availability + "'," +
+                             numSeats + "," + doors + ",'" +
+                             extras + "'," + engSize + "," + numBags + ")";
 
-            OracleCommand cmd = new OracleCommand(insertCars, conn);
+            var cmd = new OracleCommand(insertCars, conn);
             cmd.ExecuteNonQuery();
 
             conn.Close();
@@ -329,35 +327,35 @@ namespace CarSYS
         public void removeCar()
         {
             //connect to database
-            OracleConnection myConn = new OracleConnection(CarSysConnect.oradb);
+            var myConn = new OracleConnection(CarSysConnect.oradb);
             myConn.Open();
 
             //Define SQL query to INSERT car record
-            String strSQL = "UPDATE cars SET Availability = '" + this.availability.ToUpper() + "' WHERE RegNo ='" +
-                            this.regNo + "'";
+            var strSQL = "UPDATE cars SET Availability = '" + availability.ToUpper() + "' WHERE RegNo ='" +
+                         regNo + "'";
 
             //Execute the command
-            OracleCommand cmd = new OracleCommand(strSQL, myConn);
+            var cmd = new OracleCommand(strSQL, myConn);
             cmd.ExecuteNonQuery();
 
             //close DB connection
             myConn.Close();
         }
 
-        public static DataSet availableForBooking(DataSet DS, String start, String end, String catid)
+        public static DataSet availableForBooking(DataSet DS, string start, string end, string catid)
         {
-            OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
+            var conn = new OracleConnection(CarSysConnect.oradb);
 
 
             //Define the SQL Query to retrieve the data
-            String strSQL = "SELECT ra.Cost,ra.CatID,Make,Model,RegNo FROM rates ra, cars WHERE ra.catid ='" + catid +
-                            "' AND ra.CatID = cars.CatID AND Availability ='A'  AND RegNo NOT IN(SELECT RegNo FROM bookings WHERE bookings.BookingStatus= 'R' AND StartDate >= '" +
-                            start + "' AND EndDate <= '" + end + "' OR '" + start + "' BETWEEN StartDate AND EndDate)";
+            var strSQL = "SELECT ra.Cost,ra.CatID,Make,Model,RegNo FROM rates ra, cars WHERE ra.catid ='" + catid +
+                         "' AND ra.CatID = cars.CatID AND Availability ='A' AND RegNo NOT IN(SELECT RegNo FROM bookings WHERE bookings.BookingStatus= 'R' AND StartDate >= '" +
+                         start + "' AND EndDate <= '" + end + "' OR '" + start + "' BETWEEN StartDate AND EndDate   )";
 
-            OracleCommand cmd = new OracleCommand(strSQL, conn);
+            var cmd = new OracleCommand(strSQL, conn);
 
             //cmd.CommandType = CommandType.Text;
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
+            var da = new OracleDataAdapter(cmd);
 
             da.Fill(DS, "bookCar");
 
@@ -369,15 +367,15 @@ namespace CarSYS
         public void collectCar()
         {
             //connect to database
-            OracleConnection myConn = new OracleConnection(CarSysConnect.oradb);
+            var myConn = new OracleConnection(CarSysConnect.oradb);
             myConn.Open();
 
             //Define SQL query to INSERT car record
-            String strSQL = "UPDATE cars SET Availability = '" + this.availability.ToUpper() + "' WHERE RegNo ='" +
-                            this.regNo + "'";
+            var strSQL = "UPDATE cars SET Availability = '" + availability.ToUpper() + "' WHERE RegNo ='" +
+                         regNo + "'";
 
             //Execute the command
-            OracleCommand cmd = new OracleCommand(strSQL, myConn);
+            var cmd = new OracleCommand(strSQL, myConn);
             cmd.ExecuteNonQuery();
 
             //close DB connection

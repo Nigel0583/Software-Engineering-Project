@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRemove));
             this.lblRegNo = new System.Windows.Forms.Label();
             this.grpRemoveCar = new System.Windows.Forms.GroupBox();
             this.txtUpdate = new System.Windows.Forms.TextBox();
@@ -77,6 +78,7 @@
             // 
             // txtUpdate
             // 
+            this.txtUpdate.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtUpdate.Location = new System.Drawing.Point(115, 129);
             this.txtUpdate.MaxLength = 12;
             this.txtUpdate.Name = "txtUpdate";
@@ -186,7 +188,7 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(12, 12);
+            this.btnBack.Location = new System.Drawing.Point(193, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 20);
             this.btnBack.TabIndex = 4;
@@ -203,6 +205,7 @@
             this.Controls.Add(this.grpRemoveCar);
             this.Controls.Add(this.cboRemoveCar);
             this.Controls.Add(this.lblRegNo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmRemove";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Remove Car";

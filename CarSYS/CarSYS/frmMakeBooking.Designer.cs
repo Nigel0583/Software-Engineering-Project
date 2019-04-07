@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMakeBooking));
             this.btnBack = new System.Windows.Forms.Button();
             this.grpMakeBooking = new System.Windows.Forms.GroupBox();
             this.lblFrom = new System.Windows.Forms.Label();
@@ -300,6 +301,7 @@
             this.grdSelectCar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdSelectCar.Location = new System.Drawing.Point(6, 19);
             this.grdSelectCar.Name = "grdSelectCar";
+            this.grdSelectCar.ReadOnly = true;
             this.grdSelectCar.Size = new System.Drawing.Size(539, 243);
             this.grdSelectCar.TabIndex = 16;
             this.grdSelectCar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdSelectCar_CellContentClick);
@@ -435,9 +437,10 @@
             this.Controls.Add(this.btnMakeBooking);
             this.Controls.Add(this.cboCustomer);
             this.Controls.Add(this.cboCarCategory);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMakeBooking";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MakeBooking";
+            this.Text = "Make Booking";
             this.Load += new System.EventHandler(this.frmMakeBooking_Load);
             this.grpMakeBooking.ResumeLayout(false);
             this.grpMakeBooking.PerformLayout();

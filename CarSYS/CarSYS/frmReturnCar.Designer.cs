@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReturnCar));
             this.btnBack = new System.Windows.Forms.Button();
             this.grpReturnCar = new System.Windows.Forms.GroupBox();
             this.lblLate = new System.Windows.Forms.Label();
@@ -62,7 +63,7 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(12, 12);
+            this.btnBack.Location = new System.Drawing.Point(371, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 20);
             this.btnBack.TabIndex = 4;
@@ -337,9 +338,10 @@
             this.Controls.Add(this.grpReturnCar);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.cboReturnCar);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmReturnCar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmReturnCar";
+            this.Text = "Return Car";
             this.Load += new System.EventHandler(this.frmReturnCar_Load);
             this.grpReturnCar.ResumeLayout(false);
             this.grpReturnCar.PerformLayout();

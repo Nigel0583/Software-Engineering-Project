@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CarSYS
 {
     public partial class frmAddCarType : Form
     {
-        frmMainMenu parent;
+        private readonly frmMainMenu parent;
 
         public frmAddCarType(frmMainMenu Parent)
         {
@@ -75,15 +68,21 @@ namespace CarSYS
                 return;
             }
 
+            if (numericUpRate.Value < 0)
+            {
+                MessageBox.Show("Rate field must be greater than zero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                numericUpRate.Focus();
+                return;
+            }
 
             try
             {
                 //Save data in rate file 
 
-                Rates myRate = new Rates(txtCarType.Text, txtDesc.Text, Convert.ToDecimal(numericUpRate.Text));
+                var myRate = new Rates(txtCarType.Text, txtDesc.Text, Convert.ToDecimal(numericUpRate.Text));
 
 
-                //INSERT Stock record into stock table
+              
                 myRate.addRates();
 
                 //Display confirmation
@@ -97,41 +96,36 @@ namespace CarSYS
                 numericUpRate.ResetText();
                 txtCarType.Focus();
             }
-            catch
+            catch (Exception)
             {
-                this.Close();
+                
+                Close();
                 parent.Visible = true;
             }
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
             parent.Visible = true;
         }
 
-        public Boolean isValidType(String type)
+        public bool isValidType(string type)
         {
-           string ty = type.ToUpper();
+            var ty = type.ToUpper();
 
-            if ((Regex.IsMatch(ty, "^[A-Za-z]+$")))
-            {
+            if (Regex.IsMatch(ty, "^[A-Za-z]+$"))
                 return true;
-            }
-            else
-                return false;
+            return false;
         }
 
-        public Boolean isValidDesc(String desc)
+        public bool isValidDesc(string desc)
         {
-            string des = desc.ToUpper();
+            var des = desc.ToUpper();
 
-            if ((Regex.IsMatch(des, "^[0-9A-Za-z. ]+$")))
-            {
+            if (Regex.IsMatch(des, "^[0-9A-Za-z. ]+$"))
                 return true;
-            }
-            else
-                return false;
+            return false;
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -140,8 +134,6 @@ namespace CarSYS
 
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
             parent.Visible = true;
-
-
         }
     }
 }

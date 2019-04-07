@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CarSYS
 {
     public partial class frmRemoveCustomer : Form
     {
-        frmMainMenu parent;
+        private readonly frmMainMenu parent;
 
         public frmRemoveCustomer(frmMainMenu Parent)
         {
@@ -27,15 +21,13 @@ namespace CarSYS
 
         private void frmRemoveCustomer_Load(object sender, EventArgs e)
         {
-            this.cboRemoveCustomer.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboRemoveCustomer.DropDownStyle = ComboBoxStyle.DropDownList;
             loadData();
-
-
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
             parent.Visible = true;
         }
 
@@ -66,14 +58,12 @@ namespace CarSYS
             }
 
 
-            //instantiate Stock Object
-            Customer customer = new Customer();
+            
+            var customer = new Customer();
 
             customer.setStatus(Convert.ToChar(txtUpdate.Text));
             customer.setCustomerID(Convert.ToInt32(txtCustomerID.Text));
 
-
-            //INSERT Stock record into car table
             customer.removeCustomer();
 
             //Display Confirmation Message
@@ -91,14 +81,11 @@ namespace CarSYS
 
         private void cboRemoveCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if resetting combo, ignore
-            if (cboRemoveCustomer.SelectedIndex == -1)
-            {
-                return;
-            }
+          
+            if (cboRemoveCustomer.SelectedIndex == -1) return;
 
-            //find cust details
-            Customer rCustomer = new Customer();
+          
+            var rCustomer = new Customer();
             rCustomer.getCustomers(Convert.ToInt32(cboRemoveCustomer.Text.Substring(0, 3)));
 
             if (rCustomer.getCustomerID().Equals(0))
@@ -108,7 +95,6 @@ namespace CarSYS
                 return;
             }
 
-            //display cust details
             txtFirstName.Text = rCustomer.getFname();
             txtSurname.Text = rCustomer.getSname();
             txtLicence.Text = rCustomer.getLicence();
@@ -116,8 +102,6 @@ namespace CarSYS
             txtEmail.Text = rCustomer.getEmail();
             txtCustomerID.Text = rCustomer.getCustomerID().ToString("00000");
 
-
-            //display details
             grpRemoveCustomer.Visible = true;
         }
 
@@ -125,15 +109,15 @@ namespace CarSYS
         {
             try
             {
-                DataSet ds = new DataSet();
+                var ds = new DataSet();
                 ds = Customer.getCustInfo(ds);
-                for (int i = 0; i < ds.Tables["cust"].Rows.Count; i++)
+                for (var i = 0; i < ds.Tables["cust"].Rows.Count; i++)
                     cboRemoveCustomer.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(3, '0') + " " +
-                                                ds.Tables[0].Rows[i][1].ToString());
+                                                ds.Tables[0].Rows[i][1]);
             }
-            catch
+            catch (Exception)
             {
-                this.Close();
+                Close();
                 parent.Visible = true;
             }
         }
@@ -144,8 +128,9 @@ namespace CarSYS
 
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
             parent.Visible = true;
-
-
         }
+
+        
+    
     }
 }

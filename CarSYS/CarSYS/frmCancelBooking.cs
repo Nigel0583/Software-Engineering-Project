@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CarSYS
 {
     public partial class frmCancelBooking : Form
     {
-        frmMainMenu parent;
+        private readonly frmMainMenu parent;
 
         public frmCancelBooking(frmMainMenu Parent)
         {
             InitializeComponent();
             parent = Parent;
-            this.cboCancelBooking.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboCancelBooking.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void frmCancelBooking_Load(object sender, EventArgs e)
@@ -29,7 +23,7 @@ namespace CarSYS
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
             parent.Visible = true;
         }
 
@@ -42,7 +36,7 @@ namespace CarSYS
                 return;
             }
 
-            DialogResult cancel = new DialogResult();
+            var cancel = new DialogResult();
             cancel = MessageBox.Show("Do you want to delete this booking?", "Cancel",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning,
@@ -50,15 +44,15 @@ namespace CarSYS
             if (cancel == DialogResult.Yes)
             {
                 //instantiate Stock Object
-                Booking cancelBooking = new Booking();
+                var cancelBooking = new Booking();
 
                 cancelBooking.setBookNo(Convert.ToInt32(txtBookingID.Text));
-                cancelBooking.setCustomerid(Convert.ToInt32(txtCustomerID.Text));
+                cancelBooking.setCustomerId(Convert.ToInt32(txtCustomerID.Text));
 
                 cancelBooking.deleteBooking();
 
 
-                MessageBox.Show("Booking " + txtBookingID.Text + " has been canelled", "Confirmation",
+                MessageBox.Show("Booking No. " + txtBookingID.Text + " has been canelled", "Confirmation",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
@@ -70,17 +64,14 @@ namespace CarSYS
         private void cboRemoveCar_SelectedIndexChanged(object sender, EventArgs e)
         {
             grpCancelBooking.Visible = true;
-            //if resetting combo, ignore
-            if (cboCancelBooking.SelectedIndex == -1)
-            {
-                return;
-            }
+            
+            if (cboCancelBooking.SelectedIndex == -1) return;
 
             //find cust details
-            Booking booking = new Booking();
+            var booking = new Booking();
             booking.getBooking(Convert.ToInt32(cboCancelBooking.Text));
 
-            if (booking.getCustomerID().Equals(0))
+            if (booking.getCustomerId().Equals(0))
             {
                 MessageBox.Show("No details found", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtBookingID.Focus();
@@ -89,7 +80,7 @@ namespace CarSYS
 
             //display cust details
             txtBookingID.Text = booking.getBookNo().ToString("00000");
-            txtCustomerID.Text = booking.getCustomerID().ToString("00000");
+            txtCustomerID.Text = booking.getCustomerId().ToString("00000");
             txtReg.Text = booking.getRegNo();
             txtStartDate.Text = booking.getStartDate();
             txtEndDate.Text = booking.getEndDate();
@@ -119,14 +110,15 @@ namespace CarSYS
             cboCancelBooking.Items.Clear();
             try
             {
-                DataSet ds = new DataSet();
+                var ds = new DataSet();
                 ds = Booking.getBookingInfo(ds);
-                for (int i = 0; i < ds.Tables["booking"].Rows.Count; i++)
+                for (var i = 0; i < ds.Tables["booking"].Rows.Count; i++)
                     cboCancelBooking.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(0, '0').Trim());
             }
-            catch
+            catch (Exception)
             {
-                this.Close();
+                
+                Close();
                 parent.Visible = true;
             }
         }
@@ -137,8 +129,6 @@ namespace CarSYS
 
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
             parent.Visible = true;
-
-
         }
     }
 }

@@ -1,25 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CarSYS
 {
     public partial class frmRemove : Form
     {
-        frmMainMenu parent;
+        private readonly frmMainMenu parent;
 
         public frmRemove(frmMainMenu Parent)
         {
             InitializeComponent();
             parent = Parent;
-            this.cboRemoveCar.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboRemoveCar.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void frmRemove_Load(object sender, EventArgs e)
@@ -29,7 +22,7 @@ namespace CarSYS
 
         private void btnBack_Click_1(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
             parent.Visible = true;
         }
 
@@ -65,8 +58,8 @@ namespace CarSYS
                 return;
             }
 
-            //instantiate  Object
-            Cars reCar = new Cars();
+            
+            var reCar = new Cars();
 
             reCar.setAvailability(txtUpdate.Text);
             reCar.setRegNo(cboRemoveCar.Text);
@@ -77,23 +70,19 @@ namespace CarSYS
             //Display Confirmation Message
             MessageBox.Show("Car " + cboRemoveCar.Text + " has been removed", "Confirmation", MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
-           
+
             cboRemoveCar.SelectedIndex = -1;
             cboRemoveCar.Items.Clear();
             loadData();
-
         }
 
         private void cboRemoveCar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if resetting combo, ignore
-            if (cboRemoveCar.SelectedIndex == -1)
-            {
-                return;
-            }
+         
+            if (cboRemoveCar.SelectedIndex == -1) return;
 
             //find car details
-            Cars rCars = new Cars();
+            var rCars = new Cars();
             rCars.getCars(cboRemoveCar.Text);
 
             if (rCars.getReg().Equals(0))
@@ -119,25 +108,24 @@ namespace CarSYS
             grpRemoveCar.Visible = false;
             try
             {
-                DataSet ds = new DataSet();
+                var ds = new DataSet();
                 ds = Cars.getRegNo(ds);
-                for (int i = 0; i < ds.Tables["reg"].Rows.Count; i++)
+                for (var i = 0; i < ds.Tables["reg"].Rows.Count; i++)
                     cboRemoveCar.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(0, '0').Trim());
             }
-            catch
+            catch (Exception)
             {
-                this.Close();
+                Close();
                 parent.Visible = true;
             }
         }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
 
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
             parent.Visible = true;
-
-
         }
     }
 }

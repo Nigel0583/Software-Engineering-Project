@@ -696,9 +696,10 @@
             this.ClientSize = new System.Drawing.Size(800, 604);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.panelInvoice);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmInvoice";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmInvoice";
+            this.Text = "Invoice";
             this.Load += new System.EventHandler(this.frmInvoice_Load);
             this.panelInvoice.ResumeLayout(false);
             this.panelInvoice.PerformLayout();

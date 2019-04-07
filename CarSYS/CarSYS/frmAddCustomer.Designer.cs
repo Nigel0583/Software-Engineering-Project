@@ -133,6 +133,7 @@
             // 
             // txtLicence
             // 
+            this.txtLicence.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtLicence.Location = new System.Drawing.Point(81, 79);
             this.txtLicence.MaxLength = 12;
             this.txtLicence.Name = "txtLicence";
@@ -162,6 +163,7 @@
             // 
             // txtZipCode
             // 
+            this.txtZipCode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtZipCode.Location = new System.Drawing.Point(244, 172);
             this.txtZipCode.MaxLength = 18;
             this.txtZipCode.Name = "txtZipCode";
@@ -226,7 +228,7 @@
             // 
             this.txtPhone.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.txtPhone.Location = new System.Drawing.Point(244, 82);
-            this.txtPhone.MaxLength = 18;
+            this.txtPhone.MaxLength = 15;
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(92, 20);
             this.txtPhone.TabIndex = 5;

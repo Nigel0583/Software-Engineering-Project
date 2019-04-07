@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
 
@@ -13,7 +7,7 @@ namespace CarSYS
 {
     public partial class frmCarAnalysis : Form
     {
-        frmMainMenu parent;
+        private readonly frmMainMenu parent;
 
         public frmCarAnalysis(frmMainMenu Parent)
         {
@@ -26,7 +20,7 @@ namespace CarSYS
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
             parent.Visible = true;
         }
 
@@ -34,23 +28,25 @@ namespace CarSYS
         {
             dtpDate.Format = DateTimePickerFormat.Custom;
             dtpDate.CustomFormat = "yyyy";
-            this.cboCarCategory.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboCarCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             // create instance of data set
-            DataSet ds = new DataSet();
+            var ds = new DataSet();
 
             ds = Rates.getCatID(ds);
 
-            //Remove existing items from combo box
+          
             cboCarCategory.Items.Clear();
             try
             {
-                //load data from ds to cbo
-                for (int i = 0; i < ds.Tables["cat"].Rows.Count; i++)
+              
+                for (var i = 0; i < ds.Tables["cat"].Rows.Count; i++)
                     cboCarCategory.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(3, '0').Trim());
             }
-            catch
+            catch (Exception)
             {
-                this.Close();
+                
+               
+                Close();
                 parent.Visible = true;
             }
         }
@@ -68,7 +64,7 @@ namespace CarSYS
             fillChart();
         }
 
-        public String getMonth(int month)
+        public string getMonth(int month)
         {
             switch (month)
             {
@@ -126,7 +122,7 @@ namespace CarSYS
 
         private void fillChart()
         {
-            String strSQL =
+            var strSQL =
                 "SELECT COUNT(c.catid) ,to_Char(TO_DATE(EndDate,'YYYY-MM-DD'),'MM') FROM bookings   LEFT JOIN  cars c  ON c.catid = '" +
                 cboCarCategory.Text + "'" +
                 " WHERE BOOKINGSTATUS = 'R' AND EXTRACT(YEAR FROM TO_DATE(EndDate, 'YYYY-MM-DD')) = '" + dtpDate.Text +
@@ -135,20 +131,20 @@ namespace CarSYS
                 "ORDER BY to_char(TO_DATE(EndDate, 'YYYY-MM-DD'), 'MM')";
 
 
-            DataTable dt = new DataTable();
+            var dt = new DataTable();
 
-            OracleConnection myConn = new OracleConnection(CarSysConnect.oradb);
+            var myConn = new OracleConnection(CarSysConnect.oradb);
 
-            OracleCommand cmd = new OracleCommand(strSQL, myConn);
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
+            var cmd = new OracleCommand(strSQL, myConn);
+            var da = new OracleDataAdapter(cmd);
 
             da.Fill(dt);
             myConn.Close();
 
-            string[] N = new string[dt.Rows.Count];
-            decimal[] M = new decimal[dt.Rows.Count];
+            var N = new string[dt.Rows.Count];
+            var M = new decimal[dt.Rows.Count];
 
-            for (int i = 0; i < dt.Rows.Count; i++)
+            for (var i = 0; i < dt.Rows.Count; i++)
             {
                 N[i] = getMonth(Convert.ToInt32(dt.Rows[i][1]));
                 M[i] = Convert.ToDecimal(dt.Rows[i][0]);
@@ -166,11 +162,10 @@ namespace CarSYS
             chtData.Series[0].Points.DataBindXY(N, M);
             chtData.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "C";
 
-            //chtSales.Series[0].Points[0] = "XXX";
-            //chtData.Series[0].Label = "#VALY";
+            
 
             chtData.Titles.Add("Yearly Car Type Analyse");
-            //chtData.ChartAreas[0].AxisX.LabelStyle.si = 5;
+           
             chtData.ChartAreas[0].AxisX.Title = "MONTH";
             chtData.ChartAreas[0].AxisY.Title = "No. Car Type";
             chtData.Series[0].IsVisibleInLegend = false;
@@ -185,8 +180,6 @@ namespace CarSYS
 
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
             parent.Visible = true;
-
-
         }
     }
 }

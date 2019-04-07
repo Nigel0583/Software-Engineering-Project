@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCollectCar));
             this.btnBack = new System.Windows.Forms.Button();
             this.grpCollectCar = new System.Windows.Forms.GroupBox();
             this.lblBookingStatus = new System.Windows.Forms.Label();
@@ -293,9 +294,10 @@
             this.Controls.Add(this.cboCollectCar);
             this.Controls.Add(this.grpCollectCar);
             this.Controls.Add(this.btnBack);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmCollectCar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmCollectCar";
+            this.Text = "Collect Car";
             this.Load += new System.EventHandler(this.frmCollectCar_Load);
             this.grpCollectCar.ResumeLayout(false);
             this.grpCollectCar.PerformLayout();

@@ -1,35 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
+using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CarSYS
 {
     public partial class frmReturnCar : Form
     {
-        frmMainMenu parent;
+        private readonly frmMainMenu parent;
 
         public frmReturnCar(frmMainMenu Parent)
         {
             InitializeComponent();
             parent = Parent;
-            this.cboReturnCar.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboReturnCar.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
             parent.Visible = true;
         }
 
         private void frmReturnCar_Load(object sender, EventArgs e)
         {
+            grpReturnCar.Visible = false;
             loadData();
         }
 
@@ -42,8 +40,8 @@ namespace CarSYS
                 return;
             }
 
-            DateTime endDate = DateTime.ParseExact(txtEndDate.Text.Trim(), "yyyy-MM-dd",
-                System.Globalization.CultureInfo.InvariantCulture);
+            var endDate = DateTime.ParseExact(txtEndDate.Text.Trim(), "yyyy-MM-dd",
+                CultureInfo.InvariantCulture);
 
 
             if (DateTime.Today > endDate)
@@ -60,34 +58,28 @@ namespace CarSYS
 
         private void cboReturnCar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if resetting combo, ignore
-            if (cboReturnCar.SelectedIndex == -1)
-            {
-                return;
-            }
+            if (cboReturnCar.SelectedIndex == -1) return;
 
-            //find cust details
-            Booking booking = new Booking();
+            var booking = new Booking();
             booking.getBooking(Convert.ToInt32(cboReturnCar.Text));
 
-            if (booking.getCustomerID().Equals(0))
+            if (booking.getCustomerId().Equals(0))
             {
                 MessageBox.Show("No details found", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtBookingID.Focus();
                 return;
             }
 
-            //display cust details
             txtBookingID.Text = booking.getBookNo().ToString("00000");
-            txtCustomerID.Text = booking.getCustomerID().ToString("00000");
+            txtCustomerID.Text = booking.getCustomerId().ToString("00000");
             txtReg.Text = booking.getRegNo();
             txtStartDate.Text = booking.getStartDate();
             txtEndDate.Text = booking.getEndDate();
             txtStatus.Text = booking.getStatus();
             txtTotal.Text = booking.getTotal().ToString();
 
-
-            //display details
+            grpReturnCar.Visible = true;
+          
             cboReturnCar.Visible = true;
         }
 
@@ -113,14 +105,14 @@ namespace CarSYS
                 return;
             }
 
-            string today = DateTime.Today.ToString("yyyy-MM-dd");
+            var today = DateTime.Today.ToString("yyyy-MM-dd");
             //From https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings
-            DateTime endDate = DateTime.ParseExact(txtEndDate.Text, "yyyy-MM-dd",
-                System.Globalization.CultureInfo.InvariantCulture);
-            DateTime startDate = DateTime.ParseExact(txtStartDate.Text, "yyyy-MM-dd",
-                System.Globalization.CultureInfo.InvariantCulture);
-            DateTime todayDate = DateTime.ParseExact(today, "yyyy-MM-dd",
-                System.Globalization.CultureInfo.InvariantCulture);
+            var endDate = DateTime.ParseExact(txtEndDate.Text, "yyyy-MM-dd",
+                CultureInfo.InvariantCulture);
+            var startDate = DateTime.ParseExact(txtStartDate.Text, "yyyy-MM-dd",
+                CultureInfo.InvariantCulture);
+            var todayDate = DateTime.ParseExact(today, "yyyy-MM-dd",
+                CultureInfo.InvariantCulture);
 
             if (DateTime.Today < endDate)
             {
@@ -128,36 +120,37 @@ namespace CarSYS
                 btnReturnCar.Focus();
                 return;
             }
+          
+            var from = startDate.ToString("yyyy-MM-dd");
+            var to = todayDate.ToString("yyyy-MM-dd");
 
-            string from = startDate.ToString("yyyy-MM-dd");
-            string to = todayDate.ToString("yyyy-MM-dd");
-
-            DataSet ds = new DataSet();
+            var ds = new DataSet();
             grdTotalCost.DataSource = Rates.getBookingCost(ds, to, from, txtReg.Text).Tables["book"];
-
+            var tot = new Booking();
+            string total = grdTotalCost.Rows[0].Cells[0].Value.ToString();
+            tot.setTotal(Convert.ToDecimal(total));
+            tot.setBookNo(Convert.ToInt32(txtBookingID.Text));
+            tot.updateTotal();
 
             updateBookingCar();
         }
 
         public void updateBookingCar()
         {
-            Booking bookingStatus = new Booking();
+            var bookingStatus = new Booking();
 
             bookingStatus.setStatus(txtBookingStatus.Text);
             bookingStatus.setBookNo(Convert.ToInt32(txtBookingID.Text));
             bookingStatus.bookingStatus();
-            //instantiate  Object
-            Cars reCar = new Cars();
+           
+            var reCar = new Cars();
 
             reCar.setAvailability(txtStatusCar.Text);
             reCar.setRegNo(txtReg.Text);
 
-            //INSERT  record into car table
             reCar.collectCar();
 
-            //Display Confirmation Message
-
-            MessageBox.Show("Car " + txtReg.Text + " has been returned", "Confirmation", MessageBoxButtons.OK,
+            MessageBox.Show("Car with registration " + txtReg.Text + " has been returned", "Confirmation", MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
             print();
         }
@@ -166,27 +159,24 @@ namespace CarSYS
         {
             //From https://www.youtube.com/watch?v=nAI-1w9MhwE
             pdReturn.Document = pdtReturn;
-            if (pdReturn.ShowDialog() == DialogResult.OK)
-            {
-                pdtReturn.Print();
-            }
+            if (pdReturn.ShowDialog() == DialogResult.OK) pdtReturn.Print();
         }
 
-        private void pdtReturn_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        private void pdtReturn_PrintPage(object sender, PrintPageEventArgs e)
         {
             //From https://www.codeproject.com/Tips/453871/Simple-Receipt-Like-Printing-Using-the-Csharp-Prin
-            string dir = Path.GetDirectoryName(Application.ExecutablePath);
-            string filename = Path.Combine(dir, @"logo.png");
-            Image imageFile = Image.FromFile(filename);
+            var dir = Path.GetDirectoryName(Application.ExecutablePath);
+            var filename = Path.Combine(dir, @"logo.png");
+            var imageFile = Image.FromFile(filename);
 
-            Graphics graphics = e.Graphics;
+            var graphics = e.Graphics;
 
 
-            Font font = new Font("Courier New", 10);
-            float fontHeight = font.GetHeight();
-            int startX = 50;
-            int startY = 55;
-            int offset = 40;
+            var font = new Font("Courier New", 10);
+            var fontHeight = font.GetHeight();
+            var startX = 50;
+            var startY = 55;
+            var offset = 40;
             e.Graphics.DrawImage(imageFile, new PointF(0.0F, 0.0F));
             offset = offset + 20;
 
@@ -201,7 +191,7 @@ namespace CarSYS
                 new Font("Courier New", 12),
                 new SolidBrush(Color.Black), startX, startY + offset);
             offset = offset + 20;
-            String underLine = "------------------------------------------";
+            var underLine = "------------------------------------------";
             graphics.DrawString(underLine, new Font("Courier New", 10),
                 new SolidBrush(Color.Black), startX, startY + offset);
 
@@ -210,7 +200,7 @@ namespace CarSYS
             graphics.DrawString("From " + txtStartDate.Text + " To " + txtEndDate.Text, new Font("Courier New", 10),
                 new SolidBrush(Color.Black), startX, startY + offset);
             offset = offset + 20;
-            String total = "Total Amount to Pay Before fee = " + txtTotal.Text;
+            var total = "Total Amount to Pay Before fee = " + txtTotal.Text;
             graphics.DrawString(total, new Font("Courier New", 10),
                 new SolidBrush(Color.Black), startX, startY + offset);
 
@@ -220,12 +210,13 @@ namespace CarSYS
                 new SolidBrush(Color.Black), startX, startY + offset);
             offset = offset + 20;
 
-            DateTime endDate = DateTime.ParseExact(txtEndDate.Text, "yyyy-MM-dd",
-                System.Globalization.CultureInfo.InvariantCulture);
+            var endDate = DateTime.ParseExact(txtEndDate.Text, "yyyy-MM-dd",
+                CultureInfo.InvariantCulture);
+            
             if (DateTime.Today < endDate)
             {
                 offset = offset + 20;
-                String grossTotal = "Total Amount to Pay = " + txtTotal.Text;
+                var grossTotal = "Total Amount to Pay = " + txtTotal.Text;
 
                 graphics.DrawString(grossTotal, new Font("Courier New", 10),
                     new SolidBrush(Color.Black), startX, startY + offset);
@@ -233,8 +224,10 @@ namespace CarSYS
             }
             else
             {
+
+                string totalPay = grdTotalCost.Rows[0].Cells[0].Value.ToString();
                 offset = offset + 20;
-                String grossTotal = "Total Amount to Pay = " + grdTotalCost.Text;
+                var grossTotal = "Total Amount to Pay = " + totalPay;
 
                 graphics.DrawString(grossTotal, new Font("Courier New", 10),
                     new SolidBrush(Color.Black), startX, startY + offset);
@@ -243,30 +236,29 @@ namespace CarSYS
 
             clearUi();
         }
+
         public void loadData()
         {
-            grpReturnCar.Visible = false;
             try
             {
-                DataSet ds = new DataSet();
+                var ds = new DataSet();
                 ds = Booking.getCurrentBookingInfo(ds);
-                for (int i = 0; i < ds.Tables["booking"].Rows.Count; i++)
+                for (var i = 0; i < ds.Tables["booking"].Rows.Count; i++)
                     cboReturnCar.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(0, '0').Trim());
             }
-            catch
+            catch (Exception)
             {
-                this.Close();
+                Close();
                 parent.Visible = true;
             }
         }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
 
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
             parent.Visible = true;
-
-
         }
     }
 }

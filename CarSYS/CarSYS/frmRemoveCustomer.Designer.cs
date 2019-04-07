@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRemoveCustomer));
             this.btnBack = new System.Windows.Forms.Button();
             this.grpRemoveCustomer = new System.Windows.Forms.GroupBox();
             this.txtUpdate = new System.Windows.Forms.TextBox();
@@ -52,7 +53,7 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(12, 12);
+            this.btnBack.Location = new System.Drawing.Point(309, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 23);
             this.btnBack.TabIndex = 4;
@@ -86,6 +87,7 @@
             // 
             // txtUpdate
             // 
+            this.txtUpdate.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtUpdate.Location = new System.Drawing.Point(135, 136);
             this.txtUpdate.MaxLength = 12;
             this.txtUpdate.Name = "txtUpdate";
@@ -249,9 +251,10 @@
             this.Controls.Add(this.cboRemoveCustomer);
             this.Controls.Add(this.grpRemoveCustomer);
             this.Controls.Add(this.btnBack);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmRemoveCustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "RemoveCustomer";
+            this.Text = "Remove Customer";
             this.Load += new System.EventHandler(this.frmRemoveCustomer_Load);
             this.grpRemoveCustomer.ResumeLayout(false);
             this.grpRemoveCustomer.PerformLayout();

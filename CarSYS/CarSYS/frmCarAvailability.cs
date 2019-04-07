@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CarSYS
 {
     public partial class frmCarAvailability : Form
     {
-        frmMainMenu parent;
+        private readonly frmMainMenu parent;
 
         public frmCarAvailability(frmMainMenu Parent)
         {
@@ -27,24 +21,26 @@ namespace CarSYS
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
             parent.Visible = true;
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
-            string from = dtpFrom.Value.ToString("yyyy-MM-dd");
-            string to = dtpTo.Value.ToString("yyyy-MM-dd");
+            var from = dtpFrom.Value.ToString("yyyy-MM-dd");
+            var to = dtpTo.Value.ToString("yyyy-MM-dd");
             try
             {
-                // create instance of data set
-                DataSet ds = new DataSet();
+               
+                var ds = new DataSet();
 
                 grdData.DataSource = Cars.checkCarAvailability(ds, from, to).Tables["chkCar"];
             }
-            catch
+            catch (Exception)
             {
-                this.Close();
+                
+               
+                Close();
                 parent.Visible = true;
             }
         }
@@ -60,8 +56,7 @@ namespace CarSYS
 
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
             parent.Visible = true;
-
-
         }
+
     }
 }

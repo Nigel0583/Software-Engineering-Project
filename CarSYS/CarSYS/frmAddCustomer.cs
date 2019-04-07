@@ -1,41 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace CarSYS
 {
     public partial class frmAddCustomer : Form
     {
-        frmMainMenu parent;
+        private readonly frmMainMenu parent;
 
         public frmAddCustomer(frmMainMenu Parent)
         {
             InitializeComponent();
             parent = Parent;
         }
+
         private void frmAddCustomer_Load(object sender, EventArgs e)
         {
-          
+            dtpCustomer.MaxDate = DateTime.Today.AddYears(-25);
             txtCustomerID.Text = Customer.nextCustomerID().ToString("00000");
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
             parent.Visible = true;
         }
 
         private void btnAddCustomer_Click(object sender, EventArgs e)
         {
-            string DOB = dtpCustomer.Value.ToString("yyyy-MM-dd");
+            var DOB = dtpCustomer.Value.ToString("yyyy-MM-dd");
             //validate data
 
             if (txtFirstName.Text.Equals(""))
@@ -143,7 +138,7 @@ namespace CarSYS
                 return;
             }
 
-            if ((DateTime.Now.Subtract(dtpCustomer.Value).Days) / (365) < 25)
+            if (DateTime.Now.Subtract(dtpCustomer.Value).Days / 365 < 25)
             {
                 MessageBox.Show("Less than 25 Years are not allowed", "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -167,20 +162,21 @@ namespace CarSYS
 
             try
             {
-                Customer customer = new Customer(Convert.ToInt32(txtCustomerID.Text), txtEmail.Text, txtLicence.Text,
+                var customer = new Customer(Convert.ToInt32(txtCustomerID.Text), txtEmail.Text, txtLicence.Text,
                     txtFirstName.Text, txtSurname.Text, txtAddress.Text, txtCountry.Text, txtZipCode.Text,
                     txtPhone.Text, DOB, 'A');
 
                 customer.addCustomer();
 
-                MessageBox.Show("Customer " + txtCustomerID.Text + " Registered", "Confirmation", MessageBoxButtons.OK,
+                MessageBox.Show("Customer: " + txtCustomerID.Text + " has been registered", "Confirmation", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
                 clearUi();
             }
-            catch
+            catch (Exception)
             {
-                this.Close();
+               
+                Close();
                 parent.Visible = true;
             }
         }
@@ -221,7 +217,7 @@ namespace CarSYS
             try
             {
                 return Regex.IsMatch(email,
-                    @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                    @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&\*\+/=\?\^\{\}\|~\w])*)(?<=[0-9a-z])@))" +
                     @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
                     RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
             }
@@ -231,49 +227,37 @@ namespace CarSYS
             }
         }
 
-        public Boolean isvalidLicence(String licence)
+        public bool isvalidLicence(string licence)
         {
-            if ((Regex.IsMatch(licence, @"^[a-zA-Z0-9]+$")))
-            {
+            if (Regex.IsMatch(licence, @"^[a-zA-Z0-9]+$"))
                 return true;
-            }
-            else
-                return false;
+            return false;
         }
 
-        public Boolean isvalidPhone(String phone)
+        public bool isvalidPhone(string phone)
         {
             //Regex from http://regexlib.com/REDetails.aspx?regexp_id=73
-            if ((Regex.IsMatch(phone, @"^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$")))
-            {
+            if (Regex.IsMatch(phone, @"^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$"))
                 return true;
-            }
-            else
-                return false;
+            return false;
         }
 
-        public Boolean isValidLetter(String input)
+        public bool isValidLetter(string input)
         {
-           string inp = input.ToUpper();
+            var inp = input.ToUpper();
 
-            if ((Regex.IsMatch(inp, "^[0-9A-Za-z.,'-_ ]+$")))
-            {
+            if (Regex.IsMatch(inp, "^[a-zA-Z0-9, -]*$"))
                 return true;
-            }
-            else
-                return false;
+            return false;
         }
 
-        public Boolean isValidLetterOnly(String type)
+        public bool isValidLetterOnly(string type)
         {
-          string ty = type.ToUpper();
+            var ty = type.ToUpper();
 
-            if ((Regex.IsMatch(ty, "^[A-Za-z]+$")))
-            {
+            if (Regex.IsMatch(ty, "^[A-Za-z]+$"))
                 return true;
-            }
-            else
-                return false;
+            return false;
         }
 
 
@@ -294,32 +278,17 @@ namespace CarSYS
             txtFirstName.Focus();
         }
 
-        public static List<RegionInfo> GetCountriesByIso3166()
-        {
-            List<RegionInfo> countries = new List<RegionInfo>();
-            foreach (CultureInfo culture in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
-            {
-                RegionInfo country = new RegionInfo(culture.LCID);
-                if (countries.Where(p => p.Name == country.Name).Count() == 0)
-                    countries.Add(country);
-            }
-            return countries.OrderBy(p => p.EnglishName).ToList();
-        }
 
-        
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
 
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
             parent.Visible = true;
-
-
         }
 
         private void EmailTextEnter(object sender, EventArgs e)
         {
-            
             if (txtEmail.Text.Equals("example@email.com"))
             {
                 txtEmail.Text = "";

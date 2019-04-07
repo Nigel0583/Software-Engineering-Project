@@ -332,6 +332,7 @@
             // 
             // txtMake
             // 
+            this.txtMake.BackColor = System.Drawing.SystemColors.Window;
             this.txtMake.Location = new System.Drawing.Point(81, 39);
             this.txtMake.MaxLength = 15;
             this.txtMake.Name = "txtMake";

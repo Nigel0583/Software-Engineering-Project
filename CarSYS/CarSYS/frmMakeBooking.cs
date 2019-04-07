@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CarSYS
 {
     public partial class frmMakeBooking : Form
     {
-        frmMainMenu parent;
-        string reg;
-        string cost;
+        private string cost;
+        private readonly frmMainMenu parent;
+        private string reg;
 
 
         public frmMakeBooking(frmMainMenu Parent)
@@ -24,48 +18,45 @@ namespace CarSYS
 
             dtpFrom.MinDate = DateTime.Today;
             dtpTo.MinDate = DateTime.Today;
-            this.cboCarCategory.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cboCustomer.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboCarCategory.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboCustomer.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
             parent.Visible = true;
-
         }
 
         private void frmMakeBooking_Load(object sender, EventArgs e)
         {
             grpChoseCar.Visible = false;
             btnMakeBooking.Visible = false;
-            
+
             grpChoseCustomer.Visible = false;
             grpMakeBooking.Visible = false;
             txtBookingNo.Text = Booking.nextBookingNo().ToString("00000");
 
-            // create instance of data set
-            DataSet ds = new DataSet();
+            var ds = new DataSet();
 
             ds = Rates.getCatID(ds);
 
-            //Remove existing items from combo box
             cboCarCategory.Items.Clear();
             try
             {
-                //load data from ds to cbo
-                for (int i = 0; i < ds.Tables["cat"].Rows.Count; i++)
+                
+                for (var i = 0; i < ds.Tables["cat"].Rows.Count; i++)
                     cboCarCategory.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(3, '0').Trim());
 
-                DataSet dsCust = new DataSet();
+                var dsCust = new DataSet();
                 dsCust = Customer.getCustInfo(dsCust);
-                for (int i = 0; i < dsCust.Tables["cust"].Rows.Count; i++)
+                for (var i = 0; i < dsCust.Tables["cust"].Rows.Count; i++)
                     cboCustomer.Items.Add(dsCust.Tables[0].Rows[i][0].ToString().PadLeft(3, '0') + " " +
                                           dsCust.Tables[0].Rows[i][1].ToString().Trim());
             }
-            catch
+            catch (Exception)
             {
-                this.Close();
+                Close();
                 parent.Visible = true;
             }
         }
@@ -75,30 +66,21 @@ namespace CarSYS
         {
             grpChoseCar.Visible = true;
 
-            string from = dtpFrom.Value.ToString("yyyy-MM-dd");
-            string to = dtpTo.Value.ToString("yyyy-MM-dd");
-            // create instance of data set
-            DataSet ds = new DataSet();
+            var from = dtpFrom.Value.ToString("yyyy-MM-dd");
+            var to = dtpTo.Value.ToString("yyyy-MM-dd");
+          
+            var ds = new DataSet();
 
             grdSelectCar.DataSource = Cars.availableForBooking(ds, from, to, cboCarCategory.Text).Tables["bookCar"];
-
-            
-           
-
-           
         }
 
         private void cboCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
-            //if resetting combo, ignore
-            if (cboCustomer.SelectedIndex == -1)
-            {
-                return;
-            }
+         
+            if (cboCustomer.SelectedIndex == -1) return;
 
-            //find cust details
-            Customer rCustomer = new Customer();
+           
+            var rCustomer = new Customer();
             rCustomer.getCustomers(Convert.ToInt32(cboCustomer.Text.Substring(0, 3)));
 
             if (rCustomer.getCustomerID().Equals(0))
@@ -108,7 +90,7 @@ namespace CarSYS
                 return;
             }
 
-            //display cust details
+           
             txtFirstName.Text = rCustomer.getFname();
             txtSurname.Text = rCustomer.getSname();
             txtLicence.Text = rCustomer.getLicence();
@@ -123,12 +105,12 @@ namespace CarSYS
         private void grdSelectCar_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             btnMakeBooking.Visible = true;
-            string from = dtpFrom.Value.ToString("yyyy-MM-dd");
-            string to = dtpTo.Value.ToString("yyyy-MM-dd");
+            var from = dtpFrom.Value.ToString("yyyy-MM-dd");
+            var to = dtpTo.Value.ToString("yyyy-MM-dd");
             //From https://www.youtube.com/watch?v=SqQAbzDs3jo
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow view = this.grdSelectCar.Rows[e.RowIndex];
+                var view = grdSelectCar.Rows[e.RowIndex];
 
                 reg = view.Cells["RegNo"].Value.ToString();
                 txtRegChosen.Text = reg;
@@ -136,7 +118,7 @@ namespace CarSYS
                 cost = view.Cells["cost"].Value.ToString();
                 txtCost.Text = cost;
 
-                DataSet ds = new DataSet();
+                var ds = new DataSet();
 
                 grdTotalCost.DataSource = Rates.getBookingCost(ds, to, from, reg).Tables["book"];
             }
@@ -145,15 +127,12 @@ namespace CarSYS
         private void btnCancelBooking_Click(object sender, EventArgs e)
         {
             //From https://www.actiprosoftware.com/community/thread/2078/events-on-cancelbutton-and-formclose
-            DialogResult cancel = new DialogResult();
+            var cancel = new DialogResult();
             cancel = MessageBox.Show("Do you want to cancel?", "Cancel",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning,
                 MessageBoxDefaultButton.Button2);
-            if (cancel == DialogResult.Yes)
-            {
-                ClearUI();
-            }
+            if (cancel == DialogResult.Yes) ClearUI();
         }
 
         private void btnMakeBooking_Click(object sender, EventArgs e)
@@ -178,30 +157,33 @@ namespace CarSYS
                 grpChoseCar.Focus();
                 return;
             }
-            string from = dtpFrom.Value.ToString("yyyy-MM-dd");
-            string to = dtpTo.Value.ToString("yyyy-MM-dd");
-            string total = grdTotalCost.Rows[0].Cells["total"].Value.ToString();
-            int totalCost = Int32.Parse(total);
 
-            Booking booking = new Booking(Convert.ToInt32(txtBookingNo.Text), Convert.ToInt32(txtCustomerID.Text),
+            var from = dtpFrom.Value.ToString("yyyy-MM-dd");
+            var to = dtpTo.Value.ToString("yyyy-MM-dd");
+            var total = grdTotalCost.Rows[0].Cells["total"].Value.ToString();
+            var totalCost = int.Parse(total);
+
+            var booking = new Booking(Convert.ToInt32(txtBookingNo.Text), Convert.ToInt32(txtCustomerID.Text),
                 txtRegChosen.Text, from, to, "B", totalCost);
 
             //find cust details
-            Customer customer = new Customer();
+            var customer = new Customer();
             customer.getCustomers(Convert.ToInt32(txtCustomerID.Text.Substring(0, 3)));
 
             booking.addBooking();
 
             //Display confirmation
-            MessageBox.Show("Car with registration " + txtRegChosen.Text + "has been booked by customer" + txtCustomerID.Text, "Success",
+            MessageBox.Show(
+                "Car with registration:\n" + txtRegChosen.Text + "\nhas been booked by customer:\n" +txtCustomerID.Text,
+                "Success",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             ClearUI();
             txtBookingNo.Text = Booking.nextBookingNo().ToString("00000");
 
-            this.Hide();
+            Hide();
 
-            frmInvoice frmInvoice = new frmInvoice(this);
+            var frmInvoice = new frmInvoice(this);
             frmInvoice.Show();
         }
 
@@ -229,16 +211,18 @@ namespace CarSYS
 
         private void dtpTo_ValueChanged(object sender, EventArgs e)
         {
-            if (dtpTo.Value < dtpFrom.Value)
-            {
-                MessageBox.Show("End date must be greater than Start date");
-            }
+            if (dtpTo.Value < dtpFrom.Value) MessageBox.Show("End date must be greater than Start date");
+            grpChoseCar.Visible = false;
+            btnMakeBooking.Visible = false;
         }
 
         private void dtpFrom_ValueChanged(object sender, EventArgs e)
         {
             dtpTo.MinDate = dtpFrom.Value;
+            grpChoseCar.Visible = false;
+            btnMakeBooking.Visible = false;
         }
+
         //From https://stackoverflow.com/questions/1669318/override-standard-close-x-button-in-a-windows-form
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
@@ -251,6 +235,8 @@ namespace CarSYS
         private void cboCarCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             grpMakeBooking.Visible = true;
+            grpChoseCar.Visible = false;
+            btnMakeBooking.Visible = false;
         }
     }
 }

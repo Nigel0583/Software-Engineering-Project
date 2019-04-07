@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCarAvailability));
             this.btnCheck = new System.Windows.Forms.Button();
             this.grpCarAvail = new System.Windows.Forms.GroupBox();
             this.lblFrom = new System.Windows.Forms.Label();
@@ -127,9 +128,10 @@
             this.Controls.Add(this.grdData);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.grpCarAvail);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmCarAvailability";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CarAvailability";
+            this.Text = "Car Availability";
             this.grpCarAvail.ResumeLayout(false);
             this.grpCarAvail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();

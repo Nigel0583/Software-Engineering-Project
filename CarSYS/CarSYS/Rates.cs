@@ -1,47 +1,42 @@
-﻿using System;
-using System.Data;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Oracle.ManagedDataAccess.Client;
+﻿using System.Data;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client;
 
 namespace CarSYS
 {
-    class Rates
+    internal class Rates
     {
-        private string catID;
-        private string description;
+        private string catId;
         private decimal cost;
+        private string description;
 
         public Rates()
         {
-            catID = "";
+            catId = "";
             description = "";
             cost = 0;
         }
 
-        public Rates(string catID, string description, decimal cost)
+        public Rates(string catId, string description, decimal cost)
         {
-            this.catID = catID;
+            this.catId = catId;
             this.description = description;
             this.cost = cost;
         }
 
-        public void setCatId(String CatID)
+        public void setCatId(string catId)
         {
-            this.catID = CatID;
+            this.catId = catId;
         }
 
-        public void setCost(decimal Cost)
+        public void setCost(decimal cost)
         {
-            this.cost = Cost;
+            this.cost = cost;
         }
 
-        public void setDescription(String Description)
+        public void setDescription(string description)
         {
-            this.description = Description;
+            this.description = description;
         }
 
         public decimal getCost()
@@ -50,35 +45,30 @@ namespace CarSYS
         }
 
 
-        public static Boolean checkCategoryExists(String CatId)
+        public static bool checkCategoryExists(string CatId)
         {
             try
             {
-                Boolean exists = false;
+                var exists = false;
 
-                OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
+                var conn = new OracleConnection(CarSysConnect.oradb);
 
                 conn.Open();
 
-                //Define the SQL Query to retrieve the data
-                String strSQL = "SELECT * FROM rates WHERE CatID ='" + CatId + "'";
+                var strSQL = "SELECT * FROM rates WHERE CatID ='" + CatId + "'";
 
-                //Create an OracleCommand object and instantiate it
-                OracleCommand cmd = new OracleCommand(strSQL, conn);
+                var cmd = new OracleCommand(strSQL, conn);
 
-                //Create an oracleAdapter to hold the result of the executed OracleCommand
-                OracleDataReader dr = cmd.ExecuteReader();
+                var dr = cmd.ExecuteReader();
 
-                if (dr.Read())
-                {
-                    exists = true;
-                }
+                if (dr.Read()) exists = true;
 
                 return exists;
             }
-            catch
+            catch (OracleException e)
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                
+                MessageBox.Show("Code: "+ e.ErrorCode+ "\n Message: "+ e.Message+ "\n\n An exception occurred.\n Please contact your system administrator.", "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return false;
             }
@@ -89,30 +79,24 @@ namespace CarSYS
         {
             try
             {
-                //create an OracleConnection object using the connection string defined in static class CarSysConnect
-                OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
+                var conn = new OracleConnection(CarSysConnect.oradb);
 
-                //Define the SQL Query to retrieve the data
-                String strSQL = "SELECT CatID FROM Rates ORDER BY CatID";
+                var strSQL = "SELECT CatID FROM Rates ORDER BY CatID";
 
-                //Create an OracleCommand object and instantiate it
-                OracleCommand cmd = new OracleCommand(strSQL, conn);
+                var cmd = new OracleCommand(strSQL, conn);
 
-                //Create an oracleAdapter to hold the result of the executed OracleCommand
-                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                var da = new OracleDataAdapter(cmd);
 
-                //Fill the DataSet DS with the query result
                 da.Fill(DS, "cat");
 
-                //close the DB Connection
                 conn.Close();
 
-                //Return the Dataset with the required data to the windows form which executed this method
                 return DS;
             }
-            catch
+            catch (OracleException e)
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                
+                MessageBox.Show("Code: "+ e.ErrorCode+ "\n Message: "+ e.Message+ "\n\n An exception occurred.\n Please contact your system administrator.", "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return null;
             }
@@ -123,42 +107,39 @@ namespace CarSYS
         {
             try
             {
-                //connect to database
-                OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
+                var conn = new OracleConnection(CarSysConnect.oradb);
                 conn.Open();
 
-                //Define SQL query to INSERT rate record
-                String insertRates = "INSERT INTO rates VALUES('" + this.catID.ToUpper() +
-                                     "','" + this.description.ToUpper() + "'," + this.cost + ")";
+                var insertRates = "INSERT INTO rates VALUES('" + catId.ToUpper() +
+                                  "','" + description.ToUpper() + "'," + cost + ")";
 
-                //Execute the command
-                OracleCommand cmd = new OracleCommand(insertRates, conn);
+                var cmd = new OracleCommand(insertRates, conn);
                 cmd.ExecuteNonQuery();
 
-                //close DB connection
                 conn.Close();
             }
-            catch
+            catch (OracleException e)
             {
-                MessageBox.Show("Sorry, Unable to connect to database", "Error", MessageBoxButtons.OK,
+                
+                MessageBox.Show("Code: "+ e.ErrorCode+ "\n Message: "+ e.Message+ "\n\n An exception occurred.\n Please contact your system administrator.", "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                
             }
         }
 
-        public static DataSet getBookingCost(DataSet DS, String start, String end, String reg)
+        public static DataSet getBookingCost(DataSet DS, string start, string end, string reg)
         {
-            OracleConnection conn = new OracleConnection(CarSysConnect.oradb);
+            var conn = new OracleConnection(CarSysConnect.oradb);
 
 
             //Define the SQL Query to retrieve the data
-            String strSQL = "SELECT ((TO_DATE('" + start + "', 'yyyy-MM-dd')+1)- TO_DATE('" + end +
-                            "', 'yyyy-MM-dd')) * ra.COST AS Total from rates ra, cars ca WHERE RegNo = '" + reg +
-                            "' AND ca.CatID = ra.CatID";
+            var strSQL = "SELECT ((TO_DATE('" + start + "', 'yyyy-MM-dd')+1)- TO_DATE('" + end +
+                         "', 'yyyy-MM-dd')) * ra.COST AS Total from rates ra, cars ca WHERE RegNo = '" + reg +
+                         "' AND ca.CatID = ra.CatID";
 
-            OracleCommand cmd = new OracleCommand(strSQL, conn);
+            var cmd = new OracleCommand(strSQL, conn);
 
-            //cmd.CommandType = CommandType.Text;
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
+            var da = new OracleDataAdapter(cmd);
 
             da.Fill(DS, "book");
 
@@ -169,26 +150,21 @@ namespace CarSYS
 
         public void getInvoicePerDay()
         {
-            //Conenct to the DB
-            OracleConnection myConn = new OracleConnection(CarSysConnect.oradb);
+           
+            var myConn = new OracleConnection(CarSysConnect.oradb);
             myConn.Open();
 
 
-            String strSQL =
+            var strSQL =
                 "select * from rates r,  bookings b, cars c  where BookingID = ( select max(BookingID) from bookings ) AND b.regno = c.regno AND r.catid = c.catid";
 
-            OracleCommand cmd = new OracleCommand(strSQL, myConn);
+            var cmd = new OracleCommand(strSQL, myConn);
 
-            //execute the SQL query
-            OracleDataReader dr = cmd.ExecuteReader();
+            var dr = cmd.ExecuteReader();
 
 
-            if (dr.Read())
-            {
-                setCost(dr.GetDecimal(2));
-            }
+            if (dr.Read()) setCost(dr.GetDecimal(2));
 
-            //close DB connection
             myConn.Close();
         }
     }

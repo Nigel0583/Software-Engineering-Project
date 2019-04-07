@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCancelBooking));
             this.btnBack = new System.Windows.Forms.Button();
             this.btnCancelBooking = new System.Windows.Forms.Button();
             this.grpCancelBooking = new System.Windows.Forms.GroupBox();
@@ -248,9 +249,10 @@
             this.Controls.Add(this.cboCancelBooking);
             this.Controls.Add(this.lblBooking);
             this.Controls.Add(this.btnBack);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmCancelBooking";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmCancelBooking";
+            this.Text = "Cancel Booking";
             this.Load += new System.EventHandler(this.frmCancelBooking_Load);
             this.grpCancelBooking.ResumeLayout(false);
             this.grpCancelBooking.PerformLayout();

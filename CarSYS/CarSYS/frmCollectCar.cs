@@ -1,29 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CarSYS
 {
     public partial class frmCollectCar : Form
     {
-        frmMainMenu parent;
+        private readonly frmMainMenu parent;
 
         public frmCollectCar(frmMainMenu Parent)
         {
             InitializeComponent();
             parent = Parent;
-            this.cboCollectCar.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboCollectCar.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
             parent.Visible = true;
         }
 
@@ -41,18 +35,18 @@ namespace CarSYS
                 return;
             }
 
-            Booking bookingStatus = new Booking();
+            var bookingStatus = new Booking();
 
             bookingStatus.setStatus(txtBookingStatus.Text);
             bookingStatus.setBookNo(Convert.ToInt32(txtBookingID.Text));
             bookingStatus.bookingStatus();
-            //instantiate  Object
-            Cars reCar = new Cars();
+            
+            var reCar = new Cars();
 
             reCar.setAvailability(txtStatusCar.Text);
             reCar.setRegNo(txtReg.Text);
 
-            //INSERT  record into car table
+           
             reCar.collectCar();
 
             //Display Confirmation Message
@@ -66,26 +60,23 @@ namespace CarSYS
         private void cboCollectCar_SelectedIndexChanged(object sender, EventArgs e)
         {
             grpCollectCar.Visible = true;
-            //if resetting combo, ignore
-            if (cboCollectCar.SelectedIndex == -1)
-            {
-                return;
-            }
+          
+            if (cboCollectCar.SelectedIndex == -1) return;
 
-            //find cust details
-            Booking booking = new Booking();
+           
+            var booking = new Booking();
             booking.getBooking(Convert.ToInt32(cboCollectCar.Text));
 
-            if (booking.getCustomerID().Equals(0))
+            if (booking.getCustomerId().Equals(0))
             {
                 MessageBox.Show("No details found", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtBookingID.Focus();
                 return;
             }
 
-            //display cust details
+           
             txtBookingID.Text = booking.getBookNo().ToString("00000");
-            txtCustomerID.Text = booking.getCustomerID().ToString("00000");
+            txtCustomerID.Text = booking.getCustomerId().ToString("00000");
             txtReg.Text = booking.getRegNo();
             txtStartDate.Text = booking.getStartDate();
             txtEndDate.Text = booking.getEndDate();
@@ -109,30 +100,30 @@ namespace CarSYS
             cboCollectCar.ResetText();
             cboCollectCar.SelectedIndex = -1;
         }
+
         public void loadData()
         {
             grpCollectCar.Visible = false;
             try
             {
-                DataSet ds = new DataSet();
+                var ds = new DataSet();
                 ds = Booking.getBookingInfo(ds);
-                for (int i = 0; i < ds.Tables["booking"].Rows.Count; i++)
+                for (var i = 0; i < ds.Tables["booking"].Rows.Count; i++)
                     cboCollectCar.Items.Add(ds.Tables[0].Rows[i][0].ToString().PadLeft(0, '0').Trim());
             }
-            catch
+            catch (Exception)
             {
-                this.Close();
+                Close();
                 parent.Visible = true;
             }
         }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
 
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
             parent.Visible = true;
-
-
         }
     }
 }

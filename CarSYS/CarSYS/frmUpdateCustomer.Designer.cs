@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUpdateCustomer));
             this.btnBack = new System.Windows.Forms.Button();
             this.grpUpdateCustomer = new System.Windows.Forms.GroupBox();
             this.dtpCustomer = new System.Windows.Forms.DateTimePicker();
@@ -54,12 +55,13 @@
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.lblFirstName = new System.Windows.Forms.Label();
             this.cboUpdateCustomer = new System.Windows.Forms.ComboBox();
+            this.lblCust = new System.Windows.Forms.Label();
             this.grpUpdateCustomer.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(12, 12);
+            this.btnBack.Location = new System.Drawing.Point(305, 12);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 23);
             this.btnBack.TabIndex = 13;
@@ -101,7 +103,7 @@
             // 
             // dtpCustomer
             // 
-            this.dtpCustomer.Location = new System.Drawing.Point(81, 216);
+            this.dtpCustomer.Location = new System.Drawing.Point(79, 215);
             this.dtpCustomer.Name = "dtpCustomer";
             this.dtpCustomer.Size = new System.Drawing.Size(257, 20);
             this.dtpCustomer.TabIndex = 11;
@@ -117,6 +119,7 @@
             // 
             // txtStatus
             // 
+            this.txtStatus.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtStatus.Location = new System.Drawing.Point(131, 17);
             this.txtStatus.MaxLength = 1;
             this.txtStatus.Name = "txtStatus";
@@ -146,7 +149,7 @@
             // lblDOB
             // 
             this.lblDOB.AutoSize = true;
-            this.lblDOB.Location = new System.Drawing.Point(32, 222);
+            this.lblDOB.Location = new System.Drawing.Point(30, 221);
             this.lblDOB.Name = "lblDOB";
             this.lblDOB.Size = new System.Drawing.Size(30, 13);
             this.lblDOB.TabIndex = 50;
@@ -155,7 +158,7 @@
             // txtLicence
             // 
             this.txtLicence.Location = new System.Drawing.Point(81, 79);
-            this.txtLicence.MaxLength = 12;
+            this.txtLicence.MaxLength = 18;
             this.txtLicence.Name = "txtLicence";
             this.txtLicence.Size = new System.Drawing.Size(92, 20);
             this.txtLicence.TabIndex = 5;
@@ -163,7 +166,7 @@
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(30, 115);
+            this.lblEmail.Location = new System.Drawing.Point(30, 119);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(32, 13);
             this.lblEmail.TabIndex = 47;
@@ -171,8 +174,8 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(81, 108);
-            this.txtEmail.MaxLength = 12;
+            this.txtEmail.Location = new System.Drawing.Point(81, 112);
+            this.txtEmail.MaxLength = 40;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(255, 20);
             this.txtEmail.TabIndex = 7;
@@ -180,7 +183,7 @@
             // txtZipCode
             // 
             this.txtZipCode.Location = new System.Drawing.Point(244, 172);
-            this.txtZipCode.MaxLength = 12;
+            this.txtZipCode.MaxLength = 18;
             this.txtZipCode.Name = "txtZipCode";
             this.txtZipCode.Size = new System.Drawing.Size(92, 20);
             this.txtZipCode.TabIndex = 10;
@@ -206,7 +209,7 @@
             // txtCountry
             // 
             this.txtCountry.Location = new System.Drawing.Point(79, 172);
-            this.txtCountry.MaxLength = 12;
+            this.txtCountry.MaxLength = 56;
             this.txtCountry.Name = "txtCountry";
             this.txtCountry.Size = new System.Drawing.Size(92, 20);
             this.txtCountry.TabIndex = 9;
@@ -223,7 +226,7 @@
             // txtAddress
             // 
             this.txtAddress.Location = new System.Drawing.Point(81, 146);
-            this.txtAddress.MaxLength = 12;
+            this.txtAddress.MaxLength = 100;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(255, 20);
             this.txtAddress.TabIndex = 8;
@@ -240,7 +243,7 @@
             // txtPhone
             // 
             this.txtPhone.Location = new System.Drawing.Point(244, 82);
-            this.txtPhone.MaxLength = 12;
+            this.txtPhone.MaxLength = 18;
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(92, 20);
             this.txtPhone.TabIndex = 6;
@@ -266,7 +269,7 @@
             // txtSurname
             // 
             this.txtSurname.Location = new System.Drawing.Point(244, 43);
-            this.txtSurname.MaxLength = 12;
+            this.txtSurname.MaxLength = 20;
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(92, 20);
             this.txtSurname.TabIndex = 4;
@@ -284,7 +287,7 @@
             // txtFirstName
             // 
             this.txtFirstName.Location = new System.Drawing.Point(81, 43);
-            this.txtFirstName.MaxLength = 12;
+            this.txtFirstName.MaxLength = 20;
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(92, 20);
             this.txtFirstName.TabIndex = 3;
@@ -301,28 +304,40 @@
             // cboUpdateCustomer
             // 
             this.cboUpdateCustomer.FormattingEnabled = true;
-            this.cboUpdateCustomer.Location = new System.Drawing.Point(93, 56);
+            this.cboUpdateCustomer.Location = new System.Drawing.Point(122, 56);
             this.cboUpdateCustomer.Name = "cboUpdateCustomer";
-            this.cboUpdateCustomer.Size = new System.Drawing.Size(255, 21);
+            this.cboUpdateCustomer.Size = new System.Drawing.Size(226, 21);
             this.cboUpdateCustomer.TabIndex = 1;
             this.cboUpdateCustomer.Text = "Update Customer";
             this.cboUpdateCustomer.SelectedIndexChanged += new System.EventHandler(this.cboUpdateCustomer_SelectedIndexChanged);
+            // 
+            // lblCust
+            // 
+            this.lblCust.AutoSize = true;
+            this.lblCust.Location = new System.Drawing.Point(22, 59);
+            this.lblCust.Name = "lblCust";
+            this.lblCust.Size = new System.Drawing.Size(84, 13);
+            this.lblCust.TabIndex = 55;
+            this.lblCust.Text = "Chose Customer";
             // 
             // frmUpdateCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(392, 396);
+            this.Controls.Add(this.lblCust);
             this.Controls.Add(this.cboUpdateCustomer);
             this.Controls.Add(this.grpUpdateCustomer);
             this.Controls.Add(this.btnBack);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmUpdateCustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmUpdateCustomer";
+            this.Text = "Update Customer";
             this.Load += new System.EventHandler(this.frmUpdateCustomer_Load);
             this.grpUpdateCustomer.ResumeLayout(false);
             this.grpUpdateCustomer.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -354,5 +369,6 @@
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.TextBox txtStatus;
         private System.Windows.Forms.DateTimePicker dtpCustomer;
+        private System.Windows.Forms.Label lblCust;
     }
 }

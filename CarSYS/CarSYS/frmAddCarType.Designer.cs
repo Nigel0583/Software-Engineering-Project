@@ -61,7 +61,7 @@
             // numericUpRate
             // 
             this.numericUpRate.DecimalPlaces = 1;
-            this.numericUpRate.Location = new System.Drawing.Point(85, 154);
+            this.numericUpRate.Location = new System.Drawing.Point(95, 81);
             this.numericUpRate.Maximum = new decimal(new int[] {
             999,
             0,
@@ -95,7 +95,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 161);
+            this.label4.Location = new System.Drawing.Point(16, 88);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(30, 13);
             this.label4.TabIndex = 10;
@@ -103,7 +103,7 @@
             // 
             // txtDesc
             // 
-            this.txtDesc.Location = new System.Drawing.Point(95, 68);
+            this.txtDesc.Location = new System.Drawing.Point(95, 129);
             this.txtDesc.MaxLength = 100;
             this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
@@ -113,7 +113,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 99);
+            this.label5.Location = new System.Drawing.Point(16, 132);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(57, 13);
             this.label5.TabIndex = 8;
@@ -121,6 +121,7 @@
             // 
             // txtCarType
             // 
+            this.txtCarType.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtCarType.Location = new System.Drawing.Point(95, 25);
             this.txtCarType.MaxLength = 3;
             this.txtCarType.Name = "txtCarType";
