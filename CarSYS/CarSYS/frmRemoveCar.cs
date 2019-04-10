@@ -59,21 +59,32 @@ namespace CarSYS
             }
 
             
-            var reCar = new Cars();
+          
 
-            reCar.setAvailability(txtUpdate.Text);
-            reCar.setRegNo(cboRemoveCar.Text);
+            var cancel = new DialogResult();
+            cancel = MessageBox.Show("Do you want to remove car"+ txtReg.Text+"?", "Cancel",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2);
+            if (cancel == DialogResult.Yes)
+            {
+                var reCar = new Cars();
 
-            //remove  record into car table
-            reCar.removeCar();
+                reCar.setAvailability(txtUpdate.Text);
+                reCar.setRegNo(cboRemoveCar.Text);
+                //remove  record into car table
+                reCar.removeCar();
 
-            //Display Confirmation Message
-            MessageBox.Show("Car " + cboRemoveCar.Text + " has been removed", "Confirmation", MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+                //Display Confirmation Message
+                MessageBox.Show("Car " + cboRemoveCar.Text + " has been removed", "Confirmation", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
 
-            cboRemoveCar.SelectedIndex = -1;
-            cboRemoveCar.Items.Clear();
-            loadData();
+                cboRemoveCar.SelectedIndex = -1;
+                cboRemoveCar.Items.Clear();
+                loadData();
+            }
+
+           
         }
 
         private void cboRemoveCar_SelectedIndexChanged(object sender, EventArgs e)

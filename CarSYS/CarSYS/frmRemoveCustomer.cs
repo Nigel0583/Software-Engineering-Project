@@ -57,25 +57,33 @@ namespace CarSYS
                 return;
             }
 
+            var cancel = new DialogResult();
+            cancel = MessageBox.Show("Do you want to remove Customer " + txtCustomerID.Text + "?", "Cancel",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2);
+            if (cancel == DialogResult.Yes)
+            {
+                var customer = new Customer();
 
-            
-            var customer = new Customer();
+                customer.setStatus(Convert.ToChar(txtUpdate.Text));
+                customer.setCustomerID(Convert.ToInt32(txtCustomerID.Text));
 
-            customer.setStatus(Convert.ToChar(txtUpdate.Text));
-            customer.setCustomerID(Convert.ToInt32(txtCustomerID.Text));
+                customer.removeCustomer();
 
-            customer.removeCustomer();
+                //Display Confirmation Message
+                MessageBox.Show("Customer " + txtCustomerID.Text + " has been removed", "Confirmation",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            //Display Confirmation Message
-            MessageBox.Show("Customer " + txtCustomerID.Text + " has been removed", "Confirmation",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //reset UI
+                grpRemoveCustomer.Visible = false;
 
-            //reset UI
-            grpRemoveCustomer.Visible = false;
+                cboRemoveCustomer.SelectedIndex = -1;
+                cboRemoveCustomer.Items.Clear();
+                loadData();
+            }
 
-            cboRemoveCustomer.SelectedIndex = -1;
-            cboRemoveCustomer.Items.Clear();
-            loadData();
+           
         }
 
 

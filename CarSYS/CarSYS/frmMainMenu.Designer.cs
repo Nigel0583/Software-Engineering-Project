@@ -141,9 +141,9 @@
             // 
             this.bookingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.makeBookingToolStripMenuItem,
-            this.cancelBookingToolStripMenuItem,
             this.collectCarToolStripMenuItem,
-            this.returnCarToolStripMenuItem});
+            this.returnCarToolStripMenuItem,
+            this.cancelBookingToolStripMenuItem});
             this.bookingsToolStripMenuItem.Name = "bookingsToolStripMenuItem";
             this.bookingsToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.bookingsToolStripMenuItem.Text = "Bookings";
@@ -152,28 +152,28 @@
             // makeBookingToolStripMenuItem
             // 
             this.makeBookingToolStripMenuItem.Name = "makeBookingToolStripMenuItem";
-            this.makeBookingToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.makeBookingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.makeBookingToolStripMenuItem.Text = "Make Booking";
             this.makeBookingToolStripMenuItem.Click += new System.EventHandler(this.makeBookingToolStripMenuItem_Click);
             // 
             // cancelBookingToolStripMenuItem
             // 
             this.cancelBookingToolStripMenuItem.Name = "cancelBookingToolStripMenuItem";
-            this.cancelBookingToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.cancelBookingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cancelBookingToolStripMenuItem.Text = "Cancel Booking";
             this.cancelBookingToolStripMenuItem.Click += new System.EventHandler(this.cancelBookingToolStripMenuItem_Click);
             // 
             // collectCarToolStripMenuItem
             // 
             this.collectCarToolStripMenuItem.Name = "collectCarToolStripMenuItem";
-            this.collectCarToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.collectCarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.collectCarToolStripMenuItem.Text = "Collect Car";
             this.collectCarToolStripMenuItem.Click += new System.EventHandler(this.collectCarToolStripMenuItem_Click);
             // 
             // returnCarToolStripMenuItem
             // 
             this.returnCarToolStripMenuItem.Name = "returnCarToolStripMenuItem";
-            this.returnCarToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.returnCarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.returnCarToolStripMenuItem.Text = "Return Car";
             this.returnCarToolStripMenuItem.Click += new System.EventHandler(this.returnCarToolStripMenuItem_Click);
             // 

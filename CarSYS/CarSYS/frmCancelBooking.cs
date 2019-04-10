@@ -37,7 +37,7 @@ namespace CarSYS
             }
 
             var cancel = new DialogResult();
-            cancel = MessageBox.Show("Do you want to delete this booking?", "Cancel",
+            cancel = MessageBox.Show("Do you want to delete  booking" + txtBookingID.Text +"? ", "Cancel",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning,
                 MessageBoxDefaultButton.Button2);

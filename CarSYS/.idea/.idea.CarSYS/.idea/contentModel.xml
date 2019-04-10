@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\nigel\.Rider2018.3\config\consoles\db" t="IncludeRecursive" />
+    <e p="C:\Users\nigel\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\nigel\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_CarSYS.679087441.00" t="ExcludeRecursive" />
+    <e p="J:\Semester 4\Software Engineering Project\CarSYS" t="IncludeFlat">
+      <e p="CarSYS" t="IncludeRecursive">
+        <e p="App.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Booking.cs" t="Include" />
+        <e p="Cars.cs" t="Include" />
+        <e p="CarSYS.csproj" t="IncludeRecursive" />
+        <e p="CarSysConnect.cs" t="Include" />
+        <e p="Customer.cs" t="Include" />
+        <e p="frmAddCar.cs" t="Include" />
+        <e p="frmAddCar.Designer.cs" t="Include" />
+        <e p="frmAddCar.resx" t="Include" />
+        <e p="frmAddCarType.cs" t="Include" />
+        <e p="frmAddCarType.Designer.cs" t="Include" />
+        <e p="frmAddCarType.resx" t="Include" />
+        <e p="frmAddCustomer.cs" t="Include" />
+        <e p="frmAddCustomer.Designer.cs" t="Include" />
+        <e p="frmAddCustomer.resx" t="Include" />
+        <e p="frmCancelBooking.cs" t="Include" />
+        <e p="frmCancelBooking.Designer.cs" t="Include" />
+        <e p="frmCancelBooking.resx" t="Include" />
+        <e p="frmCarAnalysis.cs" t="Include" />
+        <e p="frmCarAnalysis.Designer.cs" t="Include" />
+        <e p="frmCarAnalysis.resx" t="Include" />
+        <e p="frmCarAvailability.cs" t="Include" />
+        <e p="frmCarAvailability.Designer.cs" t="Include" />
+        <e p="frmCarAvailability.resx" t="Include" />
+        <e p="frmCollectCar.cs" t="Include" />
+        <e p="frmCollectCar.Designer.cs" t="Include" />
+        <e p="frmCollectCar.resx" t="Include" />
+        <e p="frmInvoice.cs" t="Include" />
+        <e p="frmInvoice.Designer.cs" t="Include" />
+        <e p="frmInvoice.resx" t="Include" />
+        <e p="frmMainMenu.cs" t="Include" />
+        <e p="frmMainMenu.Designer.cs" t="Include" />
+        <e p="frmMainMenu.resx" t="Include" />
+        <e p="frmMakeBooking.cs" t="Include" />
+        <e p="frmMakeBooking.Designer.cs" t="Include" />
+        <e p="frmMakeBooking.resx" t="Include" />
+        <e p="frmRemoveCar.cs" t="Include" />
+        <e p="frmRemoveCar.Designer.cs" t="Include" />
+        <e p="frmRemoveCar.resx" t="Include" />
+        <e p="frmRemoveCustomer.cs" t="Include" />
+        <e p="frmRemoveCustomer.Designer.cs" t="Include" />
+        <e p="frmRemoveCustomer.resx" t="Include" />
+        <e p="frmReturnCar.cs" t="Include" />
+        <e p="frmReturnCar.Designer.cs" t="Include" />
+        <e p="frmReturnCar.resx" t="Include" />
+        <e p="frmRevenueAnalysis.cs" t="Include" />
+        <e p="frmRevenueAnalysis.Designer.cs" t="Include" />
+        <e p="frmRevenueAnalysis.resx" t="Include" />
+        <e p="frmUpdateCustomer.cs" t="Include" />
+        <e p="frmUpdateCustomer.Designer.cs" t="Include" />
+        <e p="frmUpdateCustomer.resx" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+          <e p="Settings.Designer.cs" t="Include" />
+          <e p="Settings.settings" t="Include" />
+        </e>
+        <e p="Rates.cs" t="Include" />
+      </e>
+      <e p="CarSYS.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>

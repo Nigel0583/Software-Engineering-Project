@@ -245,7 +245,7 @@ namespace CarSYS
                 var strSQL =
                     "SELECT ra.Cost, ra.Description,Make,Model,cars.CATID,NumSeats,Transmission,Fuel, RegNo,Extras FROM rates ra, cars " +
                     "WHERE ra.CatID = cars.CatID AND Availability ='A' AND RegNo NOT IN(SELECT RegNo FROM bookings WHERE bookings.BookingStatus= 'R' AND StartDate >= '" +
-                         start + "' AND EndDate <= '" + end + "' OR '" + start + "' BETWEEN StartDate AND EndDate)";
+                         start + "' AND EndDate <= '" + end + "' OR '" + start + "' BETWEEN StartDate AND EndDate) ORDER BY  ra.Cost";
 
                 var cmd = new OracleCommand(strSQL, conn);
 
